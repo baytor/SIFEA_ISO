@@ -5,17 +5,18 @@ creare la classe database con form dinamico
 
 class dbEntry {
   // Properties
-  public $name;       //nome dell'oggetto
-  public $ncolumn;    //numero di colonne
-  public $table;      //nome della tabella
-  public $clm_array;  //array con i nomi delle colonne
-  public $sql;
-  public $conn;
-  public $servername;
-  public $username;
-  public $password;
-  public $dbname;
-  public $output_table;
+  protected $name;       //nome dell'oggetto
+  protected $ncolumn;    //numero di colonne
+  protected $table;      //nome della tabella
+  protected $clm_header; //array con i nomi delle colonne visualizzati 
+  protected $clm_array;  //array con i nomi delle colonne del DB
+  protected $sql;
+  protected $conn;
+  protected $servername;
+  protected $username;
+  protected $password;
+  protected $dbname;
+  protected $output_table;
 
   public function __construct($name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table)
   {
