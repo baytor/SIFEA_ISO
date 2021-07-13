@@ -185,6 +185,36 @@ class dbEntry {
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
   }
+
+  function select_rows_by_pos_where($begin, $end, $clm, $where)
+  {
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
+    
+    $result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    //echo "<br> inizio creazione tabella";
+    $this->output_table = "<table><tr>";
+    for($i = $begin; $i <= $end; $i++)
+    {
+      $this->output_table .= "<th>" . $this->clm_array[$i] . "</th>";
+    }
+    $this->output_table .= "</tr>";
+    if ($result->num_rows > 0)
+    {
+      // output data of each row
+      while($row = $result->fetch_assoc())
+      {
+        $this->output_table .= "<tr>";
+        for ($i = $begin; $i <= $end; $i++)
+        {
+          $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
+        }
+      }
+    }
+    $this->output_table .= "</tr></table>";
+    echo $this->output_table;
+  }
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row()
   {
