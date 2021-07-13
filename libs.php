@@ -8,7 +8,7 @@ class dbEntry {
   protected $name;       //nome dell'oggetto
   protected $ncolumn;    //numero di colonne
   protected $table;      //nome della tabella
-  protected $clm_header; //array con i nomi delle colonne visualizzati 
+  protected $clm_header; //array con i nomi delle colonne visualizzati
   protected $clm_array;  //array con i nomi delle colonne del DB
   protected $sql;
   protected $conn;
@@ -154,25 +154,6 @@ class dbEntry {
     echo $this->output_table;
 }
 
-  //inserisce una riga nella tabella - da definire gli argomenti
-  function insert_row()
-  {
-    // da completare, anche con l'argomento
-    // $sql = "INSERT INTO " . $table . "VALUES ";
-  }
-
-  //cancella una riga nella tabella - da definire gli argomenti
-  function remove_row()
-  {
-
-  }
-
-  //aggiorna una riga nella tabella - da definire gli argomenti
-  function update_row()
-  {
-
-  }
-
   //cerca una serie di righe
   function select_where($clm, $where)
   {
@@ -203,6 +184,28 @@ class dbEntry {
     }
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
+  }
+  //inserisce una riga nella tabella - da definire gli argomenti
+  function insert_row()
+  {
+    // da completare, anche con l'argomento
+    // $sql = "INSERT INTO " . $table . "VALUES ";
+  }
+
+  //cancella una riga nella tabella - da definire gli argomenti
+  function remove_row()
+  {
+
+  }
+
+  //aggiorna una riga nella tabella - da definire gli argomenti
+  function update_row()
+  {
+
+  }
+  function test()
+  {
+    header('www.sifea.it');
   }
 }
  ?>
