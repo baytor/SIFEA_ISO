@@ -203,8 +203,6 @@ class dbEntry {
     }
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
-
-    //SELECT * FROM $this->table WHERE CustomerID=1;
   }
 }
  ?>
