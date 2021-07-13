@@ -1,6 +1,8 @@
 <!--PHP
 creare la classe database con form dinamico
 -->
+
+//ciao da github
 <?php
 
 class dbEntry {
@@ -189,7 +191,7 @@ class dbEntry {
   function select_rows_by_pos_where($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
-    
+
     $result = $this->conn->query($this->sql);
 
     //creazione della tabella html
