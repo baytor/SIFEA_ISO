@@ -33,6 +33,7 @@
                   "unita_misura", "quantita", "HT", "permanenza_HT", "ordine", "data_carico", "data_aggiornamento", "Note", "Attiva");
 
       $_SESSION["entry1"] = new dbEntry("Materiali apporto", $clm_header, $clm_array, "localhost", "root", "", "test", "materiali_apporto");
+
    ?>
 
    <form method="post" action="index.php">
@@ -55,7 +56,7 @@
  </html>
 
  <?php
-
+  
     $entry1 = $_SESSION["entry1"];
     $entry1->db_connection_on();
 	  if(isset($_POST['submit']))

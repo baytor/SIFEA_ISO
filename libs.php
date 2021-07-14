@@ -2,23 +2,23 @@
 creare la classe database con form dinamico
 -->
 
-//ciao da github
+
 <?php
 
 class dbEntry {
   // Properties
-  protected $name;       //nome dell'oggetto
-  protected $ncolumn;    //numero di colonne
-  protected $table;      //nome della tabella
-  protected $clm_header; //array con i nomi delle colonne visualizzati
-  protected $clm_array;  //array con i nomi delle colonne del DB
-  protected $sql;
-  protected $conn;
-  protected $servername;
-  protected $username;
-  protected $password;
-  protected $dbname;
-  protected $output_table;
+  public $name;       //nome dell'oggetto
+  public $ncolumn;    //numero di colonne
+  public $table;      //nome della tabella
+  public $clm_header; //array con i nomi delle colonne visualizzati
+  public $clm_array;  //array con i nomi delle colonne del DB
+  public $sql;
+  public $conn;
+  public $servername;
+  public $username;
+  public $password;
+  public $dbname;
+  public $output_table;
 
   public function __construct($name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table)
   {
@@ -37,7 +37,9 @@ class dbEntry {
   function get_ncolumn() {return $this->ncolumn;}
   function get_dbtable() {return $this->table;}
   function get_clm_header() {return $this->clm_header;}
+  function get_clm_header_at($i) {return $this->clm_header[$i];}
   function get_clm_array() {return $this->clm_array;}
+  function get_clm_array_at($i) {return $this->clm_array[$i];}
   function get_servername() {return $this->servername;}
   function get_username() {return $this->username;}
   function get_password() {return $this->password;}
@@ -95,7 +97,7 @@ class dbEntry {
     //var_dump($output_table);
   }
 
-  //seleziona e visualizza le righe utlizzando una stringa
+  //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
   function select_rows_by_string($a)
   {
     $this->sql = $a;
@@ -122,9 +124,9 @@ class dbEntry {
     }
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
-    //var_dump($output_table);
   }
 
+  //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
   function select_rows_by_pos($begin, $end)
   {
     $this->sql = "SELECT * FROM " . $this->table;
@@ -137,7 +139,7 @@ class dbEntry {
     $this->output_table = "<table><tr>";
     for($i = $begin; $i <= $end; $i++)
     {
-      $this->output_table .= "<th>" . $this->clm_array[$i] . "</th>";
+      $this->output_table .= "<th>" . $this->$this->clm_header[$i] . "</th>";
     }
     $this->output_table .= "</tr>";
     if ($result->num_rows > 0)
@@ -156,7 +158,7 @@ class dbEntry {
     echo $this->output_table;
 }
 
-  //cerca una serie di righe
+  //seleziona tutte le voci WHERE clm LIKE %where%
   function select_where($clm, $where)
   {
     //$this->sql = "SELECT * FROM " . $this->table . " WHERE " . $this->clm_array[$num] . " LIKE " . "'%$where%'";
@@ -188,6 +190,7 @@ class dbEntry {
     echo $this->output_table;
   }
 
+  //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
   function select_rows_by_pos_where($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
@@ -199,7 +202,7 @@ class dbEntry {
     $this->output_table = "<table><tr>";
     for($i = $begin; $i <= $end; $i++)
     {
-      $this->output_table .= "<th>" . $this->clm_array[$i] . "</th>";
+      $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
     }
     $this->output_table .= "</tr>";
     if ($result->num_rows > 0)
@@ -208,14 +211,18 @@ class dbEntry {
       while($row = $result->fetch_assoc())
       {
         $this->output_table .= "<tr>";
-        for ($i = $begin; $i <= $end; $i++)
+        $this->output_table .=  "<td><a href=viewer.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
+        for ($i = $begin+1; $i <= $end; $i++)
         {
           $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
         }
+        //echo "ultima riga: ".$row[$this->clm_array[0]]."  ";
       }
+
     }
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
+
   }
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row()
@@ -234,10 +241,6 @@ class dbEntry {
   function update_row()
   {
 
-  }
-  function test()
-  {
-    header('www.sifea.it');
   }
 }
  ?>
