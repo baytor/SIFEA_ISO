@@ -56,12 +56,12 @@
  </html>
 
  <?php
-  
+
     $entry1 = $_SESSION["entry1"];
     $entry1->db_connection_on();
 	  if(isset($_POST['submit']))
       {
-        $entry1->select_rows_by_pos_where(1, 14, $_POST['Ricerca'],$_POST['searchbar']);
+        $entry1->select_rows_by_pos_where_like(1, 14, $_POST['Ricerca'],$_POST['searchbar']);
         //$entry1->select_where($_POST['Ricerca'],$_POST['searchbar']);
       }
 

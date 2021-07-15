@@ -30,6 +30,7 @@ class dbEntry {
     $this->username = $username;
     $this->password = $password;
     $this->dbname = $dbname;
+    $this->sql = "";
   }
 
   // Methods
@@ -92,6 +93,7 @@ class dbEntry {
         }
       }
     }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
     //var_dump($output_table);
@@ -122,6 +124,7 @@ class dbEntry {
         }
       }
     }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
   }
@@ -154,12 +157,13 @@ class dbEntry {
         }
       }
     }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
 }
 
   //seleziona tutte le voci WHERE clm LIKE %where%
-  function select_where($clm, $where)
+  function select_rows_where_like($clm, $where)
   {
     //$this->sql = "SELECT * FROM " . $this->table . " WHERE " . $this->clm_array[$num] . " LIKE " . "'%$where%'";
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
@@ -186,14 +190,80 @@ class dbEntry {
         }
       }
     }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
+    $this->output_table .= "</tr></table>";
+    echo $this->output_table;
+  }
+
+  function select_rows_where_is($clm, $where)
+  {
+    //$this->sql = "SELECT * FROM " . $this->table . " WHERE " . $this->clm_array[$num] . " LIKE " . "'%$where%'";
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " = " . $where;
+    echo $this->sql."<br>";
+
+    $result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->output_table = "<table><tr>";
+    for($i = 0; $i < count($this->clm_header); $i++)
+    {
+        $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
+    }
+    $this->output_table .= "</tr>";
+    if ($result->num_rows > 0)
+    {
+      // output data of each row
+      while($row = $result->fetch_assoc())
+      {
+        $this->output_table .= "<tr>";
+        for ($i = 0; $i < count($this->clm_array); $i++)
+        {
+          $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
+        }
+      }
+    }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
   }
 
   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
-  function select_rows_by_pos_where($begin, $end, $clm, $where)
+  function select_rows_by_pos_where_like($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
+
+    $result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->output_table = "<table><tr>";
+    for($i = $begin; $i <= $end; $i++)
+    {
+      //header
+      $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
+    }
+    $this->output_table .= "</tr>";
+    if ($result->num_rows > 0)
+    {
+      // output data of each row
+      while($row = $result->fetch_assoc())
+      {
+        //popolazione delle righe
+        $this->output_table .= "<tr>";
+        $this->output_table .=  "<td><a href=viewer.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
+        for ($i = $begin+1; $i <= $end; $i++)
+        {
+          $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
+        }
+      }
+    }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
+    $this->output_table .= "</tr></table>";
+    echo $this->output_table;
+  }
+
+  function select_rows_by_pos_where_is($begin, $end, $clm, $where)
+  {
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " = " . $where;
 
     $result = $this->conn->query($this->sql);
 
@@ -220,9 +290,9 @@ class dbEntry {
       }
 
     }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table>";
     echo $this->output_table;
-
   }
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row()
