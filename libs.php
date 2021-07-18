@@ -75,9 +75,10 @@ class dbEntry {
     $this->sql = "SELECT * FROM " . $this->table;
     $this->result = $this->conn->query($this->sql);
 
-    //creazione della tabella html -- $end-1 perchè la funzione cilca da begin to end per necessità
+    //creazione della tabella html -- $end-1 perchè
+    //la funzione cilca da begin to end, compresi, per necessità
     $this->create_table(0, count($this->clm_array)-1);
-    
+
     // $this->output_table = "<table><tr>";
     // for($i = 0; $i < count($this->clm_header); $i++)
     // {
