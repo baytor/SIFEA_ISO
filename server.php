@@ -64,9 +64,9 @@ if (isset($_POST['login_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
-  if(isset($_POST['remember']))
+  if(isset($_POST['remember'])) // questa è la spunta sul login
     {
-      if(!$_COOKIE['username'])
+      if(!isset($_COOKIE['username'])) //ho aggiunto adesso la funzione isset()
       {
         //bisogna fare setcookie per user, password
         setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
@@ -75,6 +75,8 @@ if (isset($_POST['login_user'])) {
 
       else
       {
+          //prima cancello i cookies esistenti e poi li reimposto perché non
+          //me li sovrascriveva (o almeno non so come fare)
           unset($_COOKIE['username']);
           unset($_COOKIE['password']);
           setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));

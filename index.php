@@ -11,15 +11,9 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
-
-  // if(isset($_SESSION['username']) && isset($_SESSION['password']))
-  //   {
-  //     //bisogna fare setcookie per user, password
-  //     setcookie('username', $_SESSION['username'], time()+(86400 * 30 * 7));
-  //     setcookie('password', $_SESSION['password'], time()+(86400 * 30 * 7));
-  //   }
-
 ?>
+
+
  <!DOCTYPE html>
  <html>
  	<head>

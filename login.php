@@ -15,10 +15,12 @@
   	<?php include('errors.php'); ?>
   	<div class="input-group">
   		<label>Username</label>
+      <!-- il problema ce l'ho qui che quando apro la pagina è come se i COOKIES non ci fossero -->
   		<input type="text" name="username" value= <?php echo $_COOKIE['username']; ?> >
   	</div>
   	<div class="input-group">
   		<label>Password</label>
+      <!-- il problema ce l'ho qui che quando apro la pagina è come se i COOKIES non ci fossero (come sopra)-->
   		<input type="password" name="password" value= <?php echo $_COOKIE['password']; ?> type="hidden">
   	</div>
     <div class="input-group">
