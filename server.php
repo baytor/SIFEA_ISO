@@ -52,18 +52,36 @@ if (isset($_POST['reg_user'])) {
   			  VALUES('$username', '$email', '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
+    $_SESSION['password'] = $password_1;
   	$_SESSION['success'] = "You are now logged in";
   	header('location: index.php');
   }
 }
 // LOGIN USER
-//settare i cookies?
 
 if (isset($_POST['login_user'])) {
-  //bisogna fare setcookie per user, password 
-  //setcookie('user', $_POST['login_user'], time()+(86400 * 30 * 7));
+
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['password']);
+
+  if(isset($_POST['remember']))
+    {
+      if(!$_COOKIE['username'])
+      {
+        //bisogna fare setcookie per user, password
+        setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
+        setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));
+      }
+
+      else
+      {
+          unset($_COOKIE['username']);
+          unset($_COOKIE['password']);
+          setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
+          setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));
+      }
+
+    }
 
   if (empty($username)) {
   	array_push($errors, "Username is required");
@@ -80,7 +98,8 @@ if (isset($_POST['login_user'])) {
   	if (mysqli_num_rows($results) == 1)
     {
   	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
+      $_SESSION['password'] = $password;
+  	  $_SESSION['success'] .= "You are now logged in";
   	  header('location: index.php');
   	}
     else

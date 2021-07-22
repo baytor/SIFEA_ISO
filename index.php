@@ -11,6 +11,14 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
+
+  // if(isset($_SESSION['username']) && isset($_SESSION['password']))
+  //   {
+  //     //bisogna fare setcookie per user, password
+  //     setcookie('username', $_SESSION['username'], time()+(86400 * 30 * 7));
+  //     setcookie('password', $_SESSION['password'], time()+(86400 * 30 * 7));
+  //   }
+
 ?>
  <!DOCTYPE html>
  <html>
@@ -42,7 +50,7 @@
     <div class="content">
   	<!-- notification message -->
   	<?php if (isset($_SESSION['success'])) : ?>
-      <div class="error success" >
+      <div class="error success">
       	<h3>
           <?php
           	echo $_SESSION['success'];

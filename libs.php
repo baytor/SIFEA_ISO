@@ -78,29 +78,6 @@ class dbEntry {
     //creazione della tabella html -- $end-1 perchè
     //la funzione cilca da begin to end, compresi, per necessità
     $this->create_table(0, count($this->clm_array)-1);
-
-    // $this->output_table = "<table><tr>";
-    // for($i = 0; $i < count($this->clm_header); $i++)
-    // {
-    //     $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     for ($i = 0; $i < count($this->clm_array); $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //   }
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
-    //
   }
 
   //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
@@ -111,27 +88,6 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table(0, count($this->clm_array)-1);
-    // $this->output_table = "<table><tr>";
-    // for($i = 0; $i < count($this->clm_header); $i++)
-    // {
-    //     $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     for ($i = 0; $i < count($this->clm_array); $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //   }
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
   }
 
   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
@@ -143,28 +99,6 @@ class dbEntry {
 
     //creazione della tabella html
       $this->create_table($begin, $end);
-    //
-    // $this->output_table = "<table><tr>";
-    // for($i = $begin; $i <= $end; $i++)
-    // {
-    //   $this->output_table .= "<th>" . $this->$this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     for ($i = $begin; $i <= $end; $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //   }
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
 }
 
   //seleziona tutte le voci WHERE clm LIKE %where%
@@ -177,29 +111,6 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table(0, count($this->clm_array)-1);
-
-    //
-    // $this->output_table = "<table><tr>";
-    // for($i = 0; $i < count($this->clm_header); $i++)
-    // {
-    //     $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     for ($i = 0; $i < count($this->clm_array); $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //   }
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
   }
 
   function select_rows_where_is($clm, $where)
@@ -211,37 +122,12 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table(0, count($this->clm_array)-1);
-
-
-    //creazione della tabella html
-    // $this->output_table = "<table><tr>";
-    // for($i = 0; $i < count($this->clm_header); $i++)
-    // {
-    //     $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     for ($i = 0; $i < count($this->clm_array); $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //   }
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
   }
 
   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
   function select_rows_by_pos_where_like($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
-
     $this->result = $this->conn->query($this->sql);
 
     //creazione della tabella html
@@ -252,36 +138,10 @@ class dbEntry {
   function select_rows_by_pos_where_is($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " = " . $where;
-
     $result = $this->conn->query($this->sql);
 
     //creazione della tabella html
     $this->create_table($begin, $end);
-
-    // $this->output_table = "<table><tr>";
-    // for($i = $begin; $i <= $end; $i++)
-    // {
-    //   $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
-    // }
-    // $this->output_table .= "</tr>";
-    // if ($result->num_rows > 0)
-    // {
-    //   // output data of each row
-    //   while($row = $result->fetch_assoc())
-    //   {
-    //     $this->output_table .= "<tr>";
-    //     $this->output_table .=  "<td><a href=viewer.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
-    //     for ($i = $begin+1; $i <= $end; $i++)
-    //     {
-    //       $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
-    //     }
-    //     //echo "ultima riga: ".$row[$this->clm_array[0]]."  ";
-    //   }
-    //
-    // }
-    // else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    // $this->output_table .= "</tr></table>";
-    // echo $this->output_table;
   }
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row()
