@@ -13,8 +13,7 @@
   }
 ?>
 
-
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html>
  	<head>
  		<title>Home Page</title>
@@ -82,7 +81,7 @@
         {
           echo "<option value=$clm_array[$i]>$clm_header[$i]</option>";
         }
-        ?>
+       ?>
      </select>
 
      <input type="text" name="searchbar"><br><br>

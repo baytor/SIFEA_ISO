@@ -1,4 +1,16 @@
-<?php include('server.php'); ?>
+<?php
+  include('server.php');
+  if(isset($_COOKIE['username']) && isset($_COOKIE['password']))
+  {
+    $cookie_username = $_COOKIE['username'];
+    $cookie_password = $_COOKIE['password'];
+  }
+  else
+  {
+    $cookie_username = "";
+    $cookie_password = "";
+  }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -15,13 +27,12 @@
   	<?php include('errors.php'); ?>
   	<div class="input-group">
   		<label>Username</label>
-      <!-- il problema ce l'ho qui che quando apro la pagina è come se i COOKIES non ci fossero -->
-  		<input type="text" name="username" value= <?php echo $_COOKIE['username']; ?> >
+  		<input type="text" name="username" value= <?php echo $cookie_username; ?> >
   	</div>
   	<div class="input-group">
   		<label>Password</label>
-      <!-- il problema ce l'ho qui che quando apro la pagina è come se i COOKIES non ci fossero (come sopra)-->
-  		<input type="password" name="password" value= <?php echo $_COOKIE['password']; ?> type="hidden">
+  		<input type="password"
+      name="password" value= <?php echo $cookie_password; ?> type="hidden">
   	</div>
     <div class="input-group">
     <input type="checkbox" id="rememberaccount" name="remember" value="true">
