@@ -1,8 +1,3 @@
-<!--PHP
-creare la classe database con form dinamico
--->
-
-
 <?php
 
 class dbEntry {
@@ -172,7 +167,7 @@ class dbEntry {
     $this->sql = "UPDATE $this->table SET ";
     for($i = 0; $i < count($array_values) - 1; $i++)
     {
-        $this->sql .= $this->clm_array[$i] . " = " . $array_values[$i] . ", "//con ciclo for
+        $this->sql .= $this->clm_array[$i] . " = " . $array_values[$i] . ", ";//con ciclo for
     }
     $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
     $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
@@ -193,7 +188,7 @@ class dbEntry {
       while($row = $this->result->fetch_assoc())
       {
         $this->output_table .= "<tr>";
-        $this->output_table .=  "<td><a href=viewer.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
+        $this->output_table .=  "<td><a href=modify.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
         for ($i = $begin+1; $i <= $end; $i++)
         {
           $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
