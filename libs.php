@@ -138,6 +138,11 @@ class dbEntry {
     //creazione della tabella html
     $this->create_table($begin, $end);
   }
+
+  //da inserire:
+  //function select_rows_by_array_where_is(array $array, $clm, $where)
+  //function select_rows_by_array_where_like(array $array, $clm, $where)
+
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row(array $array_values)
   {
