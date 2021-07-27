@@ -3,6 +3,7 @@
   // quindi dovviamo togliere il visualizzatore e metterlo su viewer.php
   require_once('libs.php');
   session_start();
+  echo "session start";
 
   if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -21,22 +22,6 @@
  		<title>Home Page</title>
  	</head>
  <body>
-	 <style>
-
-	 		table {
-				border-collapse: collapse;
-				width: 100%;
-			}
-
-			th, td {
-				padding: 15px;
-  			text-align: center;
-				border-bottom: 5px solid #ddd;
-			}
-
-			tr:hover {background-color:#f5f5f5;}
-
-	 </style>
 
    <!-- inizio parte copiata per login -->
 	 <div class="header">
@@ -64,7 +49,9 @@
   <!-- fine parte copiata per login -->
 
 <!-- Andrà sostituito con qualcosa di meglio -->
-<a href="viewer.php">Materiali d'apporto</a>
+<form id="catalogo" method="get" action="viewer.php">
+  <button type="submit" name="matapporto">Materiali d'apporto</button>
+</form>
 
  </body>
  </html>
