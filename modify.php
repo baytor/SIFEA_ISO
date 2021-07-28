@@ -1,22 +1,12 @@
 <?php
   require_once('viewer.php');
 
-  function action($search)
-  {
-    //search($_GET['search']);
-    $_SESSION['entry1']->db_connection_on();
-    $_SESSION['entry1']->select_rows_where_is($_SESSION['entry1']->clm_array[0],$search);
-    // $_SESSION['entry1']->select_rows_by_string("SELECT * FROM ".$_SESSION['entry1']->table.
-    //                                              " WHERE ".$_SESSION['entry1']->clm_array[6]." = ".$_GET['search'].
-    //                                              " ORDER BY ".$_SESSION['entry1']->clm_array[15]);
-
-    $_SESSION['entry1']->db_connection_off();
-  }
-
   if (isset($_GET['search']))
     {
         action($_GET['search']);
         $_SESSION['row_search'] = $_GET['search'];
+        echo "L'oggetto con chiave primaria = " . $_GET['search'] .
+              " si chiama " .$_SESSION['entry1']->get_clm_header_at(2)."<br>";
     }
 
     if(isset($_POST['copia']))
@@ -41,6 +31,17 @@
     {
       echo "aggiorna<br>";
       $_SESSION['row_search'] = $_GET['search'];
+    }
+
+    function action($search)
+    {
+      //search($_GET['search']);
+      $_SESSION['entry1']->db_connection_on();
+      //$_SESSION['entry1']->select_rows_where_is($_SESSION['entry1']->clm_array[0],$search);
+      $_SESSION['entry1']->select_rows_by_string_by_pos("SELECT * FROM ".$_SESSION['entry1']->get_dbtable().
+                                                   " WHERE ".$_SESSION['entry1']->get_clm_array_at(0)."=".$search.
+                                                   " ORDER BY ".$_SESSION['entry1']->get_clm_array_at(15). " DESC",1,14);
+      $_SESSION['entry1']->db_connection_off();
     }
 ?>
 

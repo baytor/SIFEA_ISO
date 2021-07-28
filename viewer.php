@@ -1,9 +1,8 @@
 <?php
   require_once('libs.php');
   session_start();
-   //devo cercare di escludere quello che già compare in index
+   //devo cercare di escludere quello che già compare in index --> includo libs invece che index
    //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
-   //Qui l'Header è uguale al nome delle colonne del DB --> si possono settare dei nomi formattati meglio
 
    //qui si settano tutti i parametri dei pulsanti di scelta presenti su index.php
    if(isset($_GET['matapporto']))
@@ -17,7 +16,6 @@
    }
 
    //$name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table
-
     $name = $_SESSION['name'];
     $clm_header = $_SESSION['clm_header'];
     $clm_array = $_SESSION['clm_array'];
@@ -43,37 +41,60 @@
  			th, td {
  				padding: 15px;
    			text-align: center;
- 				border-bottom: 5px solid #ddd;
+ 				border-bottom: 5px solid #ddd;        
  			}
 
  			tr:hover {background-color:#f5f5f5;}
 
  	 </style>
     <body>
-
       <form id="searchform" method="post" action="viewer.php">
         <label for="where">Ricerca: </label>
 
-        <select id="Ricerca" name="Ricerca">
+        <select id="menutendina" name="menutendina">
           <?php
+
+          //mi memorizza la scelta in modo da lasciare il menù sullo stesso valore
+          $_SESSION['menutendina'] = $_POST['menutendina'];
+
            for($i = 0; $i < count($clm_array); $i++)
            {
-             echo "<option value=$clm_array[$i]>$clm_header[$i]</option>";
+             if(isset($_SESSION['menutendina']) && $_SESSION['menutendina'] == $clm_array[$i])
+             {  //se è uguale alla selezione precedente aggiunge l'opzione "selected"
+                echo "<option value=$clm_array[$i] selected>$clm_header[$i]</option>";
+             }
+             else
+             {  //altrimenti no la aggiunge
+               echo "<option value=$clm_array[$i]>$clm_header[$i]</option>";
+             }
            }
           ?>
         </select>
 
-        <input type="text" name="searchbar"><br><br>
-        <input type="submit" value="Cerca" name="search"><br><br><br><br>
-     </form>
+        <input type="text" name="searchbar">
+        <input type="checkbox" id="escludiesauriti" name="escludiesauriti" checked>
+        <label for="escludiesauriti"> Escludi esauriti</label><br><br>
+        <input type="submit" value="Cerca" name="searchbtn"><br><br><br><br>
+      </form>
 
      <?php
-
       $entry1 = $_SESSION["entry1"];
       $entry1->db_connection_on();
-      if(isset($_POST['search']))
+
+      if(isset($_POST['searchbtn']))
         {
-          $entry1->select_rows_by_pos_where_like(1, 14, $_POST['Ricerca'],$_POST['searchbar']);
+          // mi serve per comporre "where *menu* like *** and Attiva is 1";
+          $sql_string = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE " . $_POST['menutendina']
+                         . " LIKE " . "'%". $_POST['searchbar'] ."%'";
+         if(isset($_POST['escludiesauriti']))
+          {
+            $sql_string .= " AND Attiva = 1 ";
+          }
+
+          $sql_string .= " ORDER BY " . $_POST['menutendina'] . " ASC, " . $entry1->get_clm_array_at(13) . " DESC";
+          $entry1->select_rows_by_string_by_pos($sql_string, 1, 14);
+
+          //$entry1->select_rows_by_pos_where_like(1, 14, $_POST['menutendina'],$_POST['searchbar']);
           //$entry1->select_where($_POST['Ricerca'],$_POST['searchbar']);
         }
       $entry1->db_connection_off();

@@ -35,7 +35,7 @@
       name="password" value= <?php echo $cookie_password; ?> type="hidden">
   	</div>
     <div class="input-group">
-    <input type="checkbox" id="rememberaccount" name="remember" value="true">
+    <input type="checkbox" id="rememberaccount" name="remember" checked>
     <label for="rememberaccount"> Ricordati di me</label><br>
     </div>
     <div class="input-group">

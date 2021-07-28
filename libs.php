@@ -1,5 +1,13 @@
 <?php
 
+//Per il corretto funzionamento:
+//  - la posizione [0] dell'array DEVE essere la chiave primaria
+//  - la posizione [1] dell'array DEVE essere il nome o la descrizione dell'oggetto
+//  - la posizione [count($this->get_clm_array()-1)], ossia l'ultima, dell'array DEVE
+//    essere quella che dice se un oggetto è ATTIVO o effettivamente presente (valore == 1)
+//    oppure INATTIVO o ESAURITO (valore ==0)
+
+
 class dbEntry {
   // Properties
   public $name;       //nome dell'oggetto
@@ -41,6 +49,8 @@ class dbEntry {
   function get_username() {return $this->username;}
   function get_password() {return $this->password;}
   function get_dbname() {return $this->dbname;}
+  //dubito che serva
+  //function get_entry_by_primary($primary_pos, $primary_value) {if($this->get_clm_array_at($primary_pos)==$primary_value) return $this;}
 
   function set_name($name) {$this->name = $name;}
   function set_ncolumn($ncolumn) {$this->ncolumn = $ncolumn;}
@@ -83,6 +93,15 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table(0, count($this->clm_array)-1);
+  }
+
+  function select_rows_by_string_by_pos($a, $begin, $end)
+  {
+    $this->sql = $a;
+    $this->result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->create_table($begin, $end);
   }
 
   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
@@ -139,7 +158,7 @@ class dbEntry {
     $this->create_table($begin, $end);
   }
 
-  //da inserire:
+  //da inserire se serve:
   //function select_rows_by_array_where_is(array $array, $clm, $where)
   //function select_rows_by_array_where_like(array $array, $clm, $where)
 
@@ -181,6 +200,7 @@ class dbEntry {
   //crea la Tabella
   function create_table($begin, $end)
   {
+    //header della tabella
     $this->output_table = "<table><tr>";
     for($i = $begin; $i <= $end; $i++)
     {
@@ -189,10 +209,17 @@ class dbEntry {
     $this->output_table .= "</tr>";
     if ($this->result->num_rows > 0)
     {
-      // output data of each row
+      // dati della tabella -> sul valore at[1] (nome) c'è un href per selezionare la voce
       while($row = $this->result->fetch_assoc())
-      {
-        $this->output_table .= "<tr>";
+      { //se è esaurito colora la riga di grigio
+        if($row[$this->clm_array[count($this->get_clm_array())-1]] == 0)
+        {
+          $color_if_non_attiva = 'style="background-color:#cecece"';
+        }
+        else {
+          $color_if_non_attiva = "";
+        }
+        $this->output_table .= "<tr $color_if_non_attiva>";
         $this->output_table .=  "<td><a href=modify.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
         for ($i = $begin+1; $i <= $end; $i++)
         {
