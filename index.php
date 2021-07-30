@@ -2,6 +2,7 @@
   // qui va scelta la tabella con degli appositi bottoni
   // quindi dovviamo togliere il visualizzatore e metterlo su viewer.php
   require_once('libs.php');
+  require_once('style.css');
   session_start();
   echo "session start";
 

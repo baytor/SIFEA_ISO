@@ -4,8 +4,8 @@
 //  - la posizione [0] dell'array DEVE essere la chiave primaria
 //  - la posizione [1] dell'array DEVE essere il nome o la descrizione dell'oggetto
 //  - la posizione [count($this->get_clm_array()-1)], ossia l'ultima, dell'array DEVE
-//    essere quella che dice se un oggetto è ATTIVO o effettivamente presente (valore == 1)
-//    oppure INATTIVO o ESAURITO (valore ==0)
+//    essere quella che dice se un oggetto è ATTIVO e effettivamente presente (valore == 1)
+//    oppure INATTIVO o ESAURITO (valore == 0)
 
 
 class dbEntry {

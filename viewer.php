@@ -1,5 +1,6 @@
 <?php
   require_once('libs.php');
+  require_once('style.css');
   session_start();
    //devo cercare di escludere quello che già compare in index --> includo libs invece che index
    //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
@@ -25,28 +26,13 @@
 
   ?>
 
+<!-- sarebbe meglio fare il css a parte -->
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
     <head>
       <meta charset="utf-8">
       <title></title>
     </head>
-    <style>
-
- 	 		table {
- 				border-collapse: collapse;
- 				width: 100%;
- 			}
-
- 			th, td {
- 				padding: 15px;
-   			text-align: center;
- 				border-bottom: 5px solid #ddd;        
- 			}
-
- 			tr:hover {background-color:#f5f5f5;}
-
- 	 </style>
     <body>
       <form id="searchform" method="post" action="viewer.php">
         <label for="where">Ricerca: </label>
@@ -77,6 +63,11 @@
         <input type="submit" value="Cerca" name="searchbtn"><br><br><br><br>
       </form>
 
+      <form id="new_row" method="post" action="modify.php">
+        <br><br>
+        <button type="submit" name="nuovo">Nuovo</button>
+      </form>
+
      <?php
       $entry1 = $_SESSION["entry1"];
       $entry1->db_connection_on();
@@ -92,10 +83,16 @@
           }
 
           $sql_string .= " ORDER BY " . $_POST['menutendina'] . " ASC, " . $entry1->get_clm_array_at(13) . " DESC";
-          $entry1->select_rows_by_string_by_pos($sql_string, 1, 14);
+          //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
+          $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
 
           //$entry1->select_rows_by_pos_where_like(1, 14, $_POST['menutendina'],$_POST['searchbar']);
           //$entry1->select_where($_POST['Ricerca'],$_POST['searchbar']);
+        }
+        else
+        {
+          //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
+          $entry1->select_rows_by_pos(1,count($entry1->get_clm_array())-2);
         }
       $entry1->db_connection_off();
      ?>
