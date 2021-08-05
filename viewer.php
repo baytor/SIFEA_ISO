@@ -30,7 +30,7 @@
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
     <head>
-      <meta charset="utf-8">
+      <meta charset="utf8_general_ci">
       <title></title>
     </head>
     <body>
@@ -60,17 +60,31 @@
         <input type="text" name="searchbar">
         <input type="checkbox" id="escludiesauriti" name="escludiesauriti" checked>
         <label for="escludiesauriti"> Escludi esauriti</label><br><br>
-        <input type="submit" value="Cerca" name="searchbtn"><br><br><br><br>
+        <input type="submit" value="Cerca" name="searchbtn"><br><br>
       </form>
 
-      <form id="new_row" method="post" action="modify.php">
-        <br><br>
+      <form id="new_row" method="post" action="new.php">
+        <br>
         <button type="submit" name="nuovo">Nuovo</button>
       </form>
 
      <?php
       $entry1 = $_SESSION["entry1"];
       $entry1->db_connection_on();
+
+      //azione di aggiungere la nuova riga --> vedi new.php
+      //bisogna vedere se id applica l'auto increment e bisogna settare
+      //'Attiva' = 1, magari a mano in ultima riga.
+      if (isset($_POST['aggiungi']))
+      {
+        $array_new = array();
+        for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
+        {
+          array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);
+        }
+        //array_push($array_new,1); per l'ultima voce;
+        echo "voce aggiunta _ dimensione array:" .count($array_new);
+      }
 
       if(isset($_POST['searchbtn']))
         {
@@ -94,6 +108,7 @@
           //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
           $entry1->select_rows_by_pos(1,count($entry1->get_clm_array())-2);
         }
+
       $entry1->db_connection_off();
      ?>
 

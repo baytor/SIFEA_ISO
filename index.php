@@ -22,6 +22,7 @@
  	<head>
  		<title>Home Page</title>
  	</head>
+  <meta charset="utf8_general_ci">
  <body>
 
    <!-- inizio parte copiata per login -->

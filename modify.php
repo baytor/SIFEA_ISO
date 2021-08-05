@@ -45,7 +45,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf8_general_ci">
     <title></title>
   </head>
   <body>
