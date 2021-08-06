@@ -17,17 +17,33 @@
 
     if(isset($_POST['elimina']))
     {
+      $_SESSION['entry1']->db_connection_on();
       echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+      $_SESSION['entry1']->delete_row($_SESSION['row_search']);
+      $_SESSION['entry1']->db_connection_off();
+      echo "Redirecting in 2 seconds";
+      header("refresh:2; url=viewer.php");
     }
 
     if(isset($_POST['modifica']))
     {
+      //modifica la voce selezionata
+      $_SESSION['entry1']->db_connection_on();
       echo "<br><br>Modifica l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+
+      $_SESSION['entry1']->db_connection_off();
     }
 
     if(isset($_POST['aggiorna']))
     {
+      $_SESSION['entry1']->db_connection_on();
+      //aggiorna una voce:
+      //  + copia la voce mettendola in revisione (es.: aumenta il n° rev, aggiorna la data proponendo quella odierna...)
+      //    dando la possibilità di modificare i campi già esistenti;
+      //  + mette inattiva (0) la voce vecchia
+
       echo "<br><br>Aggiorna l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+      $_SESSION['entry1']->db_connection_off();
     }
 
     function action($search)
@@ -53,7 +69,10 @@
     <form id="row_options" method="post" action="modify.php">
       <br><br>
       <button type="submit" name="copia">Copia</button>
-      <button type="submit" name="elimina">Elimina</button>
+      <button type="submit" name="elimina">Elimina</button>      
+    </form>
+    <form id="row_options" method="post" action="new.php">
+      <br><br>
       <button type="submit" name="modifica">Modifica</button>
       <button type="submit" name="aggiorna">Aggiorna</button>
     </form>

@@ -78,12 +78,14 @@
       if (isset($_POST['aggiungi']))
       {
         $array_new = array();
+        array_push($array_new,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
         for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
         {
           array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);
         }
-        //array_push($array_new,1); per l'ultima voce;
-        echo "voce aggiunta _ dimensione array:" .count($array_new);
+        array_push($array_new,1); //per l'ultima voce;
+        echo "voce aggiunta _ array: " .implode(" // ",$array_new);
+        $_SESSION['entry1']->insert_row($array_new);
       }
 
       if(isset($_POST['searchbtn']))

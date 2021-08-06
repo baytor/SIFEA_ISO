@@ -166,23 +166,27 @@ class dbEntry {
   function insert_row(array $array_values)
   {
     // da completare, anche con l'argomento
-    $this->sql = "INSERT INTO " . $this->table . "VALUES (";
+    $this->sql = "INSERT INTO " . $this->table . " VALUES ('";
     //se ho un array con n valori, gli indici vanno da 0 a n-1
     //il ciclo for va dal primo al penultimo => da 0 a n-2
     for($i = 0; $i < count($array_values) - 1; $i++)
     {
-      $this->sql .= $array_values[$i] . ", ";
+      $this->sql .= $array_values[$i] . "', '";
     }
 
-    $this->sql .= $array_values[count($array_values) - 1] . ")";
+    $this->sql .= $array_values[count($array_values) - 1] . "')";
     //n-1 e chiudo parentesi
+    echo $this->sql;
+    $this->result = $this->conn->query($this->sql);
   }
 
   //cancella una riga nella tabella - da definire gli argomenti
   function delete_row($id)
   {
     //clm_array[0] deve essere la chiave primaria
-    $this->sql = "DELETE FROM $this->table WHERE $this->clm_array[0] = $id";
+    $this->sql = "DELETE FROM " . $this->table ." WHERE " . $this->get_clm_array_at(0) . " = '" . $id . "'";
+    echo $this->sql;
+    $this->result = $this->conn->query($this->sql);
   }
 
   //aggiorna una riga nella tabella - da definire gli argomenti
