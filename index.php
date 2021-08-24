@@ -52,9 +52,9 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.html">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="#">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="#">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="#">Logout</a></li></ul>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
                 
                 <h4 class="menu-text mbr-fonts-style m-0 display-4"></h4>
                 
@@ -64,6 +64,31 @@
             </div>
         </div>
     </nav>
+</section>
+
+<div id="custom-html-k"><!-- Type valid HTML here -->
+
+<div>
+    <?php
+	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/index_code.php');
+	?>
+</div></div>
+
+<section class="footer7 cid-sGZxBQDYkw" once="footers" id="footer7-j">
+
+    
+
+    
+
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">
+                    © Copyright 2025 Mobirise - All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
 
 

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   
   
-  <title>Login</title>
+  <title>Logout</title>
   <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -28,7 +28,7 @@
 </head>
 <body>
   
-  <section class="menu menu1 cid-sGZypCraQt" once="menu" id="menu1-m">
+  <section class="menu menu1 cid-sH11scGlue" once="menu" id="menu1-19">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
@@ -66,7 +66,7 @@
     </nav>
 </section>
 
-<div id="custom-html-15"><!-- Type valid HTML here -->
+<div id="custom-html-18"><!-- Type valid HTML here -->
 
 <!-- <div>
     <h1 class="display-1">Custom HTML Block</h1>
@@ -78,11 +78,11 @@
 
 <div>
      <?php 
-    	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/login_code.php'); 
+    	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/logout_code.php'); 
     ?>    
 </div></div>
 
-<section class="footer7 cid-sGZypD1KeQ" once="footers" id="footer7-n">
+<section class="footer7 cid-sH11sdbW95" once="footers" id="footer7-1a">
 
     
 

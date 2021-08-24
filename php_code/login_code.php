@@ -1,5 +1,5 @@
 <?php
-  include('server.php');
+  include('server_code.php');
   if(isset($_COOKIE['username']) && isset($_COOKIE['password']))
   {
     $cookie_username = $_COOKIE['username'];
@@ -10,41 +10,40 @@
     $cookie_username = "";
     $cookie_password = "";
   }
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Registration system PHP and MySQL</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <div class="header">
-  	<h2>Login</h2>
-  </div>
 
-  <form method="post" action="login.php">
-  	<?php include('errors.php'); ?>
-  	<div class="input-group">
+// <!-- <!DOCTYPE html>
+// <html>
+// <head>
+//   <title>Registration system PHP and MySQL</title>
+//   <link rel="stylesheet" type="text/css" href="style.css">
+// </head>
+// <body>
+//   <div class="header">
+//   	<h2>Login</h2>
+//   </div> -->
+
+echo "<form method=post action=login.php>";
+  	include('errors_code.php');
+echo "<div class=input-group>
   		<label>Username</label>
-  		<input type="text" name="username" value= <?php echo $cookie_username; ?> >
+  		<input type=text name=username value=$cookie_username>
   	</div>
-  	<div class="input-group">
+  	<div class=input-group>
   		<label>Password</label>
-  		<input type="password"
-      name="password" value= <?php echo $cookie_password; ?> type="hidden">
+  		<input type=password
+      name=password value=$cookie_password type=hidden>
   	</div>
-    <div class="input-group">
-    <input type="checkbox" id="rememberaccount" name="remember" checked>
-    <label for="rememberaccount"> Ricordati di me</label><br>
+    <div class=input-group>
+    <input type=checkbox id=rememberaccount name=remember checked>
+    <label for=rememberaccount> Ricordati di me</label><br>
     </div>
-    <div class="input-group">
-  		<button type="submit" class="btn" name="login_user">Login</button>
+    <div class=input-group>
+  		<button type=submit class=btn name=login_user>Login</button>
   	</div>
   	<p>
-  		Not yet a member? <a href="register.php">Sign up</a>
+  		Not yet a member? <a href=register.php>Sign up</a>
   	</p>
-  </form>
+  </form>";
 
-</body>
-</html>
+?>

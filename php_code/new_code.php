@@ -1,23 +1,12 @@
 <?php
-  require_once('libs.php');
-  require_once('style.css');
+  require_once('libs_code.php');
+  //require_once('style.css');
   session_start();
- ?>
 
-
- <!DOCTYPE html>
- <html lang="en" dir="ltr">
-   <head>
-     <meta charset="utf8_general_ci">
-     <title></title>
-   </head>
-   <body>
-
-     <form id="newform" class="" action="viewer.php" method="post">
-         <br><br><input type="submit" value="Aggiungi" name="aggiungi">
-     </form>
-
-     <?php
+    echo "
+     <form id=newform class= action=viewer.php method=post>
+         <br><br><input type=submit value=Aggiungi name=aggiungi>
+     </form>";
 
      if(isset($_POST['modifica']))
      {
@@ -55,6 +44,3 @@
       }
     }
      ?>
-     
-   </body>
- </html>

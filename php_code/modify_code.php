@@ -1,6 +1,6 @@
 <?php
-  require_once('libs.php');
-  require_once('style.css');
+  require_once('libs_code.php');
+  //require_once('style.css');
   session_start();
 
   if (isset($_GET['search']))
@@ -56,26 +56,26 @@
                                                    " ORDER BY ".$_SESSION['entry1']->get_clm_array_at(15). " DESC",1,count($_SESSION['entry1']->get_clm_array())-2);
       $_SESSION['entry1']->db_connection_off();
     }
-?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf8_general_ci">
-    <title></title>
-  </head>
-  <body>
 
-    <form id="row_options" method="post" action="modify.php">
+// <!DOCTYPE html>
+// <html lang="en" dir="ltr">
+//   <head>
+//     <meta charset="utf8_general_ci">
+//     <title></title>
+//   </head>
+//   <body>
+
+echo
+    "<form id=row_options method=post action=modify.php>
       <br><br>
-      <button type="submit" name="copia">Copia</button>
-      <button type="submit" name="elimina">Elimina</button>      
+      <button type=submit name=copia>Copia</button>
+      <button type=submit name=elimina>Elimina</button>
     </form>
-    <form id="row_options" method="post" action="new.php">
+    <form id=row_options method=post action=new.php>
       <br><br>
-      <button type="submit" name="modifica">Modifica</button>
-      <button type="submit" name="aggiorna">Aggiorna</button>
-    </form>
+      <button type=submit name=modifica>Modifica</button>
+      <button type=submit name=aggiorna>Aggiorna</button>
+    </form>";
 
-  </body>
-</html>
+    ?>

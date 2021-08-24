@@ -1,6 +1,6 @@
 <?php
-  require_once('libs.php');
-  require_once('style.css');
+  require_once('libs_code.php');
+  //require_once('style.css');
   session_start();
    //devo cercare di escludere quello che già compare in index --> includo libs invece che index
    //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
@@ -24,21 +24,13 @@
 
     $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, "localhost", "root", "", "test", $table);
 
-  ?>
 
-<!-- sarebbe meglio fare il css a parte -->
-  <!DOCTYPE html>
-  <html lang="en" dir="ltr">
-    <head>
-      <meta charset="utf8_general_ci">
-      <title></title>
-    </head>
-    <body>
-      <form id="searchform" method="post" action="viewer.php">
-        <label for="where">Ricerca: </label>
 
-        <select id="menutendina" name="menutendina">
-          <?php
+echo"
+      <form id=searchform method=post action=viewer.php>
+        <label for=where>Ricerca: </label>
+
+        <select id=menutendina name=menutendina>";
 
           //mi memorizza la scelta in modo da lasciare il menù sullo stesso valore
           $_SESSION['menutendina'] = $_POST['menutendina'];
@@ -54,21 +46,22 @@
                echo "<option value=$clm_array[$i]>$clm_header[$i]</option>";
              }
            }
-          ?>
-        </select>
 
-        <input type="text" name="searchbar">
-        <input type="checkbox" id="escludiesauriti" name="escludiesauriti" checked>
-        <label for="escludiesauriti"> Escludi esauriti</label><br><br>
-        <input type="submit" value="Cerca" name="searchbtn"><br><br>
+      echo "</select>";
+
+      echo "
+        <input type=text name=searchbar>
+        <input type=checkbox id=escludiesauriti name=escludiesauriti checked>
+        <label for=escludiesauriti> Escludi esauriti</label><br><br>
+        <button type=submit name=searchbtn>Cerca</button><br><br>
       </form>
 
-      <form id="new_row" method="post" action="new.php">
+      <form id=new_row method=post action=new.php>
         <br>
-        <button type="submit" name="nuovo">Nuovo</button>
-      </form>
+        <button type=submit name=nuovo>Nuovo</button>
+      </form>";
 
-     <?php
+
       $entry1 = $_SESSION["entry1"];
       $entry1->db_connection_on();
 
@@ -113,6 +106,3 @@
 
       $entry1->db_connection_off();
      ?>
-
-    </body>
-  </html>

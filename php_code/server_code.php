@@ -67,7 +67,7 @@ if (isset($_POST['login_user'])) {
   if(isset($_POST['remember'])) // questa è la spunta sul login
     {
           setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
-          setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));          
+          setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));
     }
 
   if (empty($username)) {
