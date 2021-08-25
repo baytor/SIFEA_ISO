@@ -32,16 +32,16 @@
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
-         <h3 class="menu-tite mbr-fonts-style display-4"></h3>
-        <div class="container">
+         
+        <div class="container-fluid">
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="http://www.sifea.it" target="_blank">
-                        <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 3rem;">
+                        <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-7" href="#">SIFEA S.r.l.</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="#">SIFEA S.r.l.</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -56,7 +56,7 @@
                             Home</a></li>
                     <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
                 
-                <h4 class="menu-text mbr-fonts-style m-0 display-4"></h4>
+                
                 
                 
                 
@@ -77,9 +77,11 @@
 </div> -->
 
 <div>
+    
      <?php 
     	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/login_code.php'); 
     ?>    
+       
 </div></div>
 
 <section class="footer7 cid-sGZypD1KeQ" once="footers" id="footer7-n">
@@ -91,9 +93,7 @@
     <div class="container">
         <div class="media-container-row align-center mbr-white">
             <div class="col-12">
-                <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                    © Copyright 2025 Mobirise - All Rights Reserved
-                </p>
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">Versione 0.1 del&nbsp;</p>
             </div>
         </div>
     </div>

@@ -16,35 +16,25 @@
   	header("Refresh: 2; location: login.php");
   }
 
-//    <!-- inizio parte copiata per login -->
-// 	 <div class="header">
-// 	    <h2>Home Page</h2>
-//     </div>
-//     <div class="content">
-//   	<!-- notification message -->
-//
-//   </div>
-//   <!-- fine parte copiata per login -->
-//
-// <!-- Andrà sostituito con qualcosa di meglio -->
+  // <!-- Ho modificato la parte copiata per fare in modo di avere 2 corpi:
+  // 1 prima del HTML e uno alla fine del body, come richiesto su mobyrise -->
+
+    if (isset($_SESSION['success']))
+    {
+      echo $_SESSION['success'];
+      unset($_SESSION['success']);
+    }
+
+   if (isset($_SESSION['username']))
+  {
+     echo "<p1>Welcome ". $_SESSION['username']."<br><br></p1>";
+     //echo "<a href=index.php?logout='1' style=color: red;>logout</a> </p>";
+  }
+
 
 echo "
 <form id=catalogo method=get action=viewer.php>
   <button type=submit name=matapporto>Materiali d'apporto</button>
 </form>";
 
-// <!-- Ho modificato la parte copiata per fare in modo di avere 2 corpi:
-// 1 prima del HTML e uno alla fine del body, come richiesto su mobyrise -->
-
-  if (isset($_SESSION['success']))
-  {
-    echo $_SESSION['success'];
-    unset($_SESSION['success']);
-  }
-
- if (isset($_SESSION['username']))
-{
-   echo "Welcome ". $_SESSION['username']."<br><br>";
-   //echo "<a href=index.php?logout='1' style=color: red;>logout</a> </p>";
-}
- ?>
+?>

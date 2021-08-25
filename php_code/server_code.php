@@ -53,7 +53,7 @@ if (isset($_POST['reg_user'])) {
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
     $_SESSION['password'] = $password_1;
-  	$_SESSION['success'] = "You are now logged in";
+  	$_SESSION['success'] = "You are now logged in<br>";
   	header('location: index.php');
   }
 }
@@ -86,7 +86,7 @@ if (isset($_POST['login_user'])) {
     {
   	  $_SESSION['username'] = $username;
       $_SESSION['password'] = $password;
-  	  $_SESSION['success'] .= "You are now logged in";
+  	  $_SESSION['success'] .= "You are now logged in<br>";
   	  header('location: index.php');
   	}
     else

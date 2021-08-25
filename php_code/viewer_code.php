@@ -51,7 +51,7 @@ echo"
 
       echo "
         <input type=text name=searchbar>
-        <input type=checkbox id=escludiesauriti name=escludiesauriti checked>
+        <br><input type=checkbox id=escludiesauriti name=escludiesauriti checked>
         <label for=escludiesauriti> Escludi esauriti</label><br><br>
         <button type=submit name=searchbtn>Cerca</button><br><br>
       </form>

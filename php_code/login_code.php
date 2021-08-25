@@ -11,39 +11,18 @@
     $cookie_password = "";
   }
 
-
-// <!-- <!DOCTYPE html>
-// <html>
-// <head>
-//   <title>Registration system PHP and MySQL</title>
-//   <link rel="stylesheet" type="text/css" href="style.css">
-// </head>
-// <body>
-//   <div class="header">
-//   	<h2>Login</h2>
-//   </div> -->
-
-echo "<form method=post action=login.php>";
-  	include('errors_code.php');
-echo "<div class=input-group>
-  		<label>Username</label>
-  		<input type=text name=username value=$cookie_username>
-  	</div>
-  	<div class=input-group>
-  		<label>Password</label>
-  		<input type=password
-      name=password value=$cookie_password type=hidden>
-  	</div>
-    <div class=input-group>
-    <input type=checkbox id=rememberaccount name=remember checked>
-    <label for=rememberaccount> Ricordati di me</label><br>
-    </div>
-    <div class=input-group>
-  		<button type=submit class=btn name=login_user>Login</button>
-  	</div>
-  	<p>
+echo  "<form method=post action=login.php>";
+  	  include('errors_code.php');
+echo  "<label>Username</label><br>
+  		<input type=text name=username value=$cookie_username><br>
+  		<label>Password</label><br>
+  		<input type=password name=password value=$cookie_password type=hidden><br>
+      <input type=checkbox id=rememberaccount name=remember checked>
+      <label for=rememberaccount> Ricordati di me</label><br>
+      <button type=submit class=btn name=login_user>Login</button><br>
+  	  <p>
   		Not yet a member? <a href=register.php>Sign up</a>
-  	</p>
-  </form>";
+  	  </p>
+      </form>";
 
 ?>
