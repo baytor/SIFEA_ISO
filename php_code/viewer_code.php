@@ -6,15 +6,7 @@
    //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
 
    //qui si settano tutti i parametri dei pulsanti di scelta presenti su index.php
-   if(isset($_GET['matapporto']))
-   {
-     $_SESSION['clm_header'] = array("id", "Nome articolo", "Gruppo Filler Metal", "SFA / AWS", "EN ISO", "Diametro", "Colata / lotto",
-          "unità di misura", "quantità", "Trattamento termico", "Tempo di permanenza ", "Ordine", "Data di carico", "Data di aggiornamento", "Note", "Attiva?");
-     $_SESSION['clm_array'] = array("id", "nome_articolo", "gruppo_fm", "SFA_AWS", "EN_ISO", "diametro", "Colata_lotto",
-             "unita_misura", "quantita", "HT", "permanenza_HT", "ordine", "data_carico", "data_aggiornamento", "Note", "Attiva");
-     $_SESSION['name'] = "Materiali apporto";
-     $_SESSION['table'] = "materiali_apporto";
-   }
+   include ('config_viewer_code.php');
 
    //$name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table
     $name = $_SESSION['name'];
@@ -24,9 +16,7 @@
 
     $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, "localhost", "root", "", "test", $table);
 
-
-
-echo"
+echo"<div class='formdiv'>
       <form id=searchform method=post action=viewer.php>
         <label for=where>Ricerca: </label>
 
@@ -49,18 +39,17 @@ echo"
 
       echo "</select>";
 
+      //per escludi esauriti bisognerebbe trovare un nome generico o inserire una variabile
       echo "
         <input type=text name=searchbar>
-        <br><input type=checkbox id=escludiesauriti name=escludiesauriti checked>
-        <label for=escludiesauriti> Escludi esauriti</label><br><br>
-        <button type=submit name=searchbtn>Cerca</button><br><br>
+        <br><label for=escludiesauriti>Escludi esauriti</label>
+        <input type=checkbox id=escludiesauriti name=escludiesauriti checked>
+        <button type=submit name=searchbtn>Cerca</button>
       </form>
 
       <form id=new_row method=post action=new.php>
-        <br>
         <button type=submit name=nuovo>Nuovo</button>
-      </form>";
-
+      </form></div>";
 
       $entry1 = $_SESSION["entry1"];
       $entry1->db_connection_on();

@@ -61,6 +61,26 @@ class dbEntry {
   function set_password($password) {$this->password = $password;}
   function set_dbname($dbname) {$this->dbname = $dbname;}
 
+  /*  ALTRE FUNZIONI:
+      function db_connection_on()                                 //ATTIVA LA CONNESSIONE AL DB
+      function db_connection_off()                                //DISATTIVA LA CONNESSIONE AL DB
+      function select_rows()                                      //seleziona e visualizza TUTTE le righe della Tabella
+      function select_rows_by_string($a)                          //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
+      function select_rows_by_string_by_pos($a, $begin, $end)     //SELEZIONA TRAMITE STRINGA LE COLONNE DA BEGIN A END
+      function select_rows_by_pos($begin, $end)                   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
+      function select_rows_where_like($clm, $where)               //seleziona tutte le voci WHERE clm LIKE %where%
+      function select_rows_where_is($clm, $where)                 //seleziona tutte le voci WHERE clm IS where
+      function select_rows_by_pos_where_like($begin, $end, $clm, $where)      //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
+      function select_rows_by_pos_where_is($begin, $end, $clm, $where)        //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
+      function select_rows_by_array_where_is(array $array, $clm, $where)    //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
+      function select_rows_by_array_where_like(array $array, $clm, $where)  //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
+      function insert_row(array $array_values)                    //inserisce una riga nella tabella - da definire gli argomenti
+      function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
+      function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
+      function create_table($begin, $end)                         //crea la Tabella
+
+*/
+
   //connessione ON
   function db_connection_on() //inserire gli argomenti necessari o la stringa appropriata
   {
@@ -146,9 +166,9 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table($begin, $end);
-
   }
 
+  //Seleziona le colonne di array WHERE clm LIKE %where%
   function select_rows_by_pos_where_is($begin, $end, $clm, $where)
   {
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " = " . $where;
@@ -158,9 +178,26 @@ class dbEntry {
     $this->create_table($begin, $end);
   }
 
-  //da inserire se serve:
-  //function select_rows_by_array_where_is(array $array, $clm, $where)
-  //function select_rows_by_array_where_like(array $array, $clm, $where)
+  //Seleziona le colonne di array WHERE clm IS $where
+  function select_rows_by_array_where_is(array $array, $clm, $where)
+  {
+    $array_imploded = implode(" ,", $array);
+    $this->sql = "SELECT $array_imploded FROM " . $this->table . " WHERE " . $clm . " = " . $where;
+    $result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->create_table(0, count($array)-1);
+  }
+
+  function select_rows_by_array_where_like(array $array, $clm, $where)
+  {
+    $array_imploded = implode(" ,", $array);
+    $this->sql = "SELECT $array_imploded FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
+    $result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->create_table(0, count($array)-1);
+  }
 
   //inserisce una riga nella tabella - da definire gli argomenti
   function insert_row(array $array_values)
@@ -205,7 +242,7 @@ class dbEntry {
   function create_table($begin, $end)
   {
     //header della tabella
-    $this->output_table = "<table><tr>";
+    $this->output_table = "<div class='tablediv'><table><tr>";
     for($i = $begin; $i <= $end; $i++)
     {
       $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
@@ -234,7 +271,7 @@ class dbEntry {
 
     }
     else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    $this->output_table .= "</tr></table>";
+    $this->output_table .= "</tr></table></div>";
     echo $this->output_table;
   }
 }

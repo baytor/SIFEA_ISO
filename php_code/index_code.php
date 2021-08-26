@@ -31,10 +31,10 @@
      //echo "<a href=index.php?logout='1' style=color: red;>logout</a> </p>";
   }
 
-
-echo "
+//PULSANTI PER LA VISUALIZZAZIONE DELLE TABLES
+echo "<div class=formdiv>
 <form id=catalogo method=get action=viewer.php>
   <button type=submit name=matapporto>Materiali d'apporto</button>
-</form>";
+</form></div>";
 
 ?>

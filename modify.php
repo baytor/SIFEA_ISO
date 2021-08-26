@@ -41,7 +41,7 @@
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="#">SIFEA S.r.l.</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="#">S.I.F.E.A. S.r.l.</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">

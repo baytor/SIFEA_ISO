@@ -18,6 +18,9 @@
         $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
         $row = $_SESSION['entry1']->result->fetch_assoc();
 
+        echo "
+         <form id=newform method=post action=viewer.php>";
+
         echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
         echo "<input type='text' id=".$_SESSION['entry1']->get_clm_array_at($i)
             ." name=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -39,9 +42,7 @@
       }
     }
 
-    echo "
-     <form id=newform method=post action=viewer.php>
-         <br><button type=submit class=btn name=aggiungi>Aggiungi</button><br>
+    echo "<br><button type=submit class=btn name=aggiungi>Aggiungi</button><br>
      </form>";
      //<input type=submit value=Aggiungi name=aggiungi>
      ?>

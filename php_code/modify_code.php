@@ -57,25 +57,16 @@
       $_SESSION['entry1']->db_connection_off();
     }
 
-
-// <!DOCTYPE html>
-// <html lang="en" dir="ltr">
-//   <head>
-//     <meta charset="utf8_general_ci">
-//     <title></title>
-//   </head>
-//   <body>
-
-echo
-    "<form id=row_options method=post action=modify.php>
+echo "<div class='formdiv'>
+    <form id=row_options method=post action=modify.php>
       <br><br>
       <button type=submit name=copia>Copia</button>
       <button type=submit name=elimina>Elimina</button>
     </form>
     <form id=row_options method=post action=new.php>
-      <br><br>
+      <br>
       <button type=submit name=modifica>Modifica</button>
       <button type=submit name=aggiorna>Aggiorna</button>
-    </form>";
+    </form></div>";
 
     ?>
