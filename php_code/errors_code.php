@@ -1,10 +1,10 @@
 <?php
   if (count($errors) > 0)
   {
-    echo "<div class=error>";
+    echo "<div class='error'>";
   	foreach ($errors as $error)
   	  {
-        echo $error;
+        echo "<p>$error</p>";
   	  }
   echo "</div>";
   }

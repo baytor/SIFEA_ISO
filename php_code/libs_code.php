@@ -15,6 +15,7 @@ class dbEntry {
   public $table;      //nome della tabella
   public $clm_header; //array con i nomi delle colonne visualizzati
   public $clm_array;  //array con i nomi delle colonne del DB
+  public $input_type; //array per definire il campo input all'interno del codice HTML
   public $sql;
   public $conn;
   public $servername;
@@ -23,11 +24,12 @@ class dbEntry {
   public $dbname;
   public $output_table;
 
-  public function __construct($name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table)
+  public function __construct($name, $clm_header, $clm_array, $input_type, $servername, $username, $password, $dbname, $table)
   {
     $this->name = $name;
     $this->clm_header = $clm_header;
     $this->clm_array = $clm_array;
+    $this->input_type = $input_type;
     $this->table = $table;
     $this->servername = $servername;
     $this->username = $username;
@@ -45,6 +47,8 @@ class dbEntry {
   function get_clm_header_at($i) {return $this->clm_header[$i];}
   function get_clm_array() {return $this->clm_array;}
   function get_clm_array_at($i) {return $this->clm_array[$i];}
+  function get_input_type() {return $this->input_type;}
+  function get_input_type_at($i) {return $this->input_type[$i];}
   function get_servername() {return $this->servername;}
   function get_username() {return $this->username;}
   function get_password() {return $this->password;}
@@ -57,6 +61,7 @@ class dbEntry {
   function set_dbtable($table) {$this->table = $table;}
   function set_clm_header($clm_header) {$this->clm_header = $clm_header;}
   function set_clm_array($clm_array) {$this->clm_array = $clm_array;}
+  function set_input_type($input_type) {$this->input_type = $input_type;}
   function set_servername($servername) {$this->servername = $servername;}
   function set_password($password) {$this->password = $password;}
   function set_dbname($dbname) {$this->dbname = $dbname;}

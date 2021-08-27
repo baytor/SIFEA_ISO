@@ -699,7 +699,10 @@ a {
 #custom-html-k button {
   background-color: #005eaf;
   /* Blu SIFEA */
-  border: none;
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
   /* Giallo SIFEA */
   padding: 15px 32px;
@@ -707,6 +710,13 @@ a {
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-k button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-k input {
   width: 30%;
@@ -1127,15 +1137,25 @@ a {
 }
 #custom-html-15 button {
   background-color: #005eaf;
-  /* BLU SIFEA */
-  border: none;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
-  /* GIALLO SIFEA */
+  /* Giallo SIFEA */
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-15 button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-15 input {
   width: 30%;
@@ -1558,14 +1578,25 @@ a {
 }
 #custom-html-o button {
   background-color: #005eaf;
-  /* BLU SIFEA */
-  border: none;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
-  /* GIALLO SIFEA */
+  /* Giallo SIFEA */
   padding: 15px 32px;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-o button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-o input {
   width: 30%;
@@ -2007,14 +2038,25 @@ a {
 }
 #custom-html-r button {
   background-color: #005eaf;
-  /* Green */
-  border: none;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
+  /* Giallo SIFEA */
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-r button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-r input {
   width: 30%;
@@ -2433,15 +2475,25 @@ a {
 }
 #custom-html-u button {
   background-color: #005eaf;
-  /* BLU SIFEA */
-  border: none;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
-  /* GIALLO SIFEA */
+  /* Giallo SIFEA */
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-u button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-u input {
   width: 100%;
@@ -2452,6 +2504,9 @@ a {
 #custom-html-u input[type=checkbox] {
   padding-right: 5px;
   width: 1%;
+}
+#custom-html-u input[type=textarea] {
+  word-wrap: break-word;
 }
 #custom-html-u label {
   padding-top: 10px;
@@ -2864,14 +2919,25 @@ a {
 }
 #custom-html-x button {
   background-color: #005eaf;
-  /* BLU SIFEA */
-  border: none;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
   color: #ffed00;
-  /* GIALLO SIFEA */
+  /* Giallo SIFEA */
   padding: 15px 32px;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+}
+#custom-html-x button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 #custom-html-x input {
   width: 30%;
@@ -3312,15 +3378,26 @@ a {
   color: #777;
 }
 #custom-html-18 button {
-  background-color: #4CAF50;
-  /* Green */
-  border: none;
-  color: white;
+  background-color: #005eaf;
+  /* Blu SIFEA */
+  border: 3px;
+  border-style: solid;
+  border-color: #ffed00;
+  border-radius: 12px;
+  color: #ffed00;
+  /* Giallo SIFEA */
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 20px;
+}
+#custom-html-18 button:hover {
+  background-color: #ffed00;
+  /* Giallo SIFEA */
+  color: #005eaf;
+  /* Blu SIFEA */
+  border-color: #005eaf;
 }
 .cid-sH11scGlue {
   z-index: 1000;

@@ -21,7 +21,7 @@ echo  "<label>Username</label><br>
       <label for=rememberaccount> Ricordati di me</label><br>
       <button type=submit class=btn name=login_user>Login</button><br>
   	  <p>
-  		Not yet a member? <a href=register.php>Sign up</a>
+  		Not yet a member? <a href=register.php>Register Here</a>
   	  </p>
       </form></div>";
 

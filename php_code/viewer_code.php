@@ -9,17 +9,19 @@
    include ('config_viewer_code.php');
 
    //$name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table
+   //servono perché li uso anche sotto
     $name = $_SESSION['name'];
     $clm_header = $_SESSION['clm_header'];
     $clm_array = $_SESSION['clm_array'];
+    $input_type = $_SESSION['input_type'];
     $table = $_SESSION['table'];
 
-    $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, "localhost", "root", "", "test", $table);
+    $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, $input_type, "localhost", "root", "", "test", $table);
+    //ATTENZIONE BISOGNA TROVARE IL POSTO PER SETTARE I DATI DEL DB
 
 echo"<div class='formdiv'>
       <form id=searchform method=post action=viewer.php>
         <label for=where>Ricerca: </label>
-
         <select id=menutendina name=menutendina>";
 
           //mi memorizza la scelta in modo da lasciare il menù sullo stesso valore
@@ -70,7 +72,7 @@ echo"<div class='formdiv'>
         $_SESSION['entry1']->insert_row($array_new);
       }
 
-      if(isset($_POST['searchbtn']))
+      if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE
         {
           // mi serve per comporre "where *menu* like *** and Attiva is 1";
           $sql_string = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE " . $_POST['menutendina']

@@ -1,6 +1,5 @@
 <?php
   require_once('libs_code.php');
-  //require_once('style.css');
   session_start();
 
   if (isset($_GET['search']))
@@ -10,7 +9,7 @@
         echo "<br><br>Selezionato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
     }
 
-    if(isset($_POST['copia']))
+    if(isset($_POST['copia'])) //DA FARE
     {
       echo "<br><br>Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
     }
@@ -25,7 +24,7 @@
       header("refresh:2; url=viewer.php");
     }
 
-    if(isset($_POST['modifica']))
+    if(isset($_POST['modifica'])) //DA FARE
     {
       //modifica la voce selezionata
       $_SESSION['entry1']->db_connection_on();
@@ -34,7 +33,7 @@
       $_SESSION['entry1']->db_connection_off();
     }
 
-    if(isset($_POST['aggiorna']))
+    if(isset($_POST['aggiorna'])) //DA FARE
     {
       $_SESSION['entry1']->db_connection_on();
       //aggiorna una voce:
@@ -53,7 +52,8 @@
       //$_SESSION['entry1']->select_rows_where_is($_SESSION['entry1']->clm_array[0],$search);
       $_SESSION['entry1']->select_rows_by_string_by_pos("SELECT * FROM ".$_SESSION['entry1']->get_dbtable().
                                                    " WHERE ".$_SESSION['entry1']->get_clm_array_at(0)."=".$search.
-                                                   " ORDER BY ".$_SESSION['entry1']->get_clm_array_at(15). " DESC",1,count($_SESSION['entry1']->get_clm_array())-2);
+                                                   " ORDER BY ".$_SESSION['entry1']->get_clm_array_at(15). " DESC",
+                                                   1,count($_SESSION['entry1']->get_clm_array())-2);
       $_SESSION['entry1']->db_connection_off();
     }
 
