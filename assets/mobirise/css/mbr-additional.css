@@ -2495,7 +2495,8 @@ a {
   /* Blu SIFEA */
   border-color: #005eaf;
 }
-#custom-html-u input {
+#custom-html-u input,
+#custom-html-u textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 5px 0;
@@ -2505,8 +2506,9 @@ a {
   padding-right: 5px;
   width: 1%;
 }
-#custom-html-u input[type=textarea] {
-  word-wrap: break-word;
+#custom-html-u textarea {
+  resize: none;
+  height: 10em;
 }
 #custom-html-u label {
   padding-top: 10px;
