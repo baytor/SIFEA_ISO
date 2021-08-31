@@ -1,7 +1,7 @@
 {
   "settings": {
     "name": "SIFEA Utility",
-    "currentPage": "index.php",
+    "currentPage": "new.php",
     "theme": {
       "name": "mobirise5",
       "title": "Mobirise 5",
@@ -45,7 +45,7 @@
       }
     ],
     "uniqCompNum": 47,
-    "versionPublish": "5.3.4",
+    "versionPublish": "5.3.10",
     "favicon": false,
     "mbrsiteDomain": "dx3urin0rm",
     "imageResize": false,
