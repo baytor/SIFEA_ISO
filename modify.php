@@ -41,7 +41,7 @@
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="#">S.I.F.E.A. S.r.l.</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="index.php">S.I.F.E.A. S.r.l.</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -67,12 +67,6 @@
 </section>
 
 <div id="custom-html-o"><!-- Type valid HTML here -->
-
-<!-- <div>
-    <h1 class="display-1">Custom HTML Block</h1>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#777" width="200" height="200"><path d="M6.1 8.7L2.8 12l3.3 3.3-1.4 1.4L0 12l4.7-4.7 1.4 1.4zm13.2-1.4l-1.4 1.4 3.3 3.3-3.3 3.3 1.4 1.4L24 12l-4.7-4.7zM8.1 18.6l1.8.8 6-14-1.8-.8-6 14z"></path></svg>
-    <p class="display-3">Click to Open Code Editor</p>
-</div> -->
 
 <div>
     <?php

@@ -3,8 +3,11 @@
   //require_once('style.css');
   session_start();
 
+  echo "<form id=newform method=post action=viewer.php>";
+
      if(isset($_POST['modifica']) || isset($_POST['aggiorna']))
      {
+       $_SESSION['datainsert'] = "update";
        //ciclo per creare il form su tutte le colonne con i valori preimpostati uguali
        //rozzo ma funziona
 
@@ -19,8 +22,6 @@
                           . " = " . $_SESSION['row_search'];
         $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
         $row = $_SESSION['entry1']->result->fetch_assoc();
-
-        echo "<form id=newform method=post action=viewer.php>";
 
         //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
         //rispetto al campo input
@@ -45,8 +46,9 @@
         $_SESSION['entry1']->db_connection_off();
       }
     }
-    else //questo serve se si crea un oggetto nuovo da 0
+    elseif (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
     {
+      $_SESSION['datainsert'] = "new";
       //ciclo per creare il form su tutte le colonne
       for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
       {
@@ -67,7 +69,7 @@
       }
     }
 
-    echo "<br><button type=submit class=btn name=aggiungi>Aggiungi</button><br>
+    echo "<br><button type=submit class=btn name=conferma>Conferma</button>
+          <br><button type=submit class=btn name=annulla>Annulla</button>
      </form>";
-     //<input type=submit value=Aggiungi name=aggiungi>
 ?>

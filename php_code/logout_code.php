@@ -1,8 +1,6 @@
 <?php
 include('server_code.php');
 
-
-
 echo "<p>Reindirizzamento...</p>";
 
 session_destroy();

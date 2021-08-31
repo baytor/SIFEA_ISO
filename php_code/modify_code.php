@@ -11,7 +11,7 @@
 
     if(isset($_POST['copia'])) //DA FARE
     {
-      echo "<br><br>Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+      echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
     }
 
     if(isset($_POST['elimina']))
@@ -28,7 +28,7 @@
     {
       //modifica la voce selezionata
       $_SESSION['entry1']->db_connection_on();
-      echo "<br><br>Modifica l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+      echo "<br><br>(_DA FARE_) Modifica l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
 
       $_SESSION['entry1']->db_connection_off();
     }
@@ -41,7 +41,7 @@
       //    dando la possibilità di modificare i campi già esistenti;
       //  + mette inattiva (0) la voce vecchia
 
-      echo "<br><br>Aggiorna l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+      echo "<br><br>(_DA FARE_) Aggiorna l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
       $_SESSION['entry1']->db_connection_off();
     }
 
@@ -57,16 +57,16 @@
       $_SESSION['entry1']->db_connection_off();
     }
 
-echo "<div class='formdiv'>
-    <form id=row_options method=post action=modify.php>
-      <br><br>
-      <button type=submit name=copia>Copia</button>
-      <button type=submit name=elimina>Elimina</button>
-    </form>
-    <form id=row_options method=post action=new.php>
-      <br>
-      <button type=submit name=modifica>Modifica</button>
-      <button type=submit name=aggiorna>Aggiorna</button>
-    </form></div>";
+echo "
+      <div class='formdiv'>
+      <form id=row_options method=post action=modify.php>
+        <button type=submit name=copia>Copia</button>
+        <button type=submit name=elimina>Elimina</button>
+      </form>
+      <form id=row_options method=post action=new.php>
+        <button type=submit name=modifica>Modifica</button>
+        <button type=submit name=aggiorna>Aggiorna</button>
+      </form>
+      </div>";
 
     ?>

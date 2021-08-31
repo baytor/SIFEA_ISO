@@ -33,7 +33,7 @@
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
          
-        <div class="container-fluid">
+        <div class="container">
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
@@ -41,7 +41,7 @@
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="#">S.I.F.E.A. S.r.l.</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="index.php">S.I.F.E.A. S.r.l.</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">

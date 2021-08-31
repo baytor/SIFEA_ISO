@@ -1,12 +1,14 @@
 <?php
   require_once('libs_code.php');
+  require_once('db_config_code.php');
+
   //require_once('style.css');
   session_start();
    //devo cercare di escludere quello che già compare in index --> includo libs invece che index
    //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
 
    //qui si settano tutti i parametri dei pulsanti di scelta presenti su index.php
-   include ('config_viewer_code.php');
+   include('config_viewer_code.php');
 
    //$name, $clm_header, $clm_array, $servername, $username, $password, $dbname, $table
    //servono perché li uso anche sotto
@@ -16,8 +18,15 @@
     $input_type = $_SESSION['input_type'];
     $table = $_SESSION['table'];
 
-    $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, $input_type, "localhost", "root", "", "test", $table);
-    //ATTENZIONE BISOGNA TROVARE IL POSTO PER SETTARE I DATI DEL DB
+    //datainsert serve per sapere quale pulsante per inserimento dati è premuto: 
+    //nuovo (new), modifica (update), aggiorna (upgrade) o copia(copy)
+    if(!isset($_SESSION['datainsert']))
+    {
+      $_SESSION['datainsert'] = "";
+    }
+
+    $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, $input_type,
+                                      $servername_db, $username_db, $password_db, $dbname_db, $table);
 
 echo"<div class='formdiv'>
       <form id=searchform method=post action=viewer.php>
@@ -59,7 +68,7 @@ echo"<div class='formdiv'>
       //azione di aggiungere la nuova riga --> vedi new.php
       //bisogna vedere se id applica l'auto increment e bisogna settare
       //'Attiva' = 1, magari a mano in ultima riga.
-      if (isset($_POST['aggiungi']))
+      if (isset($_POST['conferma']))
       {
         $array_new = array();
         array_push($array_new,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
@@ -68,8 +77,28 @@ echo"<div class='formdiv'>
           array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);
         }
         array_push($array_new,1); //per l'ultima voce;
-        echo "voce aggiunta _ array: " .implode(" // ",$array_new);
-        $_SESSION['entry1']->insert_row($array_new);
+
+        if ($_SESSION['datainsert'] == "new") //funziona
+        {
+          $_SESSION['entry1']->insert_row($array_new);
+        }
+        elseif ($_SESSION['datainsert'] == "update") // funziona
+        {
+          echo "update id: ". $_SESSION['row_search'] . " array: ".implode("_",$array_new). "<br>";
+          $_SESSION['entry1']->update_row($_SESSION['row_search'], $array_new);
+          //echo $_SESSION['entry1']->sql; //per DEBUG
+        }
+        else
+        {
+          echo "datainsert is: " . $_SESSION['datainsert'] . "<br>";
+          echo "<p>FATAL ERROR!!!!!!!!</p>";
+        }
+
+      }
+
+      if (isset($_POST['annulla']))
+      {
+        echo "<p>Operazione annullata...</p><br>";
       }
 
       if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE

@@ -2,7 +2,6 @@
   include('server_code.php');
   include('errors_code.php');
 
-
 echo "
   <form method=post action=register.php>
   	  <label>Username</label><br>

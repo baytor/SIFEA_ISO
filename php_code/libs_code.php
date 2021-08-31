@@ -235,12 +235,13 @@ class dbEntry {
   function update_row($id, array $array_values)
   {
     $this->sql = "UPDATE $this->table SET ";
-    for($i = 0; $i < count($array_values) - 1; $i++)
+    for($i = 1; $i < count($array_values) - 1; $i++) //ID non si modifica
     {
-        $this->sql .= $this->clm_array[$i] . " = " . $array_values[$i] . ", ";//con ciclo for
+        $this->sql .= $this->clm_array[$i] . " = '" . $array_values[$i] . "', ";//con ciclo for
     }
     $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
     $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
+    $this->result = $this->conn->query($this->sql);
   }
 
   //crea la Tabella

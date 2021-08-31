@@ -1,15 +1,15 @@
 <?php
 session_start();
-
+require_once('db_config_code.php');
 // initializing variables
 $username = "";
 $email    = "";
 $errors = array();
-$dbname =
+//$dbname =
 $user_table = "utenti";
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'test');
+$db = mysqli_connect($servername_db, $username_db, $password_db, $dbname_db);
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -55,6 +55,10 @@ if (isset($_POST['reg_user'])) {
     $_SESSION['password'] = $password_1;
   	$_SESSION['success'] = "You are now logged in<br>";
   	header('location: index.php');
+
+    // NB QUI BISOGNA VEDERE DI INSERIRE UN PASSAGGIO IN CUI LA REGISTRAZIONE
+    // SIA DA APPROVARE O COMUNQUE SIA VALIDATA IN QUALCHE MODO, MAGARI VIA MAIL
+    // NB
   }
 }
 // LOGIN USER
