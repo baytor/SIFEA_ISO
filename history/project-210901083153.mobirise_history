@@ -1,7 +1,7 @@
 {
   "settings": {
     "name": "SIFEA Utility",
-    "currentPage": "index.php",
+    "currentPage": "modify.php",
     "theme": {
       "name": "mobirise5",
       "title": "Mobirise 5",

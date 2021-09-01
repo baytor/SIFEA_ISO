@@ -2,11 +2,7 @@
   // qui va scelta la tabella con degli appositi bottoni
   // quindi dovviamo togliere il visualizzatore e metterlo su viewer.php
   require_once('libs_code.php');
-  //require_once('style.css');
   session_start();
-  // echo "session start";
-
-
 
   if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -35,8 +31,8 @@
 
 //PULSANTI PER LA VISUALIZZAZIONE DELLE TABLES
 echo "<div class=formdiv>
-<form id=catalogo method=get action=viewer.php>
-  <button type=submit name=matapporto>Materiali d'apporto</button>
-</form></div>";
+      <form id=catalogo method=get action=viewer.php>
+        <button type=submit name=matapporto>Materiali d'apporto</button>
+      </form></div>";
 
 ?>

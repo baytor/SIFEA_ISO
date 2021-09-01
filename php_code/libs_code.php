@@ -67,29 +67,29 @@ class dbEntry {
   function set_dbname($dbname) {$this->dbname = $dbname;}
 
   /*  ALTRE FUNZIONI:
-      function db_connection_on()                                 //ATTIVA LA CONNESSIONE AL DB
-      function db_connection_off()                                //DISATTIVA LA CONNESSIONE AL DB
-      function select_rows()                                      //seleziona e visualizza TUTTE le righe della Tabella
-      function select_rows_by_string($a)                          //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
-      function select_rows_by_string_by_pos($a, $begin, $end)     //SELEZIONA TRAMITE STRINGA LE COLONNE DA BEGIN A END
-      function select_rows_by_pos($begin, $end)                   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
-      function select_rows_where_like($clm, $where)               //seleziona tutte le voci WHERE clm LIKE %where%
-      function select_rows_where_is($clm, $where)                 //seleziona tutte le voci WHERE clm IS where
-      function select_rows_by_pos_where_like($begin, $end, $clm, $where)      //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
-      function select_rows_by_pos_where_is($begin, $end, $clm, $where)        //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
-      function select_rows_by_array_where_is(array $array, $clm, $where)    //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
-      function select_rows_by_array_where_like(array $array, $clm, $where)  //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
-      function insert_row(array $array_values)                    //inserisce una riga nella tabella - da definire gli argomenti
-      function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
-      function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
-      function create_table($begin, $end)                         //crea la Tabella
+  function db_connection_on()                                 //ATTIVA LA CONNESSIONE AL DB
+  function db_connection_off()                                //DISATTIVA LA CONNESSIONE AL DB
+  function select_rows()                                      //seleziona e visualizza TUTTE le righe della Tabella
+  function select_rows_by_string($a)                          //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
+  function select_rows_by_string_by_pos($a, $begin, $end)     //SELEZIONA TRAMITE STRINGA LE COLONNE DA BEGIN A END
+  function select_rows_by_pos($begin, $end)                   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
+  function select_rows_where_like($clm, $where)               //seleziona tutte le voci WHERE clm LIKE %where%
+  function select_rows_where_is($clm, $where)                 //seleziona tutte le voci WHERE clm IS where
+  function select_rows_by_pos_where_like($begin, $end, $clm, $where)      //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
+  function select_rows_by_pos_where_is($begin, $end, $clm, $where)        //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
+  function select_rows_by_array_where_is(array $array, $clm, $where)    //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm IS where
+  function select_rows_by_array_where_like(array $array, $clm, $where)  //seleziona le voci contenute in $array visualizzando le colonne di numero compreso tra begin e end WHERE clm LIKE %where%
+  function insert_row(array $array_values)                    //inserisce una riga nella tabella - da definire gli argomenti
+  function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
+  function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
+  function create_table($begin, $end)                         //crea la Tabella
 
-*/
+  */
 
   //connessione ON
   function db_connection_on() //inserire gli argomenti necessari o la stringa appropriata
   {
-      // Create connection
+    // Create connection
     $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname) or die("Connection failed: " . $conn->connect_error);
   }
 
@@ -137,8 +137,8 @@ class dbEntry {
     $this->result = $this->conn->query($this->sql);
 
     //creazione della tabella html
-      $this->create_table($begin, $end);
-}
+    $this->create_table($begin, $end);
+  }
 
   //seleziona tutte le voci WHERE clm LIKE %where%
   function select_rows_where_like($clm, $where)
@@ -237,7 +237,7 @@ class dbEntry {
     $this->sql = "UPDATE $this->table SET ";
     for($i = 1; $i < count($array_values) - 1; $i++) //ID non si modifica
     {
-        $this->sql .= $this->clm_array[$i] . " = '" . $array_values[$i] . "', ";//con ciclo for
+      $this->sql .= $this->clm_array[$i] . " = '" . $array_values[$i] . "', ";//con ciclo for
     }
     $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
     $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
@@ -281,4 +281,4 @@ class dbEntry {
     echo $this->output_table;
   }
 }
- ?>
+?>

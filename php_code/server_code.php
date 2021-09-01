@@ -25,7 +25,7 @@ if (isset($_POST['reg_user'])) {
   if (empty($email)) { array_push($errors, "Email is required"); }
   if (empty($password_1)) { array_push($errors, "Password is required"); }
   if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
+    array_push($errors, "The two passwords do not match");
   }
 
   // first check the database to make sure
@@ -46,15 +46,15 @@ if (isset($_POST['reg_user'])) {
 
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
-  	$password = md5($password_1);//encrypt the password before saving in the database
+    $password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO $user_table (username, email, password)
-  			  VALUES('$username', '$email', '$password')";
-  	mysqli_query($db, $query);
-  	$_SESSION['username'] = $username;
+    $query = "INSERT INTO $user_table (username, email, password)
+    VALUES('$username', '$email', '$password')";
+    mysqli_query($db, $query);
+    $_SESSION['username'] = $username;
     $_SESSION['password'] = $password_1;
-  	$_SESSION['success'] = "You are now logged in<br>";
-  	header('location: index.php');
+    $_SESSION['success'] = "You are now logged in<br>";
+    header('location: index.php');
 
     // NB QUI BISOGNA VEDERE DI INSERIRE UN PASSAGGIO IN CUI LA REGISTRAZIONE
     // SIA DA APPROVARE O COMUNQUE SIA VALIDATA IN QUALCHE MODO, MAGARI VIA MAIL
@@ -69,34 +69,34 @@ if (isset($_POST['login_user'])) {
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
   if(isset($_POST['remember'])) // questa è la spunta sul login
-    {
-          setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
-          setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));
-    }
+  {
+    setcookie('username', $_POST['username'], time()+(86400 * 30 * 7));
+    setcookie('password', $_POST['password'], time()+(86400 * 30 * 7));
+  }
 
   if (empty($username)) {
-  	array_push($errors, "Username is required");
+    array_push($errors, "Username is required");
   }
   if (empty($password)) {
-  	array_push($errors, "Password is required");
+    array_push($errors, "Password is required");
   }
 
   if (count($errors) == 0)
   {
-  	$password = md5($password);
-  	$query = "SELECT * FROM $user_table WHERE username='$username' AND password='$password'";
-  	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1)
+    $password = md5($password);
+    $query = "SELECT * FROM $user_table WHERE username='$username' AND password='$password'";
+    $results = mysqli_query($db, $query);
+    if (mysqli_num_rows($results) == 1)
     {
-  	  $_SESSION['username'] = $username;
+      $_SESSION['username'] = $username;
       $_SESSION['password'] = $password;
-  	  $_SESSION['success'] .= "You are now logged in<br>";
-  	  header('location: index.php');
-  	}
+      $_SESSION['success'] .= "You are now logged in<br>";
+      header('location: index.php');
+    }
     else
     {
-  		array_push($errors, "Wrong username/password combination");
-  	}
+      array_push($errors, "Wrong username/password combination");
+    }
   }
 }
 
