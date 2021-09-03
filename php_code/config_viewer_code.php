@@ -2,6 +2,9 @@
 Col controllo isset($_GET[]) si associa il click del pulsante con gli elementi corrispondenti -->
 
 <?php
+
+require_once('libs_code.php');
+
 if(isset($_GET['matapporto']))
 {
   //MAT APPORTO 16 ARGOMENTI

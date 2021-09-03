@@ -5,6 +5,7 @@ require_once('db_config_code.php');
 //devo cercare di escludere quello che già compare in index --> includo libs invece che index
 //(tipo il messaggio di benvenuto e i direzionatori delle tabelle (es.: materiali d'apporto))
 session_start();
+
 //qui si settano tutti i parametri dei pulsanti di scelta presenti su index.php
 include('config_viewer_code.php');
 
@@ -25,8 +26,10 @@ if(!isset($_SESSION['datainsert']))
 
 $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, $input_type, $servername_db, $username_db, $password_db, $dbname_db, $table);
 
-echo"<div class='formdiv'>
+echo
+"<div class='searchformdiv'>
 <form id=searchform method=post action=viewer.php>
+<div class='selectdiv'>
 <label for=where>Ricerca: </label>
 <select id=menutendina name=menutendina>";
 
@@ -67,14 +70,22 @@ echo "</select>";
 //per escludi esauriti bisognerebbe trovare un nome generico o inserire una variabile
 echo "
 <input type=text name=searchbar>
-<br><label for=escludiesauriti>Escludi esauriti</label>
+</div>
+<div class='checkboxdiv'>
+<label for=escludiesauriti>Escludi esauriti</label>
 <input type=checkbox id=escludiesauriti name=escludiesauriti checked>
+</div>
+<div class='searchbtndiv'>
 <button type=submit name=searchbtn>Cerca</button>
+</div>
 </form>
+</div>
 
+<div class='newbtnformdiv'>
 <form id=new_row method=post action=new.php>
 <button type=submit name=nuovo>Nuovo</button>
-</form></div>";
+</form>
+</div>";
 
 $entry1 = $_SESSION["entry1"];
 $entry1->db_connection_on();
@@ -114,7 +125,7 @@ if (isset($_POST['annulla']))
   echo "<p>Operazione annullata...</p><br>";
 }
 
-if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE
+if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE DIFFERENZIANDOLO PER OGNI PULSANTE
 {
   // mi serve per comporre "where *menu* like *** and Attiva is 1";
   $sql_string = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE " . $_POST['menutendina']

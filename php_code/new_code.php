@@ -3,7 +3,10 @@ require_once('libs_code.php');
 //require_once('style.css');
 session_start();
 
-echo "<form id=newform method=post action=viewer.php>";
+echo "
+<div class=newformdiv>
+<form id=newform method=post action=viewer.php>
+<div class=datadiv>"; 
 
 if(isset($_POST['modifica']) || isset($_POST['aggiorna']))
 {
@@ -69,7 +72,12 @@ elseif (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
   }
 }
 
-echo "<br><button type=submit class=btn name=conferma>Conferma</button>
-<br><button type=submit class=btn name=annulla>Annulla</button>
-</form>";
+echo "
+</div>
+<div class=buttonsdiv>
+<button type=submit class=btn name=conferma>Conferma</button>
+<button type=submit class=btn name=annulla>Annulla</button>
+</div>
+</form>
+</div>";
 ?>

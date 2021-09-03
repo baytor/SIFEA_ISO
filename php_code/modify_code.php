@@ -11,6 +11,10 @@ if (isset($_GET['search']))
 
 if(isset($_POST['copia'])) //DA FARE
 {
+  // sarebbe utile che, dopo aver premuto copia, si vada su una pagina modify
+  // corrispondente all'oggetto copiato in modo da modificarlo subito
+  // e che magari abbia già la data di creazione impostata (ma anche no...)
+  
   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
 }
 
