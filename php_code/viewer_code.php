@@ -102,7 +102,7 @@ if (isset($_POST['copia']))
 if (isset($_POST['elimina']))
 {
     echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
-    $_SESSION['entry1']->delete_row($_SESSION['row_search']);    
+    $_SESSION['entry1']->delete_row($_SESSION['row_search']);
 }
 if (isset($_POST['newrev']))
 {
