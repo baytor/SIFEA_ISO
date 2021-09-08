@@ -2459,17 +2459,29 @@ a {
 #custom-html-u div {
   padding: 80px;
   color: #777;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   border: 1px;
   border-style: dotted;
   border-color: black;
 }
 #custom-html-u .newformdiv {
-  text-align: center;
+  padding: 30px;
 }
 #custom-html-u .datadiv {
+  padding: 10px;
   float: left;
+  width: 80%;
 }
 #custom-html-u .buttonsdiv {
+  padding-top: 60px;
+  padding-left: 40px;
+  width: 20%;
+  position: fixed;
+  top: 150px;
+  right: 0;
   float: right;
 }
 #custom-html-u p {
@@ -2487,10 +2499,10 @@ a {
   color: #ffed00;
   /* Giallo SIFEA */
   padding: 15px 0;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
+  margin: 5px auto;
 }
 #custom-html-u button:hover {
   background-color: #ffed00;
@@ -2502,20 +2514,14 @@ a {
 #custom-html-u input,
 #custom-html-u textarea {
   width: 100%;
+  margin: 2px 0;
   padding: 12px 20px;
-  margin: 5px 0;
-  box-sizing: border-box;
-}
-#custom-html-u input[type=checkbox] {
-  padding-right: 5px;
-  width: 1%;
 }
 #custom-html-u textarea {
   resize: none;
   height: 10em;
 }
 #custom-html-u label {
-  padding-top: 10px;
   font-size: 25px;
 }
 .cid-sGZyJl6NZ6 {
