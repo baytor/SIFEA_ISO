@@ -18,13 +18,17 @@ $input_type = $_SESSION['input_type'];
 $table = $_SESSION['table'];
 
 //datainsert serve per sapere quale pulsante per inserimento dati è premuto:
-//nuovo (new), modifica (update), aggiorna (upgrade) o copia(copy)
+//nuovo (new), modifica (salva), aggiungi revisione (newrev), copia(copia)
+//elimina (elimina) o esci(esci)
 if(!isset($_SESSION['datainsert']))
 {
   $_SESSION['datainsert'] = "";
 }
 
 $_SESSION["entry1"] = new dbEntry($name, $clm_header, $clm_array, $input_type, $servername_db, $username_db, $password_db, $dbname_db, $table);
+
+$entry1 = $_SESSION["entry1"];
+$entry1->db_connection_on();
 
 echo
 "<div class='searchformdiv'>
@@ -87,13 +91,30 @@ echo "
 </form>
 </div>";
 
-$entry1 = $_SESSION["entry1"];
-$entry1->db_connection_on();
-
-//azione di aggiungere la nuova riga --> vedi new.php
+if (isset($_POST['copia']))
+{
+  // sarebbe utile che, dopo aver premuto copia, si vada sulla pagina col giusto id
+  // corrispondente all'oggetto copiato in modo da modificarlo subito
+  // e che magari abbia già la data di creazione impostata (ma anche no...)
+  //
+  //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+}
+if (isset($_POST['elimina']))
+{
+    echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+    $_SESSION['entry1']->delete_row($_SESSION['row_search']);
+    // echo "<br>Redirecting in 2 seconds";
+    // header("refresh:2; url=viewer.php");
+}
+if (isset($_POST['newrev']))
+{
+  //   copiare con cambiato il/gli elementi che servono
+  //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+}
+//azione di salvataggio riga (sia nuova che modificata)--> vedi new.php
 //bisogna vedere se id applica l'auto increment e bisogna settare
 //'Attiva' = 1, magari a mano in ultima riga.
-if (isset($_POST['conferma']))
+if (isset($_POST['salva']))
 {
   $array_new = array();
   array_push($array_new,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
@@ -109,20 +130,20 @@ if (isset($_POST['conferma']))
   }
   elseif ($_SESSION['datainsert'] == "update") // funziona
   {
-    echo "update id: ". $_SESSION['row_search'] . " array: ".implode("_",$array_new). "<br>";
+    //echo "updated id: ". $_SESSION['row_search'] . " array: ".implode("_",$array_new). "<br>";
     $_SESSION['entry1']->update_row($_SESSION['row_search'], $array_new);
     //echo $_SESSION['entry1']->sql; //per DEBUG
   }
   else
   {
     echo "datainsert is: " . $_SESSION['datainsert'] . "<br>";
-    echo "<p>FATAL ERROR!!!!!!!!</p>";
+    echo "<p>FATAL ERROR!!!!!!!!<br>WE'RE ALL GONNA DIIIIIIIIIIIIIIIIIIIIIIIEEEEEEEEEEEEEEEEEEEEEEEE!!!!</p>";
   }
 }
 
-if (isset($_POST['annulla']))
+if (isset($_POST['esci']))
 {
-  echo "<p>Operazione annullata...</p><br>";
+  //echo "<p>Operazione annullata...</p><br>"; //Brutto da vedere perché resta lìììììììì
 }
 
 if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE DIFFERENZIANDOLO PER OGNI PULSANTE
@@ -132,7 +153,7 @@ if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE D
   . " LIKE " . "'%". $_POST['searchbar'] ."%'";
   if(isset($_POST['escludiesauriti']))
   {
-    $sql_string .= " AND Attiva = 1 ";
+    $sql_string .= " AND " . $entry1->get_clm_array_at(count($entry1->get_clm_array())-1) . "= 1";
   }
   $sql_string .= " ORDER BY ";
   //se si ricerca in tutti i valori, esclude l'ordinamento per valore
@@ -141,7 +162,7 @@ if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE D
     $sql_string .= $_POST['menutendina'] . " ASC, ";
   }
   //$entry1->get_clm_array_at(13) è la data di aggiornamento
-  $sql_string .= $entry1->get_clm_array_at(13) . " DESC";
+  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   echo $sql_string;
   $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
@@ -152,7 +173,16 @@ if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE D
 else
 {
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
-  $entry1->select_rows_by_pos(1,count($entry1->get_clm_array())-2);
+  // mi serve per comporre "where *menu* like *** and Attiva is 1";
+  $sql_string = "SELECT * FROM " . $entry1->get_dbtable();
+  $sql_string .= " WHERE " . $entry1->get_clm_array_at(count($entry1->get_clm_array())-1) . "=1";
+  $sql_string .= " ORDER BY ";
+  //$entry1->get_clm_array_at(13) è la data di aggiornamento
+  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
+
+  //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
+  //echo $sql_string;  //NNEC
+  $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
 }
 
 $entry1->db_connection_off();

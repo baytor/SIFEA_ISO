@@ -267,7 +267,7 @@ class dbEntry {
           $color_if_non_attiva = "";
         }
         $this->output_table .= "<tr $color_if_non_attiva>";
-        $this->output_table .=  "<td><a href=modify.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
+        $this->output_table .=  "<td><a href=new.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";                    //<a href=modify.php?search="
         for ($i = $begin+1; $i <= $end; $i++)
         {
           $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";

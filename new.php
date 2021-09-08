@@ -33,7 +33,7 @@
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
          
-        <div class="container">
+        <div class="container-fluid">
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
