@@ -72,6 +72,7 @@ class dbEntry {
   function select_rows()                                      //seleziona e visualizza TUTTE le righe della Tabella
   function select_rows_by_string($a)                          //seleziona e visualizza le righe utlizzando una stringa messa dall'utente
   function select_rows_by_string_by_pos($a, $begin, $end)     //SELEZIONA TRAMITE STRINGA LE COLONNE DA BEGIN A END
+  function select_rows_by_string_by_array($a, array $array_clm) //SELEZIONA TRAMITE STRINGA LE COLONNE usando gli indici delle colonne contenuti nell'array_clm
   function select_rows_by_pos($begin, $end)                   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
   function select_rows_where_like($clm, $where)               //seleziona tutte le voci WHERE clm LIKE %where%
   function select_rows_where_is($clm, $where)                 //seleziona tutte le voci WHERE clm IS where
@@ -82,7 +83,8 @@ class dbEntry {
   function insert_row(array $array_values)                    //inserisce una riga nella tabella - da definire gli argomenti
   function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
   function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
-  function create_table($begin, $end)                         //crea la Tabella
+  function create_table($begin, $end)                         //crea la Tabella usando un ciclo for da $begin fino a $end
+  function create_table(array $array_clm)                     //crea la Tabella usando gli indici delle colonne contenuti nell'array_clm
 
   */
 
@@ -127,6 +129,15 @@ class dbEntry {
 
     //creazione della tabella html
     $this->create_table($begin, $end);
+  }
+
+  function select_rows_by_string_by_array($a, array $array_clm)
+  {
+    $this->sql = $a;
+    $this->result = $this->conn->query($this->sql);
+
+    //creazione della tabella html
+    $this->create_table_by_array($array_clm);
   }
 
   //seleziona tutte le voci visualizzando le colonne di numero compreso tra begin e end
@@ -184,24 +195,22 @@ class dbEntry {
   }
 
   //Seleziona le colonne di array WHERE clm IS $where
-  function select_rows_by_array_where_is(array $array, $clm, $where)
+  function select_rows_by_array_where_is(array $array_clm, $clm, $where)
   {
-    $array_imploded = implode(" ,", $array);
-    $this->sql = "SELECT $array_imploded FROM " . $this->table . " WHERE " . $clm . " = " . $where;
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " = " . $where;
     $result = $this->conn->query($this->sql);
 
     //creazione della tabella html
-    $this->create_table(0, count($array)-1);
+    $this->create_table_by_array($array_clm);
   }
 
-  function select_rows_by_array_where_like(array $array, $clm, $where)
+  function select_rows_by_array_where_like(array $array_clm, $clm, $where)
   {
-    $array_imploded = implode(" ,", $array);
-    $this->sql = "SELECT $array_imploded FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $clm . " LIKE " . "'%$where%'";
     $result = $this->conn->query($this->sql);
 
-    //creazione della tabella html
-    $this->create_table(0, count($array)-1);
+    //creazione della tabella html viene fatta non usando la funzione create_table ma una fatta apposta
+    $this->create_table_by_array($array_clm);
   }
 
   //inserisce una riga nella tabella - da definire gli argomenti
@@ -261,20 +270,62 @@ class dbEntry {
       { //se è esaurito colora la riga di grigio
         if($row[$this->clm_array[count($this->get_clm_array())-1]] == 0)
         {
-          $color_if_non_attiva = 'style="background-color:#cecece"';
+          $color_if_non_attiva = "style='background-color:#cecece'";
         }
         else {
           $color_if_non_attiva = "";
         }
         $this->output_table .= "<tr $color_if_non_attiva>";
-        $this->output_table .=  "<td><a href=new.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";                    //<a href=modify.php?search="
+        $this->output_table .=  "<td><a href=new.php?search=" . $row[$this->clm_array[0]] . ">" . $row[$this->clm_array[$begin]] . "</a></td>";
         for ($i = $begin+1; $i <= $end; $i++)
         {
           $this->output_table .=  "<td>" . $row[$this->clm_array[$i]] . "</td>";
         }
-        //echo "ultima riga: ".$row[$this->clm_array[0]]."  ";
+        //echo "ultima riga: " . $row[$this->clm_array[0]] . "  ";
       }
 
+    }
+    else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
+    $this->output_table .= "</tr></table></div>";
+    echo $this->output_table;
+  }
+
+  function create_table_by_array(array $array_clm)
+  {
+    //header della tabella
+    $this->output_table = "<div class='tablediv'><table><tr>";
+    foreach($array_clm as $index)
+    {
+      $this->output_table .= "<th>" . $this->clm_header[$index] . "</th>";
+    }
+    $this->output_table .= "</tr>";
+    if ($this->result->num_rows > 0)
+    {
+      // dati della tabella -> sul valore at[1] (nome) c'è un href per selezionare la voce
+      while($row = $this->result->fetch_assoc())
+      { //se è esaurito colora la riga di grigio
+        if($row[$this->clm_array[count($this->get_clm_array())-1]] == 0)
+        {
+          $color_if_non_attiva = "style='background-color:#cecece'";
+        }
+        else
+        {
+          $color_if_non_attiva = "";
+        }
+        $this->output_table .= "<tr $color_if_non_attiva>";
+        foreach($array_clm as $index)
+        {
+          if($index == $array_clm[0])
+          {
+            $this->output_table .=  "<td><a href=new.php?search=" . $row[$this->clm_array[0]] . ">"
+            . $row[$this->clm_array[$array_clm[0]]] . "</a></td>";
+          }
+          else
+          {
+            $this->output_table .=  "<td>" . $row[$this->clm_array[$index]] . "</td>";
+          }
+        }
+      }
     }
     else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
     $this->output_table .= "</tr></table></div>";

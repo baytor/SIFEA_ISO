@@ -101,8 +101,8 @@ if (isset($_POST['copia']))
 }
 if (isset($_POST['elimina']))
 {
-    echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
-    $_SESSION['entry1']->delete_row($_SESSION['row_search']);
+  echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+  $_SESSION['entry1']->delete_row($_SESSION['row_search']);
 }
 if (isset($_POST['newrev']))
 {
@@ -164,9 +164,7 @@ if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE D
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   echo $sql_string;
   $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
-
-  //$entry1->select_rows_by_pos_where_like(1, 14, $_POST['menutendina'],$_POST['searchbar']);
-  //$entry1->select_where($_POST['Ricerca'],$_POST['searchbar']);
+  //$entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array']);
 }
 else
 {
@@ -181,6 +179,7 @@ else
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   //echo $sql_string;  //NNEC
   $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
+  //$entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array']);
 }
 
 $entry1->db_connection_off();

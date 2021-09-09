@@ -14,6 +14,8 @@ if(isset($_GET['matapporto']))
   $_SESSION['input_type'] = array("text", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text",   "text", "date", "date", "textarea", "text");
   $_SESSION['name'] = "Materiali apporto";
   $_SESSION['table'] = "materiali_apporto";
+  $_SESSION['clm_data_array'] = array (1,2,3,8);
+  // $_SESSION['data_array'] = array("id", "nome_articolo", "gruppo_fm", "ordine", "data_carico", "Note");
 }
 
 ?>
