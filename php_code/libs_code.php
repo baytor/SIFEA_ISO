@@ -290,11 +290,11 @@ class dbEntry {
     echo $this->output_table;
   }
 
-  function create_table_by_array(array $array_clm)
+  function create_table_by_array(array $array_clm_value)
   {
     //header della tabella
     $this->output_table = "<div class='tablediv'><table><tr>";
-    foreach($array_clm as $index)
+    foreach($array_clm_value as $index)
     {
       $this->output_table .= "<th>" . $this->clm_header[$index] . "</th>";
     }
@@ -313,12 +313,12 @@ class dbEntry {
           $color_if_non_attiva = "";
         }
         $this->output_table .= "<tr $color_if_non_attiva>";
-        foreach($array_clm as $index)
+        foreach($array_clm_value as $index)
         {
-          if($index == $array_clm[0])
+          if($index == $array_clm_value[0])
           {
             $this->output_table .=  "<td><a href=new.php?search=" . $row[$this->clm_array[0]] . ">"
-            . $row[$this->clm_array[$array_clm[0]]] . "</a></td>";
+            . $row[$this->clm_array[$array_clm_value[0]]] . "</a></td>";
           }
           else
           {

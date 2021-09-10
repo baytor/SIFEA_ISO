@@ -14,8 +14,30 @@ if(isset($_GET['matapporto']))
   $_SESSION['input_type'] = array("text", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text",   "text", "date", "date", "textarea", "text");
   $_SESSION['name'] = "Materiali apporto";
   $_SESSION['table'] = "materiali_apporto";
-  $_SESSION['clm_data_array'] = array (1,2,3,8);
-  // $_SESSION['data_array'] = array("id", "nome_articolo", "gruppo_fm", "ordine", "data_carico", "Note");
+  $_SESSION['clm_data_array'] = array (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+  $_SESSION['attachment'] = array(6 => "Certificato", 11 => "Ordine"); //si può cambiare e fare un multi array
+  $_SESSION['file_path'] = "";
+
+  function aaa1()
+  {
+    return "<br>matapporto<br>";
+  }
+}
+
+if(isset($_GET['fornitori']))
+{
+  function aaa1()
+  {
+    return "<br>fornitori<br>";
+  }
+}
+
+if(isset($_GET['rischiopp']))
+{
+  function aaa1()
+  {
+    return "<br>rischiopp<br>";
+  }
 }
 
 ?>

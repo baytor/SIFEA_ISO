@@ -1,5 +1,6 @@
 <?php
 require_once('libs_code.php');
+require_once('config_viewer_code.php');
 //require_once('style.css');
 session_start();
 
@@ -56,12 +57,15 @@ else
   {
     $_SESSION['entry1']->db_connection_on();
 
-    $_SESSION['entry1']->sql = "SELECT " . $_SESSION['entry1']->get_clm_array_at($i)
+    $_SESSION['entry1']->sql = "SELECT * "
     . " FROM " . $_SESSION['entry1']->get_dbtable()
     . " WHERE " . $_SESSION['entry1']->get_clm_array_at(0)
     . " = " . $_SESSION['row_search'];
     $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
     $row = $_SESSION['entry1']->result->fetch_assoc();
+
+    $_SESSION['row'] = $row;
+    // array_push($array_values, $row);
 
     //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
     //rispetto al campo input
@@ -81,7 +85,7 @@ else
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
       ." value='".$row[$_SESSION['entry1']->get_clm_array_at($i)]."'><br>";
-      //se ci sono degli spazi bisogna mettere '" * "' negli input altrimenti inserisce solo la prima parola della frase
+      //se ci sono degli spazi bisogna mettere "' * '" negli input altrimenti inserisce solo la prima parola della frase
     }
     $_SESSION['entry1']->db_connection_off();
   }
@@ -96,17 +100,26 @@ else
   </div>
   </form>
   </div>";
+  echo "<div class=buttonsattachmentdiv>";
+  create_attachment_button($_SESSION['attachment']);
+  echo "</div>";
+
+  aaa1();
 }
 
-// function action($search)  //NNEC
-// {
-//   //search($_GET['search']);
-//   $_SESSION['entry1']->db_connection_on();
-//   //$_SESSION['entry1']->select_rows_where_is($_SESSION['entry1']->clm_array[0],$search);
-//   $_SESSION['entry1']->select_rows_by_string_by_pos("SELECT * FROM ".$_SESSION['entry1']->get_dbtable().
-//   " WHERE ".$_SESSION['entry1']->get_clm_array_at(0)."=".$search.
-//   " ORDER BY ".$_SESSION['entry1']->get_clm_array_at(15). " DESC",
-//   1,count($_SESSION['entry1']->get_clm_array())-2);
-//   $_SESSION['entry1']->db_connection_off();
-// }
+
+function create_attachment_button(array $attachment)
+{
+  foreach ($attachment as $clm => $button_name)
+  {
+    $file = $_SESSION['file_path'] . "http://www.sifea.it";
+
+    // output per // DEBUG:
+    // echo "<br>Session row_search: " . $_SESSION['row_search'] ." colonna: ".$_SESSION['entry1']->get_clm_array_at($clm) ." valore: ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($clm)] ." clm: " . $clm . " button_name " . $button_name . "<br>";
+
+    echo "<button type=submit class=btn onclick=window.location='$file'
+    name=".$_SESSION['entry1']->get_clm_array_at($clm).">$button_name</button>";
+  }
+}
+
 ?>

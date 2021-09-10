@@ -1,7 +1,7 @@
 {
   "settings": {
     "name": "SIFEA Utility",
-    "currentPage": "new.php",
+    "currentPage": "index.php",
     "theme": {
       "name": "mobirise5",
       "title": "Mobirise 5",
@@ -55,7 +55,9 @@
     "siteUrl": false,
     "cookiesAlert": false,
     "gdpr": false,
-    "screenshot": "screenshot.png"
+    "screenshot": "screenshot.png",
+    "publishType": "local",
+    "publishPath": "@PROJECT_PATH@"
   },
   "pages": {
     "index.php": {
@@ -2009,7 +2011,7 @@
           "_customTemplate": true,
           "_afterNavbarItem": false,
           "_customHTML": "<!-- Type valid HTML here -->\n\n<!-- <div>\n    <h1 class=\"display-1\">Custom HTML Block</h1>\n    <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#777\" width=\"200\" height=\"200\"><path d=\"M6.1 8.7L2.8 12l3.3 3.3-1.4 1.4L0 12l4.7-4.7 1.4 1.4zm13.2-1.4l-1.4 1.4 3.3 3.3-3.3 3.3 1.4 1.4L24 12l-4.7-4.7zM8.1 18.6l1.8.8 6-14-1.8-.8-6 14z\"></path></svg>\n    <p class=\"display-3\">Click to Open Code Editor</p>\n</div> -->\n\n<div>\n    [PHP_CODE_0]\n</div>",
-          "_customCSS": "/* Type valid CSS here */\n\ndiv {    \n    padding: 80px;\n//     padding-left: 400px;\n//     padding-right: 400px;\n    color: #777;\n    min-height: 200px;\n    display: flex;\n    flex-direction: column;  \n    justify-content: flex-end;\n    \n//     per debug -->\n//     border: 1px;\n//     border-style: dotted;\n//     border-color: black;\n}\n.newformdiv{\n    padding: 30px;\n}\n.datadiv{\n    padding: 10px;\n    float: left;\n    width: 80%;\n}\n.buttonsdiv{\n    padding-top: 60px;\n    padding-left: 40px;\n    width: 20%;\n    position: fixed;\n    top: 150px;\n    right: 0;\n    float: right;    \n}\n.buttonsattachmentdiv{\n    padding-top: 60px;\n    padding-left: 40px;\n    width: 100%;\n    text-align: left;\n    float: left;   \n    display: inline-block; //serve per metterli sulla stessa riga\n}\np {\n    font-size: 60px;\n    color: #777;\n}\n\nbutton {\n    background-color: #005eaf; /* Blu SIFEA */\n    border: 3px;\n    width: 250px;\n    border-style: solid;\n    border-color: #ffed00;\n    border-radius: 12px;\n    color: #ffed00;            /* Giallo SIFEA */\n    padding: 15px 0;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 20px;\n    margin: 5px 5px auto;\n}\n\nbutton:hover{\n    background-color: #ffed00;   /* Giallo SIFEA */\n    color: #005eaf;              /* Blu SIFEA */            \n    border-color: #005eaf;  \n}\n\ninput, textarea {\n    width: 100%;\n    margin: 2px 0;\n    padding: 12px 20px;\n}\n\ntextarea {\n    resize: none;\n    height: 10em;\n}\n\nlabel {\n//     display: block;\n//     text-align: left;        \n    font-size: 25px;\n}\n\n\n\n",
+          "_customCSS": "/* Type valid CSS here */\n\ndiv {    \n    padding: 80px;\n//     padding-left: 400px;\n//     padding-right: 400px;\n    color: #777;\n    min-height: 200px;\n    display: flex;\n    flex-direction: column;  \n    justify-content: flex-end;\n    \n//     per debug -->\n    border: 1px;\n    border-style: dotted;\n    border-color: black;\n}\n.newformdiv{\n    padding: 30px;\n}\n.datadiv{\n    padding: 10px;\n    float: left;\n    width: 80%;\n}\n.buttonsdiv{\n    padding-top: 60px;\n    padding-left: 40px;\n    width: 20%;\n    position: fixed;\n    top: 150px;\n    right: 0;\n    float: right;    \n}\n\np {\n    font-size: 60px;\n    color: #777;\n}\n\nbutton {\n    background-color: #005eaf; /* Blu SIFEA */\n    border: 3px;\n    width: 250px;\n    border-style: solid;\n    border-color: #ffed00;\n    border-radius: 12px;\n    color: #ffed00;            /* Giallo SIFEA */\n    padding: 15px 0;\n    text-decoration: none;\n    display: inline-block;\n    font-size: 20px;\n    margin: 5px auto;\n}\n\nbutton:hover{\n    background-color: #ffed00;   /* Giallo SIFEA */\n    color: #005eaf;              /* Blu SIFEA */            \n    border-color: #005eaf;  \n}\n\ninput, textarea {\n    width: 100%;\n    margin: 2px 0;\n    padding: 12px 20px;\n}\n\ntextarea {\n    resize: none;\n    height: 10em;\n}\n\nlabel {\n//     display: block;\n//     text-align: left;        \n    font-size: 25px;\n}\n\n\n\n",
           "alias": "code-editor",
           "_tags": [
             "Extension"

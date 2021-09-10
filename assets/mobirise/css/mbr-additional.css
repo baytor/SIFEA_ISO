@@ -2463,9 +2463,6 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border: 1px;
-  border-style: dotted;
-  border-color: black;
 }
 #custom-html-u .newformdiv {
   padding: 30px;
@@ -2483,6 +2480,14 @@ a {
   top: 150px;
   right: 0;
   float: right;
+}
+#custom-html-u .buttonsattachmentdiv {
+  padding-top: 60px;
+  padding-left: 40px;
+  width: 100%;
+  text-align: left;
+  float: left;
+  display: inline-block;
 }
 #custom-html-u p {
   font-size: 60px;
@@ -2502,7 +2507,7 @@ a {
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  margin: 5px auto;
+  margin: 5px 5px auto;
 }
 #custom-html-u button:hover {
   background-color: #ffed00;
