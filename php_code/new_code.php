@@ -89,6 +89,9 @@ else
     }
     $_SESSION['entry1']->db_connection_off();
   }
+
+  //aaa1(); //da togliere, è per vedere se posso definire una funzione su un altro file
+
   echo "
   </div>
   <div class=buttonsdiv>
@@ -104,7 +107,8 @@ else
   create_attachment_button($_SESSION['attachment']);
   echo "</div>";
 
-  aaa1();
+  // funzione presa da config_viewer_code, attualmente è una prova. Non posso recuperare funzioni all'interno del check isset($_GET['']) perché su questa pagina il risultato è falso
+  aaa1($_SESSION['name']); 
 }
 
 
