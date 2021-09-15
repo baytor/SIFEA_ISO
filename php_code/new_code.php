@@ -1,8 +1,7 @@
 <?php
 require_once('libs_code.php');
-require_once('config_viewer_code.php');
-//require_once('style.css');
 session_start();
+require_once('config_viewer_code.php');
 
 if (isset($_GET['search']))
 {
@@ -108,7 +107,7 @@ else
   echo "</div>";
 
   // funzione presa da config_viewer_code, attualmente è una prova. Non posso recuperare funzioni all'interno del check isset($_GET['']) perché su questa pagina il risultato è falso
-  aaa1($_SESSION['name']); 
+  aaa1($_SESSION['name']);
 }
 
 

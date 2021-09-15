@@ -98,6 +98,8 @@ if (isset($_POST['copia']))
   // e che magari abbia già la data di creazione impostata (ma anche no...)
   //
   //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+
+  $_SESSION['entry1']->copy_row($_SESSION['row_search']);
 }
 if (isset($_POST['elimina']))
 {
@@ -109,6 +111,7 @@ if (isset($_POST['newrev']))
   //   copiare con cambiato il/gli elementi che servono
   //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
 }
+
 //azione di salvataggio riga (sia nuova che modificata)--> vedi new.php
 //bisogna vedere se id applica l'auto increment e bisogna settare
 //'Attiva' = 1, magari a mano in ultima riga.

@@ -26,18 +26,18 @@ if (isset($_GET['search']))
   $row = $_SESSION['entry1']->result->fetch_assoc();
 
   // sarebbe bello integrare la riga successiva all'interno del ciclo FOR sfruttando $_GET['search'] che è la chiave primaria
-  $entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array'][0]);
 
+  $entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array'][0]);
+    echo "<br><p>Elenco revisioni:</p><br>";
   for($i = 1; $i < count($_SESSION['clm_data_array']); ++$i)
   {
     $sql_string2 = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE "
-    . $entry1->get_clm_array_at($_SESSION['clm_data_array_dataindex'][$i]) . " = "
+    . $entry1->get_clm_array_at($_SESSION['clm_data_array_dataindex'][$i]) . " = '"
     . $row[$entry1->get_clm_array_at($_SESSION['clm_data_array_dataindex'][$i])];
-    $sql_string2 .= " ORDER BY ";
+    $sql_string2 .= "' ORDER BY ";
     $sql_string2 .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
 
     $entry1->select_rows_by_string_by_array($sql_string2, $_SESSION['clm_data_array'][$i]);
-    echo "<br>";
   }
 
   $entry1->db_connection_off();

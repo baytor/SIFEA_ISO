@@ -83,6 +83,7 @@ class dbEntry {
   function insert_row(array $array_values)                    //inserisce una riga nella tabella - da definire gli argomenti
   function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
   function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
+  function copy_row($id)                                      //copia una riga assegnando un nuovo id
   function create_table($begin, $end)                         //crea la Tabella usando un ciclo for da $begin fino a $end
   function create_table(array $array_clm)                     //crea la Tabella usando gli indici delle colonne contenuti nell'array_clm
 
@@ -251,6 +252,27 @@ class dbEntry {
     $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
     $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
     $this->result = $this->conn->query($this->sql);
+  }
+
+  function copy_row($id)
+  {
+    //recupera la riga con l'id in argomento
+    $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $this->get_clm_array_at(0) . " = " . $id;
+
+//recupero la row
+    $this->result = $this->conn->query($this->sql);
+    $row = $this->result->fetch_assoc();
+
+    $array_copy = array();
+    array_push($array_copy,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
+    for($i = 1; $i < count($this->get_clm_array())-1; $i++)
+    {
+      array_push($array_copy,$row[$this->get_clm_array_at($i)]);
+    }
+    array_push($array_copy,1); //per l'ultima voce;
+
+    $this->insert_row($array_copy);
+
   }
 
   //crea la Tabella
