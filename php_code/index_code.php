@@ -33,6 +33,7 @@
 echo "<div class=formdiv>
       <form id=catalogo method=get action=viewer.php>
         <button type=submit name=matapporto>Materiali d'apporto</button>
+        <button type=submit name=strumenti>Strumenti di misura</button>
         <button type=submit name=fornitori>Fornitori Qualificati</button>
         <button type=submit name=rischiopp>Rischi e Opportunità</button>
       </form></div>";

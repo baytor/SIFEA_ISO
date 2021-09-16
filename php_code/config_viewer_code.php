@@ -62,6 +62,21 @@ if(isset($_GET['matapporto']))
 
 }
 
+if(isset($_GET['strumenti']))
+{
+  //STRUMENTI 18 ARGOMENTI da 0 a 17
+  $_SESSION['clm_header'] = array("id", "Descrizione", "Campo di misura", "Codice strumento", "Modello", "S/N", "Costruttore", "Tipo", "n° Taratura / Verifica", "Dotazione", "Intervallo di verifica (Mesi)", "Data messa in servizio","Data ultima verifica","Data prossima verifica", "Note", "Accettabilità","Stato", "Attiva?");    //headers dell colonne che vengono visualizzate nella tabella
+  $_SESSION['clm_array'] = array("id", "Descrizione", "campo_misura", "Codice_strumento", "Modello", "SN", "Costruttore", "Tipo", "Taratura", "Dotazione", "Intervallo_verifica", "Data_messa_servizio","Data_ultima_verifica","Data_prossima_verifica", "Note", "Accettabilità", "Stato", "Attiva");   //campi del database
+  $_SESSION['input_type'] = array("text", "text", "text", "text", "text", "text", "text",
+  "<select name=tipo><option value=P>Primario</option><option value=S>Secondario</option><option value=O>Operativo</option></select>",
+  "text", "number", "date", "date", "date", "text", "textarea", "text", "text");    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
+  $_SESSION['name'] = "Strumenti di misura";   //Titolo
+  $_SESSION['table'] = "strumenti";    //Nome della tabella
+  $_SESSION['clm_data_array_dataindex'] = array(0,3);    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
+  $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,8,9,11), array (12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
+  $_SESSION['attachment'] = array(3 => "Scheda strumento", 8 => "Taratura / Verifica");
+}
+
 if(isset($_GET['fornitori']))
 {
   //FORNITORI xx ARGOMENTI da 0 a yy
@@ -85,6 +100,8 @@ if(isset($_GET['rischiopp']))
   $_SESSION['clm_data_array_dataindex'] = array();    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
   $_SESSION['clm_data_array'] = array(array (), array ());    //definisce i blocchi di visualizzazione dall'alto verso il basso
 }
+
+
 
 //non posso inserire la stessa funzione all'interno dei vari isset perché su new.php la condizione non si verifica => così non posso valutare che funzione definire a seconda del pulsante premuto
 function aaa1($name)

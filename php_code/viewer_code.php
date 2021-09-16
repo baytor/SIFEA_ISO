@@ -106,11 +106,6 @@ if (isset($_POST['elimina']))
   echo "<br><br>Eliminato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
   $_SESSION['entry1']->delete_row($_SESSION['row_search']);
 }
-if (isset($_POST['newrev']))
-{
-  //   copiare con cambiato il/gli elementi che servono
-  //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
-}
 
 //azione di salvataggio riga (sia nuova che modificata)--> vedi new.php
 //bisogna vedere se id applica l'auto increment e bisogna settare
