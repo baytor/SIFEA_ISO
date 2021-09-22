@@ -57,9 +57,11 @@ if(isset($_GET['matapporto']))
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7), array (8,9,10,11,12,13,14));
 
   //provvisorio
-  $_SESSION['attachment'] = array(6 => "Certificato", 11 => "Ordine"); //si può cambiare e fare un multi array per includere il filepath
-  $_SESSION['file_path'] = ""; //se faccio un array 3d questo lo posso eliminare
-
+  $_SESSION['attachment'] =
+  array(
+    array("Certificato", "file:\\\\\Z:\\Documenti\\Qualità\\Saldatura\\Materiale d'apporto\\", 6, ".pdf"),
+    array("Ordine", "file:\\\\\Z:\\Documenti\\Undicesimo\\01 - Ordini Fornitori inviati\\", 11, ".pdf")
+  ); //si può cambiare e fare un multi array per includere il filepath
 }
 
 if(isset($_GET['strumenti']))
@@ -74,7 +76,12 @@ if(isset($_GET['strumenti']))
   $_SESSION['table'] = "strumenti";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array(0,3);    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,8,9,11), array (12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
-  $_SESSION['attachment'] = array(3 => "Scheda strumento", 8 => "Taratura / Verifica");
+  $_SESSION['attachment'] =
+  array(
+    array("Scheda strumento", "''", 3, "'.pdf'"),
+    array("Taratura / Verifica", "''", 8, "'.pdf'")
+  );
+  // );
 }
 
 if(isset($_GET['fornitori']))
@@ -106,8 +113,32 @@ if(isset($_GET['rischiopp']))
 //non posso inserire la stessa funzione all'interno dei vari isset perché su new.php la condizione non si verifica => così non posso valutare che funzione definire a seconda del pulsante premuto
 function aaa1($name)
 {
-  echo $name;
-}
+  switch ($name)
+  {
+    case "matapporto":
+    //funzione
+    echo "matapporto";
+    break;
+
+    case "strumenti":
+    //funzione
+    ;
+    break;
+
+    case "fornitori":
+      //funzione
+      ;
+      break;
+
+      case "rischiopp":
+      //funzione
+      ;
+      break;
+
+      default:
+      echo "Error: no function input selected";
+    }
+  }
 
 
-?>
+  ?>

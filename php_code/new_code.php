@@ -162,27 +162,41 @@ else
 
 //aaa1(); //da togliere, è per vedere se posso definire una funzione su un altro file
 
+if(isset($_SESSION['attachment']))
+{
+  echo "<div class=buttonsattachmentdiv>";
+  create_attachment_button($_SESSION['attachment']);
+  echo "</div>";
+}
 
-echo "<div class=buttonsattachmentdiv>";
-create_attachment_button($_SESSION['attachment']);
-echo "</div>";
+echo "1: ". $_SESSION['attachment'][0][0]." 2: ". $_SESSION['attachment'][1][0]."<br>";
 
-
-// funzione presa da config_viewer_code, attualmente è una prova. Non posso recuperare funzioni all'interno del check isset($_GET['']) perché su questa pagina il risultato è falso
-// aaa1($_SESSION['name']);
+for($i = 0; $i < count($_SESSION['attachment']); ++$i)
+{
+  if(isset($_POST[$_SESSION['attachment'][$i][0]]))
+  {
+    echo "Premuto" . $_SESSION['attachment'][$i][0] . "<br>";
+  }
+}
 
 function create_attachment_button(array $attachment)
 {
-  foreach ($attachment as $clm => $button_name)
-  {
-    $file = $_SESSION['file_path'] . "http://www.sifea.it";
+  echo "<form id=attachment method=post action=new.php>";
+  // "Certificato", "'Z:\Documenti\Qualità\Saldatura\Materiale d'apporto\'", 6, "'.pdf'"
+  for($i = 0; $i < count($attachment); ++$i)
+  {    
+    $file = $attachment[$i][1].$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($attachment[$i][2])].$attachment[$i][3];
 
     // output per // DEBUG:
     // echo "<br>Session row_search: " . $_SESSION['row_search'] ." colonna: ".$_SESSION['entry1']->get_clm_array_at($clm) ." valore: ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($clm)] ." clm: " . $clm . " button_name " . $button_name . "<br>";
+    $file = preg_replace("/'/", "&#39;", $file);
+    echo "<br>bottone collegato al file: $file con attachment[0]=".$attachment[$i][0]."<br>";
 
-    echo "<button type=submit class=btn onclick=window.location='$file'
-    name=".$_SESSION['entry1']->get_clm_array_at($clm).">$button_name</button>";
+    //echo "<a href='$file'><button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button></a>";
+    echo "<button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button>";
+    //echo "<a href=\\Sifea_ISO\\Ordine%20nr%2021-00448.pdf.ink>ciao</a>";
   }
+  echo "</form>";
 }
 
 ?>
