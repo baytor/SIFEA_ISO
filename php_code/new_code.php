@@ -169,13 +169,28 @@ if(isset($_SESSION['attachment']))
   echo "</div>";
 }
 
-echo "1: ". $_SESSION['attachment'][0][0]." 2: ". $_SESSION['attachment'][1][0]."<br>";
-
-for($i = 0; $i < count($_SESSION['attachment']); ++$i)
+for($i = 0; $i < count($_SESSION['attachment']); $i++)
 {
   if(isset($_POST[$_SESSION['attachment'][$i][0]]))
   {
     echo "Premuto" . $_SESSION['attachment'][$i][0] . "<br>";
+
+    $file_location = $_SESSION['attachment'][$i][1]
+                    .$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]
+                    .$_SESSION['attachment'][$i][3];
+
+    if($_SESSION['attachment'][$i][3] != "")
+    {
+      echo "Opening $file_location<br>";
+      system($file_location);
+    }
+    else
+    {
+      //se l'estensione del file (e anche il nome file) è vuoto vorrei aprisse la directory
+      //ma non va...
+      opendir($file_location);
+    }
+
   }
 }
 
@@ -184,16 +199,24 @@ function create_attachment_button(array $attachment)
   echo "<form id=attachment method=post action=new.php>";
   // "Certificato", "'Z:\Documenti\Qualità\Saldatura\Materiale d'apporto\'", 6, "'.pdf'"
   for($i = 0; $i < count($attachment); ++$i)
-  {    
-    $file = $attachment[$i][1].$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($attachment[$i][2])].$attachment[$i][3];
+  {
+    $btn_name       = $attachment[$i][0];
+    $prefix_folder  = $attachment[$i][1];
+    $clm_row        = $attachment[$i][2];
+    $file_extension = $attachment[$i][3];
+
+    $file = $prefix_folder.$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($clm_row)].$file_extension;
+    // move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 
     // output per // DEBUG:
     // echo "<br>Session row_search: " . $_SESSION['row_search'] ." colonna: ".$_SESSION['entry1']->get_clm_array_at($clm) ." valore: ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($clm)] ." clm: " . $clm . " button_name " . $button_name . "<br>";
     $file = preg_replace("/'/", "&#39;", $file);
-    echo "<br>bottone collegato al file: $file con attachment[0]=".$attachment[$i][0]."<br>";
+    $_SESSION['file'] = $file;
+    echo "<br>bottone collegato al file: $file con attachment[0]=".$btn_name."<br>";
 
     //echo "<a href='$file'><button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button></a>";
-    echo "<button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button>";
+    // echo "<input type="file" name=."$attachment[$i][0]".>"
+    echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
     //echo "<a href=\\Sifea_ISO\\Ordine%20nr%2021-00448.pdf.ink>ciao</a>";
   }
   echo "</form>";

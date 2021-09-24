@@ -59,8 +59,8 @@ if(isset($_GET['matapporto']))
   //provvisorio
   $_SESSION['attachment'] =
   array(
-    array("Certificato", "file:\\\\\Z:\\Documenti\\Qualità\\Saldatura\\Materiale d'apporto\\", 6, ".pdf"),
-    array("Ordine", "file:\\\\\Z:\\Documenti\\Undicesimo\\01 - Ordini Fornitori inviati\\", 11, ".pdf")
+    array("Certificato", "Z:\\Documenti\\Qualità\\Saldatura\\Materiale d'apporto\\", 6, ".pdf"),
+    array("Ordine", "Z:\\Documenti\\Undicesimo\\01 - Ordini Fornitori inviati\\Ordine nr ", 11, ".pdf")
   ); //si può cambiare e fare un multi array per includere il filepath
 }
 
