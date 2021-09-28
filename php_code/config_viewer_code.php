@@ -64,14 +64,12 @@ if(isset($_GET['matapporto']))
   ); //si può cambiare e fare un multi array per includere il filepath
 }
 
-if(isset($_GET['strumenti']))
+if(isset($_GET['strumenti']))//
 {
   //STRUMENTI 18 ARGOMENTI da 0 a 17
   $_SESSION['clm_header'] = array("id", "Descrizione", "Campo di misura", "Codice strumento", "Modello", "S/N", "Costruttore", "Tipo", "n° Taratura / Verifica", "Dotazione", "Intervallo di verifica (Mesi)", "Data messa in servizio","Data ultima verifica","Data prossima verifica", "Note", "Accettabilità","Stato", "Attiva?");    //headers dell colonne che vengono visualizzate nella tabella
-  $_SESSION['clm_array'] = array("id", "Descrizione", "campo_misura", "Codice_strumento", "Modello", "SN", "Costruttore", "Tipo", "Taratura", "Dotazione", "Intervallo_verifica", "Data_messa_servizio","Data_ultima_verifica","Data_prossima_verifica", "Note", "Accettabilità", "Stato", "Attiva");   //campi del database
-  $_SESSION['input_type'] = array("text", "text", "text", "text", "text", "text", "text",
-  "<select name=tipo><option value=P>Primario</option><option value=S>Secondario</option><option value=O>Operativo</option></select>",
-  "text", "number", "date", "date", "date", "text", "textarea", "text", "text");    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
+  $_SESSION['clm_array'] = array("id", "Descrizione", "campo_misura", "Codice_strumento", "Modello", "SN", "Costruttore", "Tipo", "Taratura", "Dotazione", "Intervallo_verifica", "Data_messa_servizio","Data_ultima_verifica","Data_prossima_verifica", "Note", "Accettabilita", "Stato", "Attiva");   //campi del database
+  $_SESSION['input_type'] = array("text", "text", "text", "text", "text", "text", "text", "select___Primario___Secondario___Operativo", "text", "number", "date", "date", "date", "text", "textarea", "text", "text");    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
   $_SESSION['name'] = "Strumenti di misura";   //Titolo
   $_SESSION['table'] = "strumenti";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array(0,3);    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
@@ -81,7 +79,6 @@ if(isset($_GET['strumenti']))
     array("Scheda strumento", "''", 3, "'.pdf'"),
     array("Taratura / Verifica", "''", 8, "'.pdf'")
   );
-  // );
 }
 
 if(isset($_GET['fornitori']))

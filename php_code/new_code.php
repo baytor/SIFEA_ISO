@@ -82,7 +82,19 @@ elseif (isset($_POST['newrev']))
       . $row[$_SESSION['entry1']->get_clm_array_at($i)]
       . "</textarea><br>";
     }
-    else
+    elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), "select"))
+    {
+      $a = explode(":",$_SESSION['entry1']->get_input_type_at($i));
+
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
+      for($i = 1; $i < count($a); $i++)
+      {
+        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$row[$_SESSION['entry1']->get_clm_array_at($i)]."</option>";
+      }
+      echo "</select>";
+    }
+    else //text oppure number
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -138,7 +150,19 @@ else
       . $row[$_SESSION['entry1']->get_clm_array_at($i)]
       . "</textarea><br>";
     }
-    else
+    elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), 'select'))
+    {
+      $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
+      echo "conteggio dell'array: ". count($a) ."<br>";
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
+      for($o = 1; $o < count($a); $o++)
+      {
+        echo "<option value=".$a[$o].">".$a[$o]."</option>";
+      }
+      echo "</select>";
+    }
+    else //text oppure number
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -176,13 +200,13 @@ for($i = 0; $i < count($_SESSION['attachment']); $i++)
     echo "Premuto" . $_SESSION['attachment'][$i][0] . "<br>";
 
     $file_location = $_SESSION['attachment'][$i][1]
-                    .$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]
-                    .$_SESSION['attachment'][$i][3];
+    .$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]
+    .$_SESSION['attachment'][$i][3];
 
     if($_SESSION['attachment'][$i][3] != "")
     {
       echo "Opening $file_location<br>";
-      system($file_location);
+      system($file_location); //prima funzionava....
     }
     else
     {
@@ -190,7 +214,6 @@ for($i = 0; $i < count($_SESSION['attachment']); $i++)
       //ma non va...
       opendir($file_location);
     }
-
   }
 }
 
@@ -217,7 +240,7 @@ function create_attachment_button(array $attachment)
     //echo "<a href='$file'><button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button></a>";
     // echo "<input type="file" name=."$attachment[$i][0]".>"
     echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
-    //echo "<a href=\\Sifea_ISO\\Ordine%20nr%2021-00448.pdf.ink>ciao</a>";
+    // echo "<a href=Z:\\Documenti\Undicesimo\\01%20-%20Ordini%20Fornitori%20inviati\\>ciao</a>";
   }
   echo "</form>";
 }
