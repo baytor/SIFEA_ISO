@@ -11,7 +11,8 @@ else
   $cookie_password = "";
 }
 
-echo  "<div class=formdiv><form method=post action=login.php>";
+echo  "<div class=formdiv>
+      <form method=post action=login.php>";
 include('errors_code.php');
 echo  "<label>Username</label><br>
 <input type=text name=username value=$cookie_username><br>

@@ -56,7 +56,7 @@ if(isset($_GET['matapporto']))
   //definisce i blocchi di visualizzazione dall'alto verso il basso
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7), array (8,9,10,11,12,13,14));
 
-  //provvisorio
+  //(nome pulsante, directory, colonna da cui prende il nome, estensione);
   $_SESSION['attachment'] =
   array(
     array("Certificato", "Z:\\Documenti\\Qualità\\Saldatura\\Materiale d'apporto\\", 6, ".pdf"),

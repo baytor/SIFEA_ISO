@@ -84,7 +84,7 @@ elseif (isset($_POST['newrev']))
     }
     elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), "select"))
     {
-      $a = explode(":",$_SESSION['entry1']->get_input_type_at($i));
+      $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
 
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
@@ -153,7 +153,6 @@ else
     elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), 'select'))
     {
       $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
-      echo "conteggio dell'array: ". count($a) ."<br>";
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
       for($o = 1; $o < count($a); $o++)
@@ -184,8 +183,6 @@ else
   $_SESSION['entry1']->db_connection_off();
 }
 
-//aaa1(); //da togliere, è per vedere se posso definire una funzione su un altro file
-
 if(isset($_SESSION['attachment']))
 {
   echo "<div class=buttonsattachmentdiv>";
@@ -193,33 +190,9 @@ if(isset($_SESSION['attachment']))
   echo "</div>";
 }
 
-for($i = 0; $i < count($_SESSION['attachment']); $i++)
-{
-  if(isset($_POST[$_SESSION['attachment'][$i][0]]))
-  {
-    echo "Premuto" . $_SESSION['attachment'][$i][0] . "<br>";
-
-    $file_location = $_SESSION['attachment'][$i][1]
-    .$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]
-    .$_SESSION['attachment'][$i][3];
-
-    if($_SESSION['attachment'][$i][3] != "")
-    {
-      echo "Opening $file_location<br>";
-      system($file_location); //prima funzionava....
-    }
-    else
-    {
-      //se l'estensione del file (e anche il nome file) è vuoto vorrei aprisse la directory
-      //ma non va...
-      opendir($file_location);
-    }
-  }
-}
-
 function create_attachment_button(array $attachment)
 {
-  echo "<form id=attachment method=post action=new.php>";
+  echo "<form id=pdfbrowse method=post action=pdfbrowse.php>";
   // "Certificato", "'Z:\Documenti\Qualità\Saldatura\Materiale d'apporto\'", 6, "'.pdf'"
   for($i = 0; $i < count($attachment); ++$i)
   {
