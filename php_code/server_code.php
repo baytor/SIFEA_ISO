@@ -61,6 +61,7 @@ if (isset($_POST['reg_user'])) {
     $_SESSION['password'] = $password_1;
     $_SESSION['success'] = "You are now logged in<br>";
     header('location: index.php');
+    //exit();
 
     // NB QUI BISOGNA VEDERE DI INSERIRE UN PASSAGGIO IN CUI LA REGISTRAZIONE
     // SIA DA APPROVARE O COMUNQUE SIA VALIDATA IN QUALCHE MODO, MAGARI VIA MAIL
@@ -95,8 +96,9 @@ if (isset($_POST['login_user'])) {
     {
       $_SESSION['username'] = $username;
       $_SESSION['password'] = $password;
-      $_SESSION['success'] .= "You are now logged in<br>";
-      header('location: index.php');
+      $_SESSION['success'] = "You are now logged in<br>";
+      header('location: index.php'); //va cambiato
+      //exit();
     }
     else
     {

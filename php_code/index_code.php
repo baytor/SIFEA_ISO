@@ -36,6 +36,7 @@ echo "<div class=formdiv>
         <button type=submit name=strumenti>Strumenti di misura</button>
         <button type=submit name=fornitori>Fornitori Qualificati</button>
         <button type=submit name=rischiopp>Rischi e Opportunità</button>
+        <button type=submit name=ncrecl>Non conformità e Reclami</button>
       </form></div>";
 
 ?>

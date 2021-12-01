@@ -142,8 +142,11 @@ if (isset($_POST['esci']))
   //echo "<p>Operazione annullata...</p><br>"; //Brutto da vedere perché resta lìììììììì
 }
 
-if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE DIFFERENZIANDOLO PER OGNI PULSANTE
+//VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE DIFFERENZIANDOLO PER OGNI PULSANTE
+if(isset($_POST['searchbtn']))
 {
+  //N.B. sostituire, nella stringa di ricerca, lo "spazio" con "%" -+- '/\s+/' è per gli spazi multipli
+  $_POST['searchbar'] = preg_replace('/\s+/', '%', $_POST['searchbar']);
   // mi serve per comporre "where *menu* like *** and Attiva is 1";
   $sql_string = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE " . $_POST['menutendina']
   . " LIKE " . "'%". $_POST['searchbar'] ."%'";
@@ -160,7 +163,7 @@ if(isset($_POST['searchbtn'])) //VEDIAMO SE SI RIESCE A FARLO PERSONALIZZABILE D
   //$entry1->get_clm_array_at(13) è la data di aggiornamento
   $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
-  echo $sql_string;
+  // echo $sql_string;
   $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
   //$entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array']);
 }

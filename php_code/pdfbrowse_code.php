@@ -16,6 +16,7 @@ for($i = 0; $i < count($_SESSION['attachment']); $i++)
 
     $file_location = "/SIFEA_ISO/img/C21-709.pdf";
     $filename = "C21-709.pdf";
+    // echo "<br>Nome file tmp: ".$_FILES[$_SESSION['attachment'][$i][0]]['tmp_name'];
 
     // $file_location = preg_replace("/'/", "&#39;", $file_location);
 
@@ -28,7 +29,7 @@ for($i = 0; $i < count($_SESSION['attachment']); $i++)
     // header('Accept-Ranges: bytes');
     // readfile($file_location);
 
-    echo "<embed src='$file_location' type='application/pdf'/>";
+    // echo "<embed src='$file_location' type='application/pdf'/>";
     // echo "<a href=$file_location>aaa</a>";
 
     // echo "<br>Premuto " . $_SESSION['attachment'][$i][0] . "<br>";

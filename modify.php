@@ -28,7 +28,15 @@
 </head>
 <body>
   
-  <section class="menu menu1 cid-sGZyvdG4QR" once="menu" id="menu1-p">
+  <div id="custom-html-o"><!-- Type valid HTML here -->
+
+<div>
+    <?php
+	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/modify_code.php');
+	?>
+</div></div>
+
+<section class="menu menu1 cid-sGZyvdG4QR" once="menu" id="menu1-p">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
@@ -37,7 +45,7 @@
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="http://www.sifea.it" target="_blank">
+                    <a href="index.php" target="_blank">
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
@@ -52,27 +60,19 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">
-                            Home</a></li>
-                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php" aria-expanded="true" style="display:none;">Login</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php" style="display:none;">Registrati</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="user.php">Utente</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
                 
-                
-                
-                
+                                
                 
                 
             </div>
         </div>
     </nav>
 </section>
-
-<div id="custom-html-o"><!-- Type valid HTML here -->
-
-<div>
-    <?php
-	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/modify_code.php');
-	?>
-</div></div>
 
 <section class="footer7 cid-sGZyve7G1L" once="footers" id="footer7-q">
 

@@ -1,13 +1,13 @@
 <?php
 
+require_once('fpdf183/fpdf.php');
+
 //Per il corretto funzionamento:
 //  - la posizione [0] dell'array DEVE essere la chiave primaria
 //  - la posizione [1] dell'array DEVE essere il nome o la descrizione dell'oggetto
 //  - la posizione [count($this->get_clm_array()-1)], ossia l'ultima, dell'array DEVE
 //    essere quella che dice se un oggetto è ATTIVO e effettivamente presente (valore == 1)
 //    oppure INATTIVO o ESAURITO (valore == 0)
-
-
 class dbEntry {
   // Properties
   public $name;       //nome dell'oggetto
@@ -259,7 +259,7 @@ class dbEntry {
     //recupera la riga con l'id in argomento
     $this->sql = "SELECT * FROM " . $this->table . " WHERE " . $this->get_clm_array_at(0) . " = " . $id;
 
-//recupero la row
+    //recupero la row
     $this->result = $this->conn->query($this->sql);
     $row = $this->result->fetch_assoc();
 
@@ -279,7 +279,9 @@ class dbEntry {
   function create_table($begin, $end)
   {
     //header della tabella
-    $this->output_table = "<div class='tablediv'><table><tr>";
+    //se rinuncio al tablediv posso mettere, in css, th con position: sticky per vedere sempre la riga del header
+    // $this->output_table = "<div class='tablediv'><table><tr>";
+    $this->output_table = "<table><tr>";
     for($i = $begin; $i <= $end; $i++)
     {
       $this->output_table .= "<th>" . $this->clm_header[$i] . "</th>";
@@ -308,14 +310,16 @@ class dbEntry {
 
     }
     else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    $this->output_table .= "</tr></table></div>";
+    // $this->output_table .= "</tr></table></div>";
+    $this->output_table .= "</tr></table>";
     echo $this->output_table;
   }
 
   function create_table_by_array(array $array_clm_value)
   {
     //header della tabella
-    $this->output_table = "<div class='tablediv'><table><tr>";
+    // $this->output_table = "<div class='tablediv'><table><tr>";
+    $this->output_table = "<table><tr>";
     foreach($array_clm_value as $index)
     {
       $this->output_table .= "<th>" . $this->clm_header[$index] . "</th>";
@@ -350,8 +354,72 @@ class dbEntry {
       }
     }
     else {echo "Error in ".$this->sql."<br>".$this->conn->error;}
-    $this->output_table .= "</tr></table></div>";
+    // $this->output_table .= "</tr></table></div>";
+    $this->output_table .= "</tr></table>";
     echo $this->output_table;
   }
 }
+
+//se la versione di php precede la 8 serve
+if (!function_exists('str_contains')) {
+  function str_contains (string $haystack, string $needle)
+  {
+    return empty($needle) || strpos($haystack, $needle) !== false;
+  }
+}
+
+//classe per generare report PDF
+class reportPDF extends FPDF
+{
+  function Header()
+  {
+    echo "upper SIFEA";
+  }
+
+  function Footer()
+  {
+    echo "lower SIFEA";
+  }
+  // public $header = array();
+  // public $footer = array();
+  // public $body = array();
+  // public dbEntry $dbentry;
+  //
+  // public function __construct($dbentry, $header, $footer, $body)
+  // {
+  //
+  // }
+  //
+  // function get_dbentry() {return $this->dbentry;}
+  // function get_header() {return $this->header;}
+  // function get_footer() {return $this->footer;}
+  // function get_body() {return $this->body;}
+  //
+  // //magary possono essere array che si aggiunge a cascata
+  // function set_dbentry($dbentry)
+  // {
+  //
+  // }
+  //
+  // function set_header($header)
+  // {
+  //
+  // }
+  //
+  // function set_footer($footer)
+  // {
+  //
+  // }
+  //
+  // function set_body($body)
+  // {
+  //
+  // }
+
+  function printPDF()
+  {
+
+  }
+}
+
 ?>

@@ -28,7 +28,22 @@
 </head>
 <body>
   
-  <section class="menu menu1 cid-sGZyM1OB86" once="menu" id="menu1-y">
+  <div id="custom-html-x"><!-- Type valid HTML here -->
+
+<!-- <div>
+    <h1 class="display-1">Custom HTML Block</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#777" width="200" height="200"><path d="M6.1 8.7L2.8 12l3.3 3.3-1.4 1.4L0 12l4.7-4.7 1.4 1.4zm13.2-1.4l-1.4 1.4 3.3 3.3-3.3 3.3 1.4 1.4L24 12l-4.7-4.7zM8.1 18.6l1.8.8 6-14-1.8-.8-6 14z"></path></svg>
+    <p class="display-3">Click to Open Code Editor</p>
+</div> -->
+
+<div>
+    <?php
+	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/viewer_code.php');
+	?>
+</div>
+</div>
+
+<section class="menu menu1 cid-sGZyM1OB86" once="menu" id="menu1-y">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
@@ -37,7 +52,7 @@
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="http://www.sifea.it" target="_blank">
+                    <a href="index.php" target="_blank">
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
@@ -52,33 +67,19 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">
-                            Home</a></li>
-                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php" aria-expanded="true" style="display:none;">Login</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php" style="display:none;">Registrati</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="user.php">Utente</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
                 
-                
-                
-                
+                                
                 
                 
             </div>
         </div>
     </nav>
 </section>
-
-<div id="custom-html-x"><!-- Type valid HTML here -->
-
-<!-- <div>
-    <h1 class="display-1">Custom HTML Block</h1>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#777" width="200" height="200"><path d="M6.1 8.7L2.8 12l3.3 3.3-1.4 1.4L0 12l4.7-4.7 1.4 1.4zm13.2-1.4l-1.4 1.4 3.3 3.3-3.3 3.3 1.4 1.4L24 12l-4.7-4.7zM8.1 18.6l1.8.8 6-14-1.8-.8-6 14z"></path></svg>
-    <p class="display-3">Click to Open Code Editor</p>
-</div> -->
-
-<div>
-    <?php
-	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/viewer_code.php');
-	?>
-</div></div>
 
 <section class="footer7 cid-sGZyM2hGHO" once="footers" id="footer7-z">
 

@@ -28,7 +28,7 @@
 </head>
 <body>
   
-  <section class="menu menu1 cid-sGZypCraQt" once="menu" id="menu1-m">
+  <section class="menu menu1 cid-sGZypCraQt" once="menu" id="menu2-m">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
@@ -37,7 +37,7 @@
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="http://www.sifea.it" target="_blank">
+                    <a href="index.php" target="_blank">
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
@@ -52,13 +52,13 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">
-                            Home</a></li>
-                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php">Login</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li><li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php">Logout</a></li></ul>
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-primary display-4" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="login.php" aria-expanded="true">Login</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="register.php">Registrati</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="user.php" style="display:none;">Utente</a></li>
+                    <li class="nav-item"><a class="nav-link link text-primary display-4" href="logout.php" style="display:none;">Logout</a></li></ul>
                 
-                
-                
-                
+                                
                 
                 
             </div>

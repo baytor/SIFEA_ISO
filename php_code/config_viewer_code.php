@@ -47,7 +47,7 @@ if(isset($_GET['matapporto']))
   $_SESSION['name'] = "Materiali apporto";
 
   //Nome della tabella
-  $_SESSION['table'] = "materiali_apporto";
+    $_SESSION['table'] = "materiali_apporto";
 
   //array(x, n1, n2, ecc...)  --> il primo indice va impostato come 0 (per il futuro), i successivi servono per indicare la ricerca secondaria in modo che si possano visualizzare tutti i record che hanno il valore in colonna n1 uguale a quello del record che ha come id il valore x. Questo serve principalmente per vedere tutte le revisioni di un record.
   //Es.: l'oggetto con id = x, ha sulla colonna n1 il valore y --> cerco tutti i record che nella colonna n1 hanno il valore y e li mostro nella pagina modify.php.
@@ -76,8 +76,8 @@ if(isset($_GET['strumenti']))//
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,8,9,11), array (12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
   $_SESSION['attachment'] =
   array(
-    array("Scheda strumento", "''", 3, "'.pdf'"),
-    array("Taratura / Verifica", "''", 8, "'.pdf'")
+    array("Scheda strumento", "", 3, ".pdf"),
+    array("Taratura / Verifica", "", 8, ".pdf")
   );
 }
 
@@ -90,7 +90,7 @@ if(isset($_GET['fornitori']))
   $_SESSION['name'] = "Fornitori qualificati";      //Titolo
   $_SESSION['table'] = "";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array();    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
-  $_SESSION['clm_data_array'] = array(array (), array ());    //definisce i blocchi di visualizzazione dall'alto verso il basso
+  $_SESSION['clm_data_array'] = array(array(), array());    //definisce i blocchi di visualizzazione dall'alto verso il basso
 }
 
 if(isset($_GET['rischiopp']))
@@ -102,19 +102,31 @@ if(isset($_GET['rischiopp']))
   $_SESSION['name'] = "Rischi e Opportunità";   //Titolo
   $_SESSION['table'] = "";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array();    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
-  $_SESSION['clm_data_array'] = array(array (), array ());    //definisce i blocchi di visualizzazione dall'alto verso il basso
+  $_SESSION['clm_data_array'] = array(array(), array());    //definisce i blocchi di visualizzazione dall'alto verso il basso
+}
+
+if(isset($_GET['ncrecl']))
+{
+  //RISCHIOPP xx ARGOMENTI da 0 a yy
+  $_SESSION['clm_header'] = array();    //headers dell colonne che vengono visualizzate nella tabella
+  $_SESSION['clm_array'] = array();   //campi del database
+  $_SESSION['input_type'] = array();    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
+  $_SESSION['name'] = "Non conformità e Reclami";   //Titolo
+  $_SESSION['table'] = "";    //Nome della tabella
+  $_SESSION['clm_data_array_dataindex'] = array();    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
+  $_SESSION['clm_data_array'] = array(array(), array());    //definisce i blocchi di visualizzazione dall'alto verso il basso
 }
 
 
 
 //non posso inserire la stessa funzione all'interno dei vari isset perché su new.php la condizione non si verifica => così non posso valutare che funzione definire a seconda del pulsante premuto
-function aaa1($name)
+function create_optional_button($name)
 {
   switch ($name)
   {
-    case "matapporto":
+    case "Materiali apporto":
     //funzione
-    echo "matapporto";
+    echo "<a href=reports/reportmatapporto.php>Click Me!</a>";
     break;
 
     case "strumenti":
