@@ -48,14 +48,25 @@ if (isset($_GET['search']))
 if(isset($_POST['newrev'])) //DA FARE
 {
   $_SESSION['entry1']->db_connection_on();
+
+  //mette ATTIVA = 0
+  $array_old = array();
+  array_push($array_old, $_SESSION['row_search']);
+  for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
+  {
+    array_push($array_old, $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($i)]);
+  }
+  array_push($array_old,0); //per l'ultima voce;
+  $_SESSION['entry1']->update_row($_SESSION['row_search'], $array_old);
+
+  //inserisce la nuova riga
   $array_new = array();
   array_push($array_new,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
     array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);
   }
-  array_push($array_new,0); //per l'ultima voce;
-
+  array_push($array_new,1); //per l'ultima voce;
   $_SESSION['entry1']->insert_row($array_new);
 
   echo "<br><br>Aggiunta revisione all'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";

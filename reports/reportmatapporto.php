@@ -1,11 +1,12 @@
 <?php
 
-  require_once('parent_report.php');
-  //print_report();
+require_once($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/libs_code.php');
 
-  $_SESSION['pdf_report']->Cell(60,10,'Powered by FPDF.',0,1,'C', TRUE);
-  $_SESSION['pdf_report']->output();
-
-
-
- ?>
+$pdf = new reportPDF();
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$pdf->SetFont('Times','',12);
+for($i=1;$i<=40;$i++)
+$pdf->Cell(0,10,'Printing line number '.$i,0,1);
+$pdf->Output();
+?>

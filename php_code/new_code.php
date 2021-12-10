@@ -28,6 +28,18 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
       ."></textarea><br>";
     }
+    elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), "select"))
+    {
+      $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
+
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
+      for($t = 1; $t < count($a); $t++)
+      {
+        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
+      }
+      echo "</select>";
+    }
     else
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
@@ -36,6 +48,7 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
       ."><br>";
     }
   }
+//$_SESSION['entry1']->insert_row();
   echo "
   </div>
   <div class=buttonsdiv>
@@ -47,32 +60,34 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
 }
 elseif (isset($_POST['newrev']))
 {
-  echo "
-  <div class=newformdiv>
-  <form id=newform method=post action=modify.php>
-  <div class=datadiv>";
+  $_SESSION['entry1']->db_connection_on();
   $_SESSION['datainsert'] = "update";
   //ciclo per creare il form su tutte le colonne con i valori preimpostati uguali
   //rozzo ma funziona
 
   //NB --> INPUT TYPE VA DEFINITO COME VARIABILE PERCHé A SECONDA DEL CAMPO CI SONO OPZIONI DIVERSE
+
+  // for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
+  // {
+  $_SESSION['entry1']->sql = "SELECT * "
+  . " FROM " . $_SESSION['entry1']->get_dbtable()
+  . " WHERE " . $_SESSION['entry1']->get_clm_array_at(0)
+  . " = " . $_SESSION['row_search'];
+  $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
+  $row = $_SESSION['entry1']->result->fetch_assoc();
+
+  $_SESSION['row'] = $row;
+  // array_push($array_values, $row);
+
+  //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
+  //rispetto al campo input
+  echo "
+  <div class=newformdiv>
+  <form id=newform method=post action=modify.php>
+  <div class=datadiv>";
+
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
-    $_SESSION['entry1']->db_connection_on();
-
-    $_SESSION['entry1']->sql = "SELECT * "
-    . " FROM " . $_SESSION['entry1']->get_dbtable()
-    . " WHERE " . $_SESSION['entry1']->get_clm_array_at(0)
-    . " = " . $_SESSION['row_search'];
-    $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
-    $row = $_SESSION['entry1']->result->fetch_assoc();
-
-    $_SESSION['row'] = $row;
-    // array_push($array_values, $row);
-
-    //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
-    //rispetto al campo input
-
     if($_SESSION['entry1']->get_input_type_at($i) == "textarea")
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
@@ -88,9 +103,9 @@ elseif (isset($_POST['newrev']))
 
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
-      for($i = 1; $i < count($a); $i++)
+      for($t = 1; $t < count($a); $t++)
       {
-        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$row[$_SESSION['entry1']->get_clm_array_at($i)]."</option>";
+        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
       }
       echo "</select>";
     }
@@ -115,27 +130,29 @@ elseif (isset($_POST['newrev']))
 }
 else
 {
-  echo "
-  <div class=newformdiv>
-  <form id=newform method=post action=viewer.php>
-  <div class=datadiv>";
   $_SESSION['datainsert'] = "update";
   //ciclo per creare il form su tutte le colonne con i valori preimpostati uguali
   //rozzo ma funziona
 
   //NB --> INPUT TYPE VA DEFINITO COME VARIABILE PERCHé A SECONDA DEL CAMPO CI SONO OPZIONI DIVERSE
+
+  echo "
+  <div class=newformdiv>
+  <form id=newform method=post action=viewer.php>
+  <div class=datadiv>";
+
+  $_SESSION['entry1']->db_connection_on();
+  $_SESSION['entry1']->sql = "SELECT * "
+  . " FROM " . $_SESSION['entry1']->get_dbtable()
+  . " WHERE " . $_SESSION['entry1']->get_clm_array_at(0)
+  . " = " . $_SESSION['row_search'];
+  $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
+  $row = $_SESSION['entry1']->result->fetch_assoc();
+
+  $_SESSION['row'] = $row;
+
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
-    $_SESSION['entry1']->db_connection_on();
-
-    $_SESSION['entry1']->sql = "SELECT * "
-    . " FROM " . $_SESSION['entry1']->get_dbtable()
-    . " WHERE " . $_SESSION['entry1']->get_clm_array_at(0)
-    . " = " . $_SESSION['row_search'];
-    $_SESSION['entry1']->result = $_SESSION['entry1']->conn->query($_SESSION['entry1']->sql);
-    $row = $_SESSION['entry1']->result->fetch_assoc();
-
-    $_SESSION['row'] = $row;
     // array_push($array_values, $row);
 
     //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
@@ -155,9 +172,9 @@ else
       $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
-      for($o = 1; $o < count($a); $o++)
+      for($t = 1; $t < count($a); $t++)
       {
-        echo "<option value=".$a[$o].">".$a[$o]."</option>";
+        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
       }
       echo "</select>";
     }

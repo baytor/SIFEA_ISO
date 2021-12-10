@@ -1,6 +1,6 @@
 <?php
 
-require_once('fpdf183/fpdf.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/fpdf183/fpdf.php');
 
 //Per il corretto funzionamento:
 //  - la posizione [0] dell'array DEVE essere la chiave primaria
@@ -228,7 +228,7 @@ class dbEntry {
 
     $this->sql .= $array_values[count($array_values) - 1] . "')";
     //n-1 e chiudo parentesi
-    echo $this->sql;
+    echo "INSERT ROW: $this->sql<br>";
     $this->result = $this->conn->query($this->sql);
   }
 
@@ -251,6 +251,7 @@ class dbEntry {
     }
     $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
     $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
+    echo "UPDATE ROW: $this->sql <br>";
     $this->result = $this->conn->query($this->sql);
   }
 
@@ -371,55 +372,27 @@ if (!function_exists('str_contains')) {
 //classe per generare report PDF
 class reportPDF extends FPDF
 {
+
+  // Page header
   function Header()
   {
-    echo "upper SIFEA";
+    // Logo
+    $this->Image($_SERVER['DOCUMENT_ROOT'].'\SIFEA_ISO\img\Logo SIFEA resize trasparenza.png',10,6,30);
+    $this->SetFont('Arial','B',15);     // Arial bold 15
+    //$this->Cell(80);                    // Move to the right
+    $this->Cell(30,10,'Title',1,0,'C'); // Title
+    $this->Cell(40,10,'Rombo',1,0,'C');
+    $this->Ln(20);                      // Line break
   }
 
+  // Page footer
   function Footer()
   {
-    echo "lower SIFEA";
+    $this->SetY(-15);                                               // Position at 1.5 cm from bottom
+    $this->SetFont('Arial','I',8);                                  // Arial italic 8
+    $this->Cell(0,10,'Pagina '.$this->PageNo().' di {nb}',0,0,'R'); // Page number
   }
-  // public $header = array();
-  // public $footer = array();
-  // public $body = array();
-  // public dbEntry $dbentry;
-  //
-  // public function __construct($dbentry, $header, $footer, $body)
-  // {
-  //
-  // }
-  //
-  // function get_dbentry() {return $this->dbentry;}
-  // function get_header() {return $this->header;}
-  // function get_footer() {return $this->footer;}
-  // function get_body() {return $this->body;}
-  //
-  // //magary possono essere array che si aggiunge a cascata
-  // function set_dbentry($dbentry)
-  // {
-  //
-  // }
-  //
-  // function set_header($header)
-  // {
-  //
-  // }
-  //
-  // function set_footer($footer)
-  // {
-  //
-  // }
-  //
-  // function set_body($body)
-  // {
-  //
-  // }
 
-  function printPDF()
-  {
-
-  }
 }
 
 ?>

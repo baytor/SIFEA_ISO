@@ -113,7 +113,7 @@ if (isset($_POST['elimina']))
 if (isset($_POST['salva']))
 {
   $array_new = array();
-  array_push($array_new,""); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
+  array_push($array_new,0); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
     array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);

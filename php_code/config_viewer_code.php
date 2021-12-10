@@ -41,7 +41,7 @@ if(isset($_GET['matapporto']))
   $_SESSION['clm_array'] = array("id", "nome_articolo", "gruppo_fm", "SFA_AWS", "EN_ISO", "diametro", "Colata_lotto",   "unita_misura", "quantita", "HT", "permanenza_HT", "ordine", "data_carico", "data_aggiornamento", "Note", "Attiva");
 
   //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
-  $_SESSION['input_type'] = array("text", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text",   "text", "date", "date", "textarea", "text");
+  $_SESSION['input_type'] = array("number", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text",   "text", "date", "date", "textarea", "text");
 
   //Titolo
   $_SESSION['name'] = "Materiali apporto";
@@ -67,9 +67,9 @@ if(isset($_GET['matapporto']))
 if(isset($_GET['strumenti']))//
 {
   //STRUMENTI 18 ARGOMENTI da 0 a 17
-  $_SESSION['clm_header'] = array("id", "Descrizione", "Campo di misura", "Codice strumento", "Modello", "S/N", "Costruttore", "Tipo", "n° Taratura / Verifica", "Dotazione", "Intervallo di verifica (Mesi)", "Data messa in servizio","Data ultima verifica","Data prossima verifica", "Note", "Accettabilità","Stato", "Attiva?");    //headers dell colonne che vengono visualizzate nella tabella
+  $_SESSION['clm_header'] = array("id", "Descrizione", "Campo di misura", "Codice strumento", "Modello", "S/N", "Costruttore", "Tipo", "n° Taratura / Verifica", "Dotazione", "Intervallo di verifica (Mesi)", "Data messa in servizio","Data ultima verifica","Data prossima verifica", "Note", "Accettabilità","Stato", "Attiva?");    //headers delle colonne che vengono visualizzate nella tabella
   $_SESSION['clm_array'] = array("id", "Descrizione", "campo_misura", "Codice_strumento", "Modello", "SN", "Costruttore", "Tipo", "Taratura", "Dotazione", "Intervallo_verifica", "Data_messa_servizio","Data_ultima_verifica","Data_prossima_verifica", "Note", "Accettabilita", "Stato", "Attiva");   //campi del database
-  $_SESSION['input_type'] = array("text", "text", "text", "text", "text", "text", "text", "select___Primario___Secondario___Operativo", "text", "number", "date", "date", "date", "text", "textarea", "text", "text");    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
+  $_SESSION['input_type'] = array("number", "text", "text", "text", "text", "text", "text", "select___Primario___Secondario___Operativo", "text", "text", "number", "date", "date", "date", "textarea", "text", "text", "text");    //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
   $_SESSION['name'] = "Strumenti di misura";   //Titolo
   $_SESSION['table'] = "strumenti";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array(0,3);    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
