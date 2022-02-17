@@ -28,15 +28,7 @@
 </head>
 <body>
   
-  <div id="custom-html-o"><!-- Type valid HTML here -->
-
-<div>
-    <?php
-	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/modify_code.php');
-	?>
-</div></div>
-
-<section class="menu menu1 cid-sGZyvdG4QR" once="menu" id="menu1-p">
+  <section class="menu menu1 cid-sGZyvdG4QR" once="menu" id="menu1-p">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         
@@ -45,7 +37,7 @@
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.php" target="_blank">
+                    <a href="index.php">
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
@@ -73,6 +65,14 @@
         </div>
     </nav>
 </section>
+
+<div id="custom-html-o"><!-- Type valid HTML here -->
+
+<div>
+    <?php
+	include($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/php_code/modify_code.php');
+	?>
+</div></div>
 
 <section class="footer7 cid-sGZyve7G1L" once="footers" id="footer7-q">
 

@@ -21,6 +21,17 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
   //ciclo per creare il form su tutte le colonne
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
+    if ($i == count($_SESSION['entry1']->get_clm_array())-2 || $i == count($_SESSION['entry1']->get_clm_array())-3)
+    {
+      $today = date("Y-m-d");
+
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." name=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." value= '$today'"
+      ."><br>";
+      continue;
+    }
     if($_SESSION['entry1']->get_input_type_at($i) == "textarea")
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
@@ -36,9 +47,18 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
       for($t = 1; $t < count($a); $t++)
       {
-        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
+        echo "<option value=".$a[$t].">".$a[$t]."</option>";
+        //echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
       }
       echo "</select>";
+    }
+    elseif($_SESSION['entry1']->get_input_type_at($i) == "date") //solo se è una voce nuova
+    {
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." name=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." value=".$today
+      ."><br>";
     }
     else
     {
@@ -48,7 +68,7 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
       ."><br>";
     }
   }
-//$_SESSION['entry1']->insert_row();
+  //$_SESSION['entry1']->insert_row();
   echo "
   </div>
   <div class=buttonsdiv>
@@ -86,8 +106,20 @@ elseif (isset($_POST['newrev']))
   <form id=newform method=post action=modify.php>
   <div class=datadiv>";
 
-  for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
+  for($i = 1; $i < count($_SESSION['entry1']->get_clm_array()); $i++)
   {
+    if ($i == count($_SESSION['entry1']->get_clm_array())-2)
+    {
+      $today = date("Y-m-d");
+
+
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." name=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." value= '$today'"
+      ."><br>";
+      continue;
+    }
     if($_SESSION['entry1']->get_input_type_at($i) == "textarea")
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
@@ -105,7 +137,11 @@ elseif (isset($_POST['newrev']))
       echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
       for($t = 1; $t < count($a); $t++)
       {
-        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
+        $selected = "";
+        if($a[$t] == $row[$_SESSION['entry1']->get_clm_array_at($i)])
+        {$selected = "selected";}
+        echo "<option value=".$a[$t]." $selected>".$a[$t]."</option>";
+        // echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
       }
       echo "</select>";
     }
@@ -151,13 +187,23 @@ else
 
   $_SESSION['row'] = $row;
 
-  for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
+  for($i = 1; $i < count($_SESSION['entry1']->get_clm_array()); $i++)
   {
     // array_push($array_values, $row);
 
     //controllo riga per riga --> se come campo è richiesto il textarea devo fare una cosa completamente diversa
     //rispetto al campo input
-
+    if ($i == count($_SESSION['entry1']->get_clm_array())-2)
+    {
+      $today = date("Y-m-d");
+      echo "Today $today<br>";
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." name=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." value= '$today'"
+      ."><br>";
+      continue;
+    }
     if($_SESSION['entry1']->get_input_type_at($i) == "textarea")
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
@@ -169,21 +215,44 @@ else
     }
     elseif(str_contains($_SESSION['entry1']->get_input_type_at($i), 'select'))
     {
-      $a = explode("___",$_SESSION['entry1']->get_input_type_at($i));
-      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
-      echo "<select name=".$_SESSION['entry1']->get_clm_header_at($i)." id=".$_SESSION['entry1']->get_clm_header_at($i).">";
+      $a = explode("___",$_SESSION['entry1']->get_input_type_at($i)); //array
+
+      echo "<label for=".$_SESSION['entry1']->get_clm_array_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
+      echo "<select name=".$_SESSION['entry1']->get_clm_array_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i).">";
       for($t = 1; $t < count($a); $t++)
       {
-        echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
+        $selected = "";
+        if($a[$t] == $row[$_SESSION['entry1']->get_clm_array_at($i)])
+        {$selected = "selected";}
+        echo "<option value=".$a[$t]." $selected>".$a[$t]."</option>";
+        //echo "<option value=".$row[$_SESSION['entry1']->get_clm_array_at($i)].">".$a[$t]."</option>";
       }
       echo "</select>";
+      $str = implode("_", $a);
+      echo "array a implode: $str<br>";
+    }
+    elseif($_SESSION['entry1']->get_input_type_at($i) == "checkbox") //OCCHIO
+    {
+      $checked = "";
+      if($row[$_SESSION['entry1']->get_clm_array_at($i)] == 1)
+      {
+        $checked = "checked";
+      }
+      echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label>";
+      echo "<input type='".$_SESSION['entry1']->get_input_type_at($i)
+      ."' id=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." name=".$_SESSION['entry1']->get_clm_array_at($i)
+      ." value='".$row[$_SESSION['entry1']->get_clm_array_at($i)]
+      ."' $checked>"; //Bisogna capire come collegare il check col valore 1 o 0
     }
     else //text oppure number
     {
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
-      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
+      echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)
+      ." id=".$_SESSION['entry1']->get_clm_array_at($i)
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
-      ." value='".$row[$_SESSION['entry1']->get_clm_array_at($i)]."'><br>";
+      ." value='".$row[$_SESSION['entry1']->get_clm_array_at($i)]
+      ."'><br>";
       //se ci sono degli spazi bisogna mettere "' * '" negli input altrimenti inserisce solo la prima parola della frase
     }
   }
@@ -202,20 +271,33 @@ else
   $_SESSION['entry1']->db_connection_off();
 }
 
-if(isset($_SESSION['attachment']))
+if(isset($_SESSION['attachment']) && !isset($_POST['nuovo'])) //se è nuovo i pulsanti degli allegati non si vedono ancora || TBD-> se il file non c'è lo carica, così se è nuovo si carica il file
+echo "<form id=pdfbrowse method=post action=pdfbrowse.php target=_blank>";
 {
   echo "<div class=buttonsattachmentdiv>";
-  create_attachment_button($_SESSION['attachment']);
+  // create_attachment_button($_SESSION['attachment']);
+  for($i = 0; $i < count($_SESSION['attachment']); ++$i)
+  {
+    $btn_name = $_SESSION['attachment'][$i][0];
+    echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
+  }
+  echo "</form>";
   echo "</div>";
 }
 
+//Accorpato sopra per comodità --> facciamo una prova
+//questa adesso è inutilizzata
 function create_attachment_button(array $attachment)
 {
   echo "<form id=pdfbrowse method=post action=pdfbrowse.php target=_blank>";
-  // "Certificato", "'Z:\Documenti\Qualità\Saldatura\Materiale d'apporto\'", 6, "'.pdf'"
+
   for($i = 0; $i < count($attachment); ++$i)
   {
     $btn_name       = $attachment[$i][0];
+
+    //  se il file con quel nome non esiste ==> INPUT_FILE
+    //  se il file con quel no
+
     $file_folder    = $attachment[$i][1];
     $file_name      = $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($attachment[$i][2])];
     $file_extension = $attachment[$i][3];
@@ -225,13 +307,13 @@ function create_attachment_button(array $attachment)
     echo "<input type=file id=$btn_name name=$btn_name value=$file hidden>";
     $_FILES[$btn_name]['name'] = $file_name;
     echo "<br>".$_FILES[$btn_name]['name']."<br>";
-    // move_uploaded_file($_FILES[$btn_name]["tmp_name"], $target_file);
+    move_uploaded_file($_FILES[$btn_name]["tmp_name"], $target_file);
 
     // output per // DEBUG:
     // echo "<br>Session row_search: " . $_SESSION['row_search'] ." colonna: ".$_SESSION['entry1']->get_clm_array_at($clm) ." valore: ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($clm)] ." clm: " . $clm . " button_name " . $button_name . "<br>";
 
     // $_SESSION['file'] = $file;
-    echo "<br>bottone collegato al file: $file con attachment[0]=".$btn_name."<br>";
+    //echo "<br>bottone collegato al file: $file con attachment[0]=".$btn_name."<br>";
     // echo "<a href='$file'><button type=submit class=btn name=".$attachment[$i][0].">".$attachment[$i][0]."</button></a>";
     echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
     // echo "<a href=Z:\\Documenti\Undicesimo\\01%20-%20Ordini%20Fornitori%20inviati\\>ciao</a>";

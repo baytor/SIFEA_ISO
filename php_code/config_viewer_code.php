@@ -29,38 +29,42 @@ $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7), array (8,9,10,11,12,1
 
 require_once('libs_code.php');
 
+// $today = date("d/m/Y");
+$today = "23/01/2022";
+
 if(isset($_GET['matapporto']))
 {
   //MAT APPORTO 16 ARGOMENTI da 0 a 15
 
   //headers dell colonne che vengono visualizzate nella tabella
   $_SESSION['clm_header'] = array("id", "Nome articolo", "Gruppo Filler Metal", "SFA / AWS", "EN ISO", "Diametro", "Colata / lotto",
-  "unità di misura", "quantità", "Trattamento termico", "Tempo di permanenza ", "Ordine", "Data di carico", "Data di aggiornamento", "Note", "Attiva?");
+  "unità di misura", "quantità", "Trattamento termico", "Tempo di permanenza ", "Ordine", "Note", "Data di carico", "Data di aggiornamento", "A magazzino");
 
-  //campi del database
-  $_SESSION['clm_array'] = array("id", "nome_articolo", "gruppo_fm", "SFA_AWS", "EN_ISO", "diametro", "Colata_lotto",   "unita_misura", "quantita", "HT", "permanenza_HT", "ordine", "data_carico", "data_aggiornamento", "Note", "Attiva");
+  //campi del database ==> bisogna fare (id, nome ... data_inserimento, data_aggiornamento, Attiva)
+  $_SESSION['clm_array'] = array("id", "nome_articolo", "gruppo_fm", "SFA_AWS", "EN_ISO", "diametro", "Colata_lotto",   "unita_misura", "quantita", "HT", "permanenza_HT", "ordine", "Note", "data_carico", "data_aggiornamento", "Attiva");
 
   //tipo di campo che compare nel form di inserimento dati sulla pagina new.php
-  $_SESSION['input_type'] = array("number", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text",   "text", "date", "date", "textarea", "text");
+  $_SESSION['input_type'] = array("number", "text", "number", "text", "text", "number step='0.1'", "text", "text", "text", "text", "text", "text", "textarea", "date", "date", "checkbox");
 
   //Titolo
   $_SESSION['name'] = "Materiali apporto";
 
   //Nome della tabella
-    $_SESSION['table'] = "materiali_apporto";
+  $_SESSION['table'] = "materiali_apporto";
 
   //array(x, n1, n2, ecc...)  --> il primo indice va impostato come 0 (per il futuro), i successivi servono per indicare la ricerca secondaria in modo che si possano visualizzare tutti i record che hanno il valore in colonna n1 uguale a quello del record che ha come id il valore x. Questo serve principalmente per vedere tutte le revisioni di un record.
   //Es.: l'oggetto con id = x, ha sulla colonna n1 il valore y --> cerco tutti i record che nella colonna n1 hanno il valore y e li mostro nella pagina modify.php.
-  $_SESSION['clm_data_array_dataindex'] = array(0,6);
+  $_SESSION['clm_data_array_dataindex'] = array(0,6,10);
+  // $_SESSION['clm_data_array_dataindex'] = array(0,6);
 
-  //definisce i blocchi di visualizzazione dall'alto verso il basso
+  //definisce i blocchi di visualizzazione dall'alto verso il basso su modify.php
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7), array (8,9,10,11,12,13,14));
 
   //(nome pulsante, directory, colonna da cui prende il nome, estensione);
   $_SESSION['attachment'] =
   array(
-    array("Certificato", "Z:\\Documenti\\Qualità\\Saldatura\\Materiale d'apporto\\", 6, ".pdf"),
-    array("Ordine", "Z:\\Documenti\\Undicesimo\\01 - Ordini Fornitori inviati\\Ordine nr ", 11, ".pdf")
+    array("Certificato", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/img/', 6, ".pdf"),
+    array("Ordine", $_SERVER['DOCUMENT_ROOT']."/SIFEA_ISO/img/", 11, ".pdf")
   ); //si può cambiare e fare un multi array per includere il filepath
 }
 
@@ -73,7 +77,7 @@ if(isset($_GET['strumenti']))//
   $_SESSION['name'] = "Strumenti di misura";   //Titolo
   $_SESSION['table'] = "strumenti";    //Nome della tabella
   $_SESSION['clm_data_array_dataindex'] = array(0,3);    //Questo serve principalmente per vedere tutte le revisioni di un record. (vedi sopra)
-  $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,8,9,11), array (12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
+  $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,9,11), array (8,12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
   $_SESSION['attachment'] =
   array(
     array("Scheda strumento", "", 3, ".pdf"),
@@ -117,8 +121,6 @@ if(isset($_GET['ncrecl']))
   $_SESSION['clm_data_array'] = array(array(), array());    //definisce i blocchi di visualizzazione dall'alto verso il basso
 }
 
-
-
 //non posso inserire la stessa funzione all'interno dei vari isset perché su new.php la condizione non si verifica => così non posso valutare che funzione definire a seconda del pulsante premuto
 function create_optional_button($name)
 {
@@ -148,6 +150,5 @@ function create_optional_button($name)
       echo "Error: no function input selected";
     }
   }
-
 
   ?>

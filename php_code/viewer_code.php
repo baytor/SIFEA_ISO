@@ -97,7 +97,7 @@ if (isset($_POST['copia']))
   // corrispondente all'oggetto copiato in modo da modificarlo subito
   // e che magari abbia già la data di creazione impostata (ma anche no...)
   //
-  //   echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
+  //  echo "<br><br>(_DA FARE_) Copiato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
 
   $_SESSION['entry1']->copy_row($_SESSION['row_search']);
 }
@@ -113,22 +113,26 @@ if (isset($_POST['elimina']))
 if (isset($_POST['salva']))
 {
   $array_new = array();
-  array_push($array_new,0); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI;
+  array_push($array_new,0); //per l'id che in realtà verrà assegnato dal DB in quanto primary, unique, AI; se datainsert = update il id 0 viene saltato e si usa quello attuale
   for($i = 1; $i < count($_SESSION['entry1']->get_clm_array())-1; $i++)
   {
     array_push($array_new,$_POST[$_SESSION['entry1']->get_clm_array_at($i)]);
   }
-  array_push($array_new,1); //per l'ultima voce;
-
   if ($_SESSION['datainsert'] == "new") //funziona
   {
+    array_push($array_new,1); //setta attivo per l'ultima voce;
     $_SESSION['entry1']->insert_row($array_new);
   }
   elseif ($_SESSION['datainsert'] == "update") // funziona
   {
-    //echo "updated id: ". $_SESSION['row_search'] . " array: ".implode("_",$array_new). "<br>";
     $_SESSION['entry1']->update_row($_SESSION['row_search'], $array_new);
-    //echo $_SESSION['entry1']->sql; //per DEBUG
+
+    $status = 0;
+    if (isset($_POST[$_SESSION['entry1']->get_clm_array_at(count($_SESSION['entry1']->get_clm_array())-1)])) $status = 1;
+
+    //ho fatto una funzione a parte perché quelle di modifica non toccano lo stato di una riga
+    $_SESSION['entry1']->change_active($_SESSION['row_search'], $status);
+
   }
   else
   {
@@ -158,16 +162,16 @@ if(isset($_POST['searchbtn']))
   //se si ricerca in tutti i valori, esclude l'ordinamento per valore
   if(strpos($_POST['menutendina'], 'oncat') != true) //concat per intero non lo prendeva...
   {
-    $sql_string .= $_POST['menutendina'] . " ASC, ";
+    $sql_string .= $_POST['menutendina'] . " DESC, ";
   }
   //$entry1->get_clm_array_at(13) è la data di aggiornamento
-  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
+  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-2) . " DESC";
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   // echo $sql_string;
   $entry1->select_rows_by_string_by_pos($sql_string, 1, count($entry1->get_clm_array())-2);
   //$entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array']);
 }
-else
+else //visualizzatore principale
 {
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   // mi serve per comporre "where *menu* like *** and Attiva is 1";

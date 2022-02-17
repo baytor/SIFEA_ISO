@@ -4,53 +4,60 @@ require_once('libs_code.php');
 session_start();
 require_once('config_viewer_code.php');
 
+echo "<br><br><br><br><br><br><br><br>";
 echo "<div class=pdfbrowser>";
-for($i = 0; $i < count($_SESSION['attachment']); $i++)
+// echo "<form id=pdfbrowse method=post action=pdfbrowse.php>";
+echo "<form id=pdfbrowse method=post>";
+
+if(isset($_POST['UploadedFile']))
+{
+  if(isset($_FILES['UploadedFile']['tmp_name'])) echo "File caricato<br>";
+  else echo "File non trovato";
+  // move_uploaded_file($_FILES['UploadedFile']['tmp_name'], $file);
+}
+
+for($i = 0; $i < count($_SESSION['attachment']); ++$i)
 {
   if(isset($_POST[$_SESSION['attachment'][$i][0]]))
   {
-    // $file_location = $_SESSION['attachment'][$i][1]
-    // .$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]
-    // .$_SESSION['attachment'][$i][3];
-    // $filename = $_SESSION['attachment'][$i][0] .'.pdf'; /* Note: Always use .pdf at the end. */
 
-    $file_location = "/SIFEA_ISO/img/C21-709.pdf";
-    $filename = "C21-709.pdf";
-    // echo "<br>Nome file tmp: ".$_FILES[$_SESSION['attachment'][$i][0]]['tmp_name'];
 
-    // $file_location = preg_replace("/'/", "&#39;", $file_location);
+    $file =
+    $_SESSION['attachment'][$i][1].
+    $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])].
+    $_SESSION['attachment'][$i][3];
 
-    // echo "<a href=$file_location>aaa</a>";
 
-    // header('Content-type: application/pdf');
-    // header('Content-Disposition: inline; filename="' . $filename . '"');
     // header('Content-Transfer-Encoding: binary');
-    // header('Content-Length: ' . filesize($file_location));
     // header('Accept-Ranges: bytes');
-    // readfile($file_location);
 
-    // echo "<embed src='$file_location' type='application/pdf'/>";
-    // echo "<a href=$file_location>aaa</a>";
+    echo "file name: $file<br>";
 
-    // echo "<br>Premuto " . $_SESSION['attachment'][$i][0] . "<br>";
-    // echo "file: $filename file_location: $file_location<br>";
-    exit;
+    if(!file_exists($file)) //(non)esiste il file
+    {
+      echo "il file non esiste<br>";
+      // echo "<input type=file id=UploadedFile name=UploadedFile value=$file>";
+      echo "<input type=file name=UploadedFile id=UploadedFile>";
+      echo "<input type=submit value='Carica file' name=submit>";
 
-    // if($_SESSION['attachment'][$i][3] != "")
-    // {
-    //   echo "Opening $file_location<br>";
-    //   // Send the file to the browser.
-    //   system($file_location);
-    // }
-    // else
-    // {
-    //   //se l'estensione del file (e anche il nome file) è vuoto vorrei aprisse la directory
-    //   //ma non va...
-    //   echo "Opening MEH...<br>";
-    //   opendir($file_location);
-    // }
+      // $info = pathinfo($_FILES['userFile']['name']);
+      // $ext = $info['extension']; // get the extension of the file
+      // $newname = "newname.".$ext;
+      // $target = 'images/'.$newname;
+    }
+    else
+    {
+      // header('Content-type: application/pdf');
+      // header('Content-Disposition: inline; filename="' . $file . '"');
+      // @readfile($file);//manca qualcosa...
+      echo "il file esiste<br>";
+    }
+
+    //debug
+    echo "<br><br><br><br><br><br><br>".$_SESSION['attachment'][$i][0]."<br>";
   }
 }
+echo "</form>";
 echo "</div>";
 
 ?>

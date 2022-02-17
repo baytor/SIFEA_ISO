@@ -2523,6 +2523,11 @@ a {
   margin: 2px 0;
   padding: 12px 20px;
 }
+#custom-html-u input[type=checkbox] {
+  padding: 90px;
+  width: 25px;
+  height: 25px;
+}
 #custom-html-u select {
   width: 100%;
   margin: 2px 0;

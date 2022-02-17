@@ -8,6 +8,11 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/fpdf183/fpdf.php');
 //  - la posizione [count($this->get_clm_array()-1)], ossia l'ultima, dell'array DEVE
 //    essere quella che dice se un oggetto è ATTIVO e effettivamente presente (valore == 1)
 //    oppure INATTIVO o ESAURITO (valore == 0)
+//  - la posizione [count($this->get_clm_array()-2)], ossia penultima, dell'array DEVE
+//    essere quella che da la data di aggiornamento
+//  - la posizione [count($this->get_clm_array()-3)], ossia la terzultima ultima, dell'array DEVE
+//    essere quella che essere quella che da la data di inserimento
+
 class dbEntry {
   // Properties
   public $name;       //nome dell'oggetto
@@ -84,6 +89,7 @@ class dbEntry {
   function delete_row($id)                                    //cancella una riga nella tabella - da definire gli argomenti
   function update_row($id, array $array_values)               //aggiorna una riga nella tabella - da definire gli argomenti
   function copy_row($id)                                      //copia una riga assegnando un nuovo id
+  function change_active($id, $status)                        //setta attivo o inattivo sull'ultima colonna (0 oppure 1)
   function create_table($begin, $end)                         //crea la Tabella usando un ciclo for da $begin fino a $end
   function create_table(array $array_clm)                     //crea la Tabella usando gli indici delle colonne contenuti nell'array_clm
 
@@ -249,10 +255,10 @@ class dbEntry {
     {
       $this->sql .= $this->clm_array[$i] . " = '" . $array_values[$i] . "', ";//con ciclo for
     }
-    $this->sql .= $this->clm_array[count($array_values) - 1] . " = " . $array_values[count($array_values) - 1];
-    $this->sql .= " WHERE " . $this->clm_array[0] . " = " . $id;
-    echo "UPDATE ROW: $this->sql <br>";
+    $this->sql .= $this->clm_array[count($array_values) - 1] . " = '" . $array_values[count($array_values) - 1];
+    $this->sql .= "' WHERE " . $this->clm_array[0] . " = " . $id;
     $this->result = $this->conn->query($this->sql);
+    echo "$this->sql<br>";
   }
 
   function copy_row($id)
@@ -274,6 +280,16 @@ class dbEntry {
 
     $this->insert_row($array_copy);
 
+  }
+
+  function change_active($id, $status)
+  {
+    $this->sql = "UPDATE $this->table SET "
+    . $this->clm_array[count($this->get_clm_array())-1] . " = $status WHERE "
+    . $this->clm_array[0] . " = '$id'";
+    $this->result = $this->conn->query($this->sql);
+
+    echo "$this->sql<br>";
   }
 
   //crea la Tabella

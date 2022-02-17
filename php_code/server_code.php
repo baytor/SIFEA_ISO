@@ -103,6 +103,7 @@ if (isset($_POST['login_user'])) {
     else
     {
       array_push($errors, "Wrong username/password combination");
+      $db->close();
     }
   }
 }

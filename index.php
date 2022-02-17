@@ -37,7 +37,7 @@
  
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.php" target="_blank">
+                    <a href="index.php">
                         <img src="assets/images/logo-sifea-resize-trasparenza.png" alt="" style="height: 4.6rem;">
                     </a>
                 </span>
