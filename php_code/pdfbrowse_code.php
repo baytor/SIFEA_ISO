@@ -4,60 +4,68 @@ require_once('libs_code.php');
 session_start();
 require_once('config_viewer_code.php');
 
-echo "<br><br><br><br><br><br><br><br>";
+echo "<br><br><br>";
+// echo "<br><br><br><br><br><br><br><br>";
 echo "<div class=pdfbrowser>";
-// echo "<form id=pdfbrowse method=post action=pdfbrowse.php>";
-echo "<form id=pdfbrowse method=post>";
 
-if(isset($_POST['UploadedFile']))
-{
-  if(isset($_FILES['UploadedFile']['tmp_name'])) echo "File caricato<br>";
-  else echo "File non trovato";
-  // move_uploaded_file($_FILES['UploadedFile']['tmp_name'], $file);
-}
 
 for($i = 0; $i < count($_SESSION['attachment']); ++$i)
 {
   if(isset($_POST[$_SESSION['attachment'][$i][0]]))
   {
-
-
-    $file =
-    $_SESSION['attachment'][$i][1].
-    $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])].
-    $_SESSION['attachment'][$i][3];
-
-
-    // header('Content-Transfer-Encoding: binary');
-    // header('Accept-Ranges: bytes');
-
-    echo "file name: $file<br>";
-
-    if(!file_exists($file)) //(non)esiste il file
+    $_SESSION['file'] = $_SESSION['attachment'][$i][1];
+    if(isset($_SESSION['attachment'][$i][2]))
     {
-      echo "il file non esiste<br>";
-      // echo "<input type=file id=UploadedFile name=UploadedFile value=$file>";
-      echo "<input type=file name=UploadedFile id=UploadedFile>";
-      echo "<input type=submit value='Carica file' name=submit>";
+      $_SESSION['file'] .= $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])];
+      $_SESSION['file'] .= $_SESSION['attachment'][$i][3];
+    }
+    echo "isset " . $_SESSION['file'] . "<br>";
+  }
+}
 
-      // $info = pathinfo($_FILES['userFile']['name']);
-      // $ext = $info['extension']; // get the extension of the file
-      // $newname = "newname.".$ext;
-      // $target = 'images/'.$newname;
+if(isset($_POST['Upload']))
+{
+  print_r($_FILES);
+  $filefrom = $_FILES['UploadedFile']['tmp_name'];
+  $fileto = $_SESSION['file'];
+  move_uploaded_file($filefrom, $fileto);
+  echo "POST Upload $fileto";
+}
+else
+{
+  if(!file_exists($_SESSION['file'])) //(non)esiste il file
+  {
+    echo "<form id=pdfbrowse method=post action=pdfbrowse.php enctype='multipart/form-data'>";
+    echo "il file ".$_SESSION['file']." non trovato";
+    // echo "il file ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]." non esiste1<br>";
+    echo "<input type=file class=btn name='UploadedFile' id=UploadedFile>";
+    echo "<button type=submit class=btn name=Upload>Carica file</button>";
+    echo "</form>";
+  }
+  else //il file esiste
+  {
+    if(!is_file($_SESSION['file']))
+    {
+      // echo "<form id=pdfbrowse method=post action=pdfbrowse.php enctype='multipart/form-data'>";
+      // echo "il file ".$_SESSION['file']." non trovato";
+      // // echo "il file ".$_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])]." non esiste1<br>";
+      // echo "<input type=file class=btn name='UploadedFile' id=UploadedFile>";
+      // echo "<button type=submit class=btn name=Upload>Carica un file</button>";
+      // echo "</form>";
+      $a = scandir($_SESSION['file']);
+      echo $_SESSION['file'] . " found<br>";
+      // print_r($a);
+      foreach ($a as $file)
+      {
+        echo "<a href=file:///" . $_SESSION['file'].$file . " target=_blank>" . $file . "</a><br>";
+      }
     }
     else
     {
-      // header('Content-type: application/pdf');
-      // header('Content-Disposition: inline; filename="' . $file . '"');
-      // @readfile($file);//manca qualcosa...
-      echo "il file esiste<br>";
+      exec($_SESSION['file']);
     }
-
-    //debug
-    echo "<br><br><br><br><br><br><br>".$_SESSION['attachment'][$i][0]."<br>";
   }
 }
-echo "</form>";
-echo "</div>";
 
+echo "</div>";
 ?>

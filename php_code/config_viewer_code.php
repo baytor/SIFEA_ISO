@@ -54,18 +54,22 @@ if(isset($_GET['matapporto']))
 
   //array(x, n1, n2, ecc...)  --> il primo indice va impostato come 0 (per il futuro), i successivi servono per indicare la ricerca secondaria in modo che si possano visualizzare tutti i record che hanno il valore in colonna n1 uguale a quello del record che ha come id il valore x. Questo serve principalmente per vedere tutte le revisioni di un record.
   //Es.: l'oggetto con id = x, ha sulla colonna n1 il valore y --> cerco tutti i record che nella colonna n1 hanno il valore y e li mostro nella pagina modify.php.
-  $_SESSION['clm_data_array_dataindex'] = array(0,6,10);
-  // $_SESSION['clm_data_array_dataindex'] = array(0,6);
+  //$_SESSION['clm_data_array_dataindex'] = array(0,6,10);
+  $_SESSION['clm_data_array_dataindex'] = array(0,6); //deve essere delle stesse dimensioni di $_SESSION['clm_data_array']
 
   //definisce i blocchi di visualizzazione dall'alto verso il basso su modify.php
-  $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7), array (8,9,10,11,12,13,14));
+  $_SESSION['clm_data_array'] = array(array (1,2,3,4,5), array (6,7,8,9,10,11,12,13,14));
 
   //(nome pulsante, directory, colonna da cui prende il nome, estensione);
   $_SESSION['attachment'] =
   array(
-    array("Certificato", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/img/', 6, ".pdf"),
-    array("Ordine", $_SERVER['DOCUMENT_ROOT']."/SIFEA_ISO/img/", 11, ".pdf")
+    array("Certificato", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/certificati/matapporto/', 6, ".pdf"),
+    array("Ordine", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/certificati/ordini/', 11, ".pdf"),
+    array("DirProva",$_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/certificati/matapporto/')
   ); //si può cambiare e fare un multi array per includere il filepath
+
+  //campo e quantità minima con cui parte l'alert -- DA IMPLEMENTARE
+  $_SESSION['scortaminima'] = array(array(8,50));
 }
 
 if(isset($_GET['strumenti']))//
@@ -80,8 +84,8 @@ if(isset($_GET['strumenti']))//
   $_SESSION['clm_data_array'] = array(array (1,2,3,4,5,6,7,9,11), array (8,12,13,14,15,16));    //definisce i blocchi di visualizzazione dall'alto verso il basso
   $_SESSION['attachment'] =
   array(
-    array("Scheda strumento", "", 3, ".pdf"),
-    array("Taratura / Verifica", "", 8, ".pdf")
+    array("Scheda strumento", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/certificati/strumenti/', 3, ".pdf"),
+    array("Taratura / Verifica", $_SERVER['DOCUMENT_ROOT'].'/SIFEA_ISO/certificati/strumenti/', 8, ".pdf")
   );
 }
 

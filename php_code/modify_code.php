@@ -31,8 +31,10 @@ if (isset($_GET['search']))
   // sarebbe bello integrare la riga successiva all'interno del ciclo FOR sfruttando $_GET['search'] che è la chiave primaria
 
   $entry1->select_rows_by_string_by_array($sql_string, $_SESSION['clm_data_array'][0]);
-  echo "<br><p>Elenco revisioni:</p><br>";
 
+  echo "<br><p>Elenco revisioni:</p><br>";
+  $_SESSION['sql_string'] = array();
+  array_push($_SESSION['sql_string'],$sql_string);
 
   // for($i = 1; $i < count($_SESSION['clm_data_array']); ++$i)
   // {
@@ -45,9 +47,9 @@ if (isset($_GET['search']))
   //   $entry1->select_rows_by_string_by_array($sql_string2, $_SESSION['clm_data_array'][$i]);
   // }
 
-$sql_string2 = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE ";
   for($i = 1; $i < count($_SESSION['clm_data_array']); ++$i)
   {
+    $sql_string2 = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE ";
     $sql_string2 .= $entry1->get_clm_array_at($_SESSION['clm_data_array_dataindex'][$i]) . " = '"
     . $row[$entry1->get_clm_array_at($_SESSION['clm_data_array_dataindex'][$i])];
     $sql_string2 .= "' ORDER BY ";
@@ -55,6 +57,7 @@ $sql_string2 = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE ";
 
     $entry1->select_rows_by_string_by_array($sql_string2, $_SESSION['clm_data_array'][$i]);
     echo "$sql_string2<br>";
+    array_push($_SESSION['sql_string'],$sql_string2);
   }
 
   $entry1->db_connection_off();
@@ -62,9 +65,16 @@ $sql_string2 = "SELECT * FROM " . $entry1->get_dbtable() . " WHERE ";
 
 if (isset($_POST['esci']))
 {
+  //riprendo i valori che erano settati prima
   echo "sei uscito su viewer.php<br>";
-  echo $sql_string."<br>";
-  //echo "<p>Operazione annullata...</p><br>"; //Brutto da vedere perché resta lìììììììì
+  $_SESSION['entry1']->db_connection_on();
+  for($i = 0; $i < count($_SESSION['clm_data_array']); ++$i)
+  {
+    $_SESSION['entry1']->select_rows_by_string_by_array($_SESSION['sql_string'][$i], $_SESSION['clm_data_array'][$i]);
+    if($i==0) echo "<br><p>Elenco revisioni:</p><br>";
+  }
+  $_SESSION['entry1']->db_connection_off();
+  //valutare questa come soluzione più sintetica
 }
 
 if(isset($_POST['newrev']))

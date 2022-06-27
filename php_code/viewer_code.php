@@ -179,7 +179,7 @@ else //visualizzatore principale
   $sql_string .= " WHERE " . $entry1->get_clm_array_at(count($entry1->get_clm_array())-1) . "=1";
   $sql_string .= " ORDER BY ";
   //$entry1->get_clm_array_at(13) è la data di aggiornamento
-  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-3) . " DESC";
+  $sql_string .= $entry1->get_clm_array_at(count($entry1->get_clm_array())-2) . " DESC";
 
   //escludo la visualizzazione della chiave primaria alla pos 0 e "Attiva" alla pos $entry1->get_clm_array()-1
   //echo $sql_string;  //NNEC

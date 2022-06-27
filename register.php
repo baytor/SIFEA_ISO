@@ -80,7 +80,7 @@
 	?>
 </div></div>
 
-<section class="footer7 cid-sGZyBNViqj" once="footers" id="footer7-t">
+<section class="footer7 cid-sGZyBNViqj mbr-reveal" once="footers" id="footer7-t">
 
     
 
