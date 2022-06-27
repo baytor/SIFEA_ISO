@@ -10,6 +10,30 @@ if (isset($_GET['search']))
   // echo "<br><br>Selezionato l'oggetto con chiave primaria = " . $_SESSION['row_search']."<br>";
 }
 
+if(isset($_SESSION['attachment']) && !isset($_POST['nuovo'])) //se è nuovo i pulsanti degli allegati non si vedono ancora
+{
+  echo "<form id=pdfbrowse method=post action=pdfbrowse.php>"; //target=_blank per aprire in pagina nuova
+  echo "<div class=buttonsattachmentdiv>";
+  // create_attachment_button($_SESSION['attachment']);
+  for($i = 0; $i < count($_SESSION['attachment']); ++$i)
+  {
+    $btn_name = $_SESSION['attachment'][$i][0];
+
+    $_SESSION['file'] =  $_SESSION['attachment'][$i][1];
+    if(isset($_SESSION['attachment'][$i][2]))
+    {
+      $_SESSION['file'] .= $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])];
+      $_SESSION['file'] .= $_SESSION['attachment'][$i][3];
+    }
+
+    echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
+    // echo "<button href='".$_SESSION['file']."' class=btn name=$btn_name>$btn_name</button>"; //non va bene, non apre la dir
+  }
+  echo "</form>";
+  echo "</div>";
+
+}
+
 if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
 {
   echo "
@@ -24,7 +48,6 @@ if (isset($_POST['nuovo'])) //questo serve se si crea un oggetto nuovo da 0
     if ($i == count($_SESSION['entry1']->get_clm_array())-2 || $i == count($_SESSION['entry1']->get_clm_array())-3)
     {
       $today = date("Y-m-d");
-
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -111,8 +134,6 @@ elseif (isset($_POST['newrev']))
     if ($i == count($_SESSION['entry1']->get_clm_array())-2)
     {
       $today = date("Y-m-d");
-
-
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -196,7 +217,7 @@ else
     if ($i == count($_SESSION['entry1']->get_clm_array())-2)
     {
       $today = date("Y-m-d");
-      echo "Today $today<br>";
+      //echo "Today $today<br>";
       echo "<label for=".$_SESSION['entry1']->get_clm_header_at($i).">".$_SESSION['entry1']->get_clm_header_at($i)."</label><br>";
       echo "<input type=".$_SESSION['entry1']->get_input_type_at($i)." id=".$_SESSION['entry1']->get_clm_array_at($i)
       ." name=".$_SESSION['entry1']->get_clm_array_at($i)
@@ -271,25 +292,32 @@ else
   $_SESSION['entry1']->db_connection_off();
 }
 
-if(isset($_SESSION['attachment']) && !isset($_POST['nuovo'])) //se è nuovo i pulsanti degli allegati non si vedono ancora || TBD-> se il file non c'è lo carica, così se è nuovo si carica il file
-echo "<form id=pdfbrowse method=post action=pdfbrowse.php target=_blank>";
-{
-  echo "<div class=buttonsattachmentdiv>";
-  // create_attachment_button($_SESSION['attachment']);
-  for($i = 0; $i < count($_SESSION['attachment']); ++$i)
-  {
-    $btn_name = $_SESSION['attachment'][$i][0];
-    echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
-  }
-  echo "</form>";
-  echo "</div>";
-}
-
+//SPOSTATO IN ALTO PER VEDERE GRAFICAMENTE COME VA
+// if(isset($_SESSION['attachment']) && !isset($_POST['nuovo'])) //se è nuovo i pulsanti degli allegati non si vedono ancora
+// {
+//   echo "<form id=pdfbrowse method=post action=pdfbrowse.php>"; //target=_blank per aprire in pagina nuova
+//   echo "<div class=buttonsattachmentdiv>";
+//   // create_attachment_button($_SESSION['attachment']);
+//   for($i = 0; $i < count($_SESSION['attachment']); ++$i)
+//   {
+//     $btn_name = $_SESSION['attachment'][$i][0];
+//
+//     $_SESSION['file'] =  $_SESSION['attachment'][$i][1];
+//     $_SESSION['file'] .= $_SESSION['row'][$_SESSION['entry1']->get_clm_array_at($_SESSION['attachment'][$i][2])];
+//     $_SESSION['file'] .= $_SESSION['attachment'][$i][3];
+//
+//     echo "<button type=submit class=btn name=$btn_name>$btn_name</button>";
+//     // echo "<button href='".$_SESSION['file']."' class=btn name=$btn_name>$btn_name</button>"; //non va bene, non apre la dir
+//   }
+//   echo "</form>";
+//   echo "</div>";
+//
+// }
 //Accorpato sopra per comodità --> facciamo una prova
 //questa adesso è inutilizzata
 function create_attachment_button(array $attachment)
 {
-  echo "<form id=pdfbrowse method=post action=pdfbrowse.php target=_blank>";
+  echo "<form id=pdfbrowse method=post action=pdfbrowse.php>"; //target=_blank per aprire su scheda bianca
 
   for($i = 0; $i < count($attachment); ++$i)
   {
